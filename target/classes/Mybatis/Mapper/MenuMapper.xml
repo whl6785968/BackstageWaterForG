@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sandalen.water.dao.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com.sandalen.water.bean.Menu" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="component" property="component" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="iconCls" property="iconcls" jdbcType="VARCHAR" />
+    <result column="keepAlive" property="keepalive" jdbcType="BIT" />
+    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="requireAuth" property="requireauth" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, url, path, component, title, iconCls, keepAlive, parentId, requireAuth
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sandalen.water.bean.MenuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from menu
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from menu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sandalen.water.bean.MenuExample" >
+    delete from menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sandalen.water.bean.Menu" >
+    insert into menu (id, url, path, 
+      component, title, iconCls, 
+      keepAlive, parentId, requireAuth
+      )
+    values (#{id,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{component,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{iconcls,jdbcType=VARCHAR}, 
+      #{keepalive,jdbcType=BIT}, #{parentid,jdbcType=INTEGER}, #{requireauth,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sandalen.water.bean.Menu" >
+    insert into menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="component != null" >
+        component,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="iconcls != null" >
+        iconCls,
+      </if>
+      <if test="keepalive != null" >
+        keepAlive,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="requireauth != null" >
+        requireAuth,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null" >
+        #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="iconcls != null" >
+        #{iconcls,jdbcType=VARCHAR},
+      </if>
+      <if test="keepalive != null" >
+        #{keepalive,jdbcType=BIT},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="requireauth != null" >
+        #{requireauth,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sandalen.water.bean.MenuExample" resultType="java.lang.Integer" >
+    select count(*) from menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update menu
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path != null" >
+        path = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.component != null" >
+        component = #{record.component,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iconcls != null" >
+        iconCls = #{record.iconcls,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keepalive != null" >
+        keepAlive = #{record.keepalive,jdbcType=BIT},
+      </if>
+      <if test="record.parentid != null" >
+        parentId = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.requireauth != null" >
+        requireAuth = #{record.requireauth,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update menu
+    set id = #{record.id,jdbcType=INTEGER},
+      url = #{record.url,jdbcType=VARCHAR},
+      path = #{record.path,jdbcType=VARCHAR},
+      component = #{record.component,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      iconCls = #{record.iconcls,jdbcType=VARCHAR},
+      keepAlive = #{record.keepalive,jdbcType=BIT},
+      parentId = #{record.parentid,jdbcType=INTEGER},
+      requireAuth = #{record.requireauth,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sandalen.water.bean.Menu" >
+    update menu
+    <set >
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null" >
+        component = #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="iconcls != null" >
+        iconCls = #{iconcls,jdbcType=VARCHAR},
+      </if>
+      <if test="keepalive != null" >
+        keepAlive = #{keepalive,jdbcType=BIT},
+      </if>
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="requireauth != null" >
+        requireAuth = #{requireauth,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sandalen.water.bean.Menu" >
+    update menu
+    set url = #{url,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      component = #{component,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      iconCls = #{iconcls,jdbcType=VARCHAR},
+      keepAlive = #{keepalive,jdbcType=BIT},
+      parentId = #{parentid,jdbcType=INTEGER},
+      requireAuth = #{requireauth,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <resultMap id="getMenuList" type="com.sandalen.water.bean.Menu">
+    <id column="id" property="id" jdbcType="INTEGER"></id>
+    <result column="path" property="path" jdbcType="VARCHAR"></result>
+    <result column="component" property="component" jdbcType="VARCHAR"></result>
+    <result column="title" property="title" jdbcType="VARCHAR"></result>
+    <result column="iconCls" property="iconcls" jdbcType="VARCHAR"></result>
+    <result column="keepAlive" property="keepalive" jdbcType="BOOLEAN"></result>
+    <result column="requireAuth" property="requireauth" jdbcType="INTEGER"></result>
+    <collection property="children" ofType="com.sandalen.water.bean.Menu">
+      <id column="id2" property="id" jdbcType="INTEGER"></id>
+      <result column="path2" property="path" jdbcType="VARCHAR"></result>
+      <result column="component2" property="component" jdbcType="VARCHAR"></result>
+      <result column="title2" property="title" jdbcType="VARCHAR"></result>
+      <result column="iconCls2" property="iconcls" jdbcType="VARCHAR"></result>
+      <result column="keepAlive2" property="keepalive" jdbcType="BOOLEAN"></result>
+      <result column="requireAuth2" property="requireauth" jdbcType="INTEGER"></result>
+      <collection property="children" ofType="com.sandalen.water.bean.Menu">
+        <id column="id3" property="id"/>
+        <result column="title3" property="title3" jdbcType="VARCHAR"/>
+      </collection>
+    </collection>
+
+  </resultMap>
+  
+  <select id="getMenuByUserId" resultMap="getMenuList" parameterType="java.lang.String">
+   select distinct m1.id,m1.path,m1.component,m1.title,m1.iconCls,m1.keepAlive,m1.requireAuth,m2.id as id2,m2.path as path2,m2.component as component2,m2.title as title2,m2.iconCls as iconCls2,m2.keepAlive as keepAlive2,m2.requireAuth as requireAuth2 from user_role ur,role r,role_menu rm,menu m1,menu m2 where  m1.id  = m2.parentId and r.roleId = ur.role_id and r.roleId = rm.role_id and rm.menu_id = m2.id and user_id = #{id};
+  </select>
+</mapper>

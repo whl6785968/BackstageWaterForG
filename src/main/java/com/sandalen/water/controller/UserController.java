@@ -2,6 +2,7 @@ package com.sandalen.water.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sandalen.water.bean.*;
+import com.sandalen.water.enumeration.ResultCode;
 import com.sandalen.water.service.UserService;
 import com.sandalen.water.util.CookieUtils;
 import com.sandalen.water.util.JwtUtils;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
@@ -46,18 +48,19 @@ public class UserController {
     }
 
     @RequestMapping("/login")
-    public RespBean login(@RequestBody User user, HttpServletRequest request, HttpServletResponse response){
+    public RespBean login(@RequestBody LoginUser loginUser, HttpServletRequest request, HttpServletResponse response){
+        System.out.println("dengdeng");
         Cookie cookie;
         JSONObject jsonObject = new JSONObject();
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria = userExample.createCriteria();
-        criteria.andUseridEqualTo(user.getUserid());
+        criteria.andUseridEqualTo(loginUser.getUsername());
         User user1 = userService.getUser(userExample);
         if(user1 == null){
             return RespBean.error("该用户不存在");
         }
         else {
-            if(!user.getPwd().equals(user1.getPwd())){
+            if(!loginUser.getPassword().equals(user1.getPwd())){
                 return RespBean.error("密码错误");
             }
             else {
@@ -115,5 +118,15 @@ public class UserController {
 
         return RespBean.error("修改权限失败");
 
+    }
+
+    @RequestMapping("/getRoleById")
+    public RespBean getRoleById(String userid){
+        Role role = userService.getRoleById(userid);
+        if(role == null){
+            return RespBean.error("获取角色失败");
+        }
+
+        return RespBean.ok("获取成功",role);
     }
 }

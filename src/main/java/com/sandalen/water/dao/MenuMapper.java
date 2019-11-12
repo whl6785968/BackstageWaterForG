@@ -34,4 +34,6 @@ public interface MenuMapper {
     int updateByPrimaryKey(Menu record);
 
     List<Menu> getMenuByUserId(String userId);
+
+    List<Menu> getAllMenuTree();
 }

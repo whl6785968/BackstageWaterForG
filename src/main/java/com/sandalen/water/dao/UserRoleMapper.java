@@ -1,5 +1,6 @@
 package com.sandalen.water.dao;
 
+import com.sandalen.water.bean.Role;
 import com.sandalen.water.bean.UserRole;
 import com.sandalen.water.bean.UserRoleExample;
 import java.util.List;
@@ -32,4 +33,6 @@ public interface UserRoleMapper {
     int updateByPrimaryKeySelective(UserRole record);
 
     int updateByPrimaryKey(UserRole record);
+
+    Role getRoleByUserId(String id);
 }

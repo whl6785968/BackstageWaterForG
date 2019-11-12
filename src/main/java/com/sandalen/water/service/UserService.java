@@ -1,9 +1,6 @@
 package com.sandalen.water.service;
 
-import com.sandalen.water.bean.Menu;
-import com.sandalen.water.bean.User;
-import com.sandalen.water.bean.UserExample;
-import com.sandalen.water.bean.UserRole;
+import com.sandalen.water.bean.*;
 import com.sandalen.water.dao.MenuMapper;
 import com.sandalen.water.dao.UserMapper;
 import com.sandalen.water.dao.UserRoleMapper;
@@ -56,5 +53,10 @@ public class UserService {
     public int changeRole(UserRole userRole){
         int i = userRoleMapper.updateByPrimaryKeySelective(userRole);
         return i;
+    }
+
+    public Role getRoleById(String userid){
+        Role role = userRoleMapper.getRoleByUserId(userid);
+        return role;
     }
 }

@@ -3,8 +3,13 @@ package com.sandalen.water.dao;
 import com.sandalen.water.bean.RoleMenu;
 import com.sandalen.water.bean.RoleMenuExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@Mapper
 public interface RoleMenuMapper {
     int countByExample(RoleMenuExample example);
 

@@ -2,6 +2,8 @@ package com.sandalen.water.dao;
 
 import com.sandalen.water.bean.Menu;
 import com.sandalen.water.bean.MenuExample;
+
+import java.lang.management.MemoryNotificationInfo;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -36,4 +38,6 @@ public interface MenuMapper {
     List<Menu> getMenuByUserId(String userId);
 
     List<Menu> getAllMenuTree();
+
+    List<Menu> getAllMenu();
 }

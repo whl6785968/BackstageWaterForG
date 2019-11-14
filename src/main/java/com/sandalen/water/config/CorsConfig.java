@@ -6,16 +6,19 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-public class CorsConfig extends WebMvcConfigurerAdapter {
+public class CorsConfig implements WebMvcConfigurer {
     private CorsConfiguration buildConfig() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowCredentials(true);
         corsConfiguration.addAllowedOrigin("*");
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
-        corsConfiguration.setAllowCredentials(true);
+
+
         return corsConfiguration;
     }
 
@@ -27,10 +30,10 @@ public class CorsConfig extends WebMvcConfigurerAdapter {
         return new CorsFilter(source);
     }
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("*")
-                .allowedMethods("GET", "HEAD", "POST","PUT", "DELETE", "OPTIONS")
-                .allowCredentials(true).maxAge(3600);
-    }
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**").allowedOrigins("http://localhost:8080").allowedHeaders("*")
+//                .allowedMethods("GET", "HEAD", "POST","PUT", "DELETE", "OPTIONS")
+//                .maxAge(3600);
+//    }
 }

@@ -2,29 +2,44 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="51271783-d4b8-440d-8f3b-e71da6de1d4a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/Fileter/CorsFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/LoginUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/SecurityUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/config/SecuriyConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/MenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/enumeration/ResultCode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/MenuService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/UserForSecurityService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/Userinfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/UserinfoExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/UserinfoMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/other/Constant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/CustomAccessDecisioManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Filter/AdminAuthenticationProcessingFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Filter/MyAutenticaitonFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Login/AdminAutenticationProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Login/AdminAuthenticationEntryPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Login/AdminAuthenticationSuccessHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Login/CusAuthenticationManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/UrlFilterInvocationSecurityMetadatasource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/util/MultiReadHttpServletRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/util/ResponseUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/UserinfoMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/Fileter/CorsFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/Filter/CorsFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/WaterApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/WaterApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/RespBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/RespBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/SecurityUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/SecurityUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/config/CorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/config/SecuriyConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/config/SecuriyConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/MenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/MenuMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/MenuMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/RoleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/RoleMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/RoleMenuMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/RoleMenuMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/UserRoleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/UserRoleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/MenuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/MenuService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/UserForSecurityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/UserForSecurityService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/util/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/util/JwtUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/MenuMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/MenuMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/UserRoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/UserRoleMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/sandalen/water/WaterApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/sandalen/water/WaterApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Mybatis/Mapper/MenuMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Mybatis/Mapper/MenuMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Mybatis/Mapper/UserRoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Mybatis/Mapper/UserRoleMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/generatorConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/water.iml" beforeDir="false" afterPath="$PROJECT_DIR$/water.iml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -36,7 +51,56 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/config/SecuriyConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1077">
+              <caret line="112" column="68" lean-forward="true" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="68" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/LoginController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-703">
+              <caret line="29" column="29" lean-forward="true" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/security/UrlFilterInvocationSecurityMetadatasource.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="65">
+              <caret line="38" column="3" selection-start-line="38" selection-start-column="3" selection-end-line="38" selection-end-column="3" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/security/CustomAccessDecisioManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="338">
+              <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -49,6 +113,9 @@
     <findStrings>
       <find>tsm</find>
       <find>getUserId</find>
+      <find>UserD</find>
+      <find>Userdetails</find>
+      <find>userService</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -59,32 +126,52 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/util/CookieUtils.java" />
         <option value="$PROJECT_DIR$/src/main/resources/generator.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/Menu.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/util/JwtUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/RespBean.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/vo/UserRoleVo.java" />
         <option value="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/UserMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/UserMapper.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/sandalen/water/WaterApplicationTests.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/RoleMenuMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/MenuMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/MenuMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/RoleMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/MenuService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/MenuController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/LoginUser.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/Fileter/CorsFilter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/config/SecuriyConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/UserForSecurityService.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/config/CorsConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/enumeration/ResultCode.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/SecurityUser.java" />
         <option value="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/UserRoleMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/UserRoleMapper.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/UserForSecurityService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/Menu.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/MenuMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/MenuMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/MenuController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/WaterApplication.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/MenuService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/util/ResponseUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/RespBean.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Login/AdminAuthenticationEntryPoint.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/util/JwtUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/UserExample.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/util/MultiReadHttpServletRequest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Login/AdminAutenticationManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Login/CusActionManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Filter/AdminAuthenticationProcessingFilter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Login/CusAuthenticationManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/UserdetailsMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/UserinfoMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/UserService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/SecurityUser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Login/AdminAutenticationProvider.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Login/AdminAuthenticationSuccessHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/UrlFilterInvocationSecurityMetadatasource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/other/Constant.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Filter/MyAutenticaitonFilter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/config/CorsConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/Filter/CorsFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/LoginController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/config/SecuriyConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/CustomAccessDecisioManager.java" />
       </list>
     </option>
   </component>
@@ -98,13 +185,13 @@
         <path>
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
           <item name="water" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
         </path>
         <path>
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
           <item name="water" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
-          <item name="org.springframework.security:spring-security-test:5.2.0.RELEASE" type="c0821a7e:MavenProjectsStructure$DependencyNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
+          <item name="mybatis-generator" type="36feed69:MavenProjectsStructure$PluginNode" />
         </path>
       </expand>
       <select />
@@ -120,6 +207,22 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="water" type="58d84e3e:PackageViewProjectNode" />
+              <item name="water" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="water" type="58d84e3e:PackageViewProjectNode" />
+              <item name="water" type="616d4139:PackageViewModuleNode" />
+              <item name="com.sandalen.water" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Tests'; set:Tests; class com.intellij.psi.search.scope.TestsScope">
           <expand>
@@ -262,6 +365,17 @@
               <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="sandalen" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="water" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="config" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="water" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="water" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="sandalen" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="water" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="controller" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
@@ -273,7 +387,7 @@
               <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="sandalen" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="water" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="dao" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Filter" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="water" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -284,7 +398,7 @@
               <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="sandalen" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="water" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="service" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="security" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="water" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -295,7 +409,20 @@
               <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="sandalen" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="water" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="vo" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="security" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Filter" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="water" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="water" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="sandalen" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="water" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="security" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Login" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="water" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -311,15 +438,6 @@
               <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="Mybatis" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="water" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="water" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Mybatis" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Mapper" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -369,22 +487,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="water" type="58d84e3e:PackageViewProjectNode" />
-              <item name="water" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="water" type="58d84e3e:PackageViewProjectNode" />
-              <item name="water" type="616d4139:PackageViewModuleNode" />
-              <item name="com.sandalen.water" type="1f31426a:PackageElementNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -394,29 +496,29 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1573548843733" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1573722072401" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\water\src\main\resources\Mybatis\Mapper" />
+      <recent name="F:\water\src\main\java\com\sandalen\water\dao" />
+      <recent name="F:\water\src\main\java\com\sandalen\water\bean" />
+      <recent name="F:\water\src\main\resources\static\static" />
+      <recent name="F:\water\src\main\resources\static" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.sandalen.water.config" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\water\src\main\resources\static" />
       <recent name="F:\water\src\main\java\com\sandalen\water\dao" />
       <recent name="F:\water\src\main\java\com\sandalen\water\bean" />
       <recent name="F:\water\src\main\resources\Mybatis" />
       <recent name="F:\water\src\main\resources\Mybatis\Mapper" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.sandalen.water.config" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\water\src\main\resources\static\static" />
-      <recent name="F:\water\src\main\resources\static" />
-      <recent name="F:\water\src\main\resources\static\static\css" />
-      <recent name="F:\water\src\main\resources\static\static\js" />
-      <recent name="F:\water\src\main\resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -482,8 +584,19 @@
       <workItem from="1573259404348" duration="8381000" />
       <workItem from="1573282728703" duration="3517000" />
       <workItem from="1573452135193" duration="11168000" />
-      <workItem from="1573519873970" duration="7416000" />
+      <workItem from="1573519873970" duration="7698000" />
+      <workItem from="1573605734188" duration="19185000" />
+      <workItem from="1573691828664" duration="14738000" />
+      <workItem from="1573714773718" duration="6250000" />
     </task>
+    <task id="LOCAL-00001" summary="second commit">
+      <created>1573549090960</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1573549090961</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -492,12 +605,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73597000" />
+    <option name="totallyTimeSpent" value="114052000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22788204" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20107238" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -506,9 +620,9 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34844193" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.26487252" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37393767" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.32577905" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -536,297 +650,77 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="second commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="second commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sandalen/water/security/CustomAccessDecisioManager.java</url>
+          <line>22</line>
+          <properties />
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Login/AdminAuthenticationEntryPoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="23" column="75" selection-start-line="23" selection-start-column="75" selection-end-line="23" selection-end-column="75" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/UserExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="200" lean-forward="true" selection-start-line="200" selection-end-line="200" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/RespBean.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
-          <folding>
-            <element signature="e#524#525#0" expanded="true" />
-            <element signature="e#573#574#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/util/JwtUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="18" column="27" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/static/js/vendor.ae70bdaaf8da10be1b92.js.map" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/static/js/app.8751510962f942da9af1.js" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/static/js/app.9ced18e8b2ee13b3c319.js" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/static/js/app.42d59e10f34fb691e3bd.js" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/static/css/app.da12a1550cfb79b3af70584f7efb0705.css" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/static/js/manifest.3ad1d5771e9b13dbdad2.js" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/static/css/app.0346688f444cb15377c59988cdaba71b.css" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/UserRole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/vo/UserRoleVo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-          <folding>
-            <element signature="e#197#198#0" expanded="true" />
-            <element signature="e#229#230#0" expanded="true" />
-            <element signature="e#279#280#0" expanded="true" />
-            <element signature="e#321#322#0" expanded="true" />
-            <element signature="e#466#467#0" expanded="true" />
-            <element signature="e#495#496#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/sandalen/water/WaterApplicationTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/static/js/app.05b1eefee4c6d529cb0a.js" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/UserMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="37" column="45" selection-start-line="37" selection-start-column="45" selection-end-line="37" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/static/js/app.f40d5423e18c3c1c893d.js" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/static/css/css/app.c82163bde4878f13785b9a3515dc5d5d.css" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/static/index.html" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/static/css/app.c82163bde4878f13785b9a3515dc5d5d.css" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/generatorConfig.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/static/js/app.dab6736e9f31288eaae2.js" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/static/js/app.283b9b46e64f8d6feb2d.js" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/static/css/app.1f9ee62fd0c0aaea09557a94bd91059b.css" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/index.html" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/UserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1371">
-          <caret line="178" lean-forward="true" selection-start-line="178" selection-end-line="178" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/MenuMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="37" column="32" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/Menu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="19" column="28" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="28" />
-          <folding>
-            <element signature="e#408#409#0" expanded="true" />
-            <element signature="e#439#440#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/RoleMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/service/MenuService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="54" column="9" lean-forward="true" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1211#1212#0" expanded="true" />
-            <element signature="e#1240#1241#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/RoleMenuMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://MAVEN/com.sandalen:water:0.0.1-SNAPSHOT">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>MAVEN</ID>
-          <OriginalElement>com.sandalen:water:0.0.1-SNAPSHOT</OriginalElement>
-          <nodes>
-            <node x="" y="">com.sandalen:water:0.0.1-SNAPSHOT</node>
-            <node x="" y="">com.auth0:java-jwt:jar:3.4.0</node>
-            <node x="" y="">com.auth0:java-jwt:jar:3.4.0/com.fasterxml.jackson.core:jackson-databind:jar:2.10.0</node>
-            <node x="" y="">com.auth0:java-jwt:jar:3.4.0/com.fasterxml.jackson.core:jackson-databind:jar:2.10.0/com.fasterxml.jackson.core:jackson-annotations:jar:2.10.0</node>
-            <node x="" y="">com.auth0:java-jwt:jar:3.4.0/com.fasterxml.jackson.core:jackson-databind:jar:2.10.0/com.fasterxml.jackson.core:jackson-core:jar:2.10.0</node>
-            <node x="" y="">com.auth0:java-jwt:jar:3.4.0/commons-codec:commons-codec:jar:1.13</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:2.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot:jar:2.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.2.0.RELEASE/ch.qos.logback:logback-classic:jar:1.2.3</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.2.0.RELEASE/ch.qos.logback:logback-classic:jar:1.2.3/ch.qos.logback:logback-core:jar:1.2.3</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.2.0.RELEASE/org.apache.logging.log4j:log4j-to-slf4j:jar:2.12.1</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.2.0.RELEASE/org.apache.logging.log4j:log4j-to-slf4j:jar:2.12.1/org.apache.logging.log4j:log4j-api:jar:2.12.1</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.2.0.RELEASE/org.slf4j:jul-to-slf4j:jar:1.7.28</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.2.0.RELEASE/jakarta.annotation:jakarta.annotation-api:jar:1.3.5</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.2.0.RELEASE/org.yaml:snakeyaml:jar:1.25</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:2.2.0.RELEASE/org.springframework:spring-aop:jar:5.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:2.2.0.RELEASE/org.springframework:spring-aop:jar:5.2.0.RELEASE/org.springframework:spring-beans:jar:5.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:2.2.0.RELEASE/org.springframework.security:spring-security-config:jar:5.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:2.2.0.RELEASE/org.springframework.security:spring-security-config:jar:5.2.0.RELEASE/org.springframework:spring-context:jar:5.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:2.2.0.RELEASE/org.springframework.security:spring-security-web:jar:5.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:2.2.0.RELEASE/org.springframework.security:spring-security-web:jar:5.2.0.RELEASE/org.springframework:spring-expression:jar:5.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jdbc:jar:2.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jdbc:jar:2.2.0.RELEASE/org.springframework.data:spring-data-jdbc:jar:1.1.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jdbc:jar:2.2.0.RELEASE/org.springframework.data:spring-data-jdbc:jar:1.1.0.RELEASE/org.springframework.data:spring-data-relational:jar:1.1.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jdbc:jar:2.2.0.RELEASE/org.springframework.data:spring-data-jdbc:jar:1.1.0.RELEASE/org.springframework.data:spring-data-commons:jar:2.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jdbc:jar:2.2.0.RELEASE/org.springframework.data:spring-data-jdbc:jar:1.1.0.RELEASE/org.springframework:spring-tx:jar:5.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-jdbc:jar:2.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-jdbc:jar:2.2.0.RELEASE/com.zaxxer:HikariCP:jar:3.4.1</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-jdbc:jar:2.2.0.RELEASE/org.springframework:spring-jdbc:jar:5.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:2.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-json:jar:2.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-json:jar:2.2.0.RELEASE/com.fasterxml.jackson.datatype:jackson-datatype-jdk8:jar:2.10.0</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-json:jar:2.2.0.RELEASE/com.fasterxml.jackson.datatype:jackson-datatype-jsr310:jar:2.10.0</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-json:jar:2.2.0.RELEASE/com.fasterxml.jackson.module:jackson-module-parameter-names:jar:2.10.0</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-tomcat:jar:2.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-tomcat:jar:2.2.0.RELEASE/org.apache.tomcat.embed:tomcat-embed-core:jar:9.0.27</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-tomcat:jar:2.2.0.RELEASE/org.apache.tomcat.embed:tomcat-embed-el:jar:9.0.27</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-tomcat:jar:2.2.0.RELEASE/org.apache.tomcat.embed:tomcat-embed-websocket:jar:9.0.27</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-validation:jar:2.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-validation:jar:2.2.0.RELEASE/jakarta.validation:jakarta.validation-api:jar:2.0.1</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-validation:jar:2.2.0.RELEASE/org.hibernate.validator:hibernate-validator:jar:6.0.17.Final</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-validation:jar:2.2.0.RELEASE/org.hibernate.validator:hibernate-validator:jar:6.0.17.Final/org.jboss.logging:jboss-logging:jar:3.4.1.Final</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-starter-validation:jar:2.2.0.RELEASE/org.hibernate.validator:hibernate-validator:jar:6.0.17.Final/com.fasterxml:classmate:jar:1.5.0</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:2.2.0.RELEASE/org.springframework:spring-web:jar:5.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:2.2.0.RELEASE/org.springframework:spring-webmvc:jar:5.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-websocket:jar:2.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-websocket:jar:2.2.0.RELEASE/org.springframework:spring-messaging:jar:5.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-websocket:jar:2.2.0.RELEASE/org.springframework:spring-websocket:jar:5.2.0.RELEASE</node>
-            <node x="" y="">org.mybatis.spring.boot:mybatis-spring-boot-starter:jar:2.1.1</node>
-            <node x="" y="">org.mybatis.spring.boot:mybatis-spring-boot-starter:jar:2.1.1/org.mybatis.spring.boot:mybatis-spring-boot-autoconfigure:jar:2.1.1</node>
-            <node x="" y="">org.mybatis.spring.boot:mybatis-spring-boot-starter:jar:2.1.1/org.mybatis:mybatis:jar:3.5.3</node>
-            <node x="" y="">org.mybatis.spring.boot:mybatis-spring-boot-starter:jar:2.1.1/org.mybatis:mybatis-spring:jar:2.0.3</node>
-            <node x="" y="">com.alibaba:druid-spring-boot-starter:jar:1.1.10</node>
-            <node x="" y="">com.alibaba:druid-spring-boot-starter:jar:1.1.10/com.alibaba:druid:jar:1.1.10</node>
-            <node x="" y="">com.alibaba:druid-spring-boot-starter:jar:1.1.10/org.slf4j:slf4j-api:jar:1.7.28</node>
-            <node x="" y="">com.alibaba:druid-spring-boot-starter:jar:1.1.10/org.springframework.boot:spring-boot-autoconfigure:jar:2.2.0.RELEASE</node>
-            <node x="" y="">org.mybatis.generator:mybatis-generator-core:jar:1.3.5</node>
-            <node x="" y="">com.alibaba:fastjson:jar:1.2.56</node>
-            <node x="" y="">mysql:mysql-connector-java:jar:8.0.18</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-test:jar:2.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.springframework.boot:spring-boot-test-autoconfigure:jar:2.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/com.jayway.jsonpath:json-path:jar:2.4.0</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/com.jayway.jsonpath:json-path:jar:2.4.0/net.minidev:json-smart:jar:2.3</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/com.jayway.jsonpath:json-path:jar:2.4.0/net.minidev:json-smart:jar:2.3/net.minidev:accessors-smart:jar:1.2</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/com.jayway.jsonpath:json-path:jar:2.4.0/net.minidev:json-smart:jar:2.3/net.minidev:accessors-smart:jar:1.2/org.ow2.asm:asm:jar:5.0.4</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/jakarta.xml.bind:jakarta.xml.bind-api:jar:2.3.2</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/jakarta.xml.bind:jakarta.xml.bind-api:jar:2.3.2/jakarta.activation:jakarta.activation-api:jar:1.2.1</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.junit.jupiter:junit-jupiter:jar:5.5.2</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.junit.jupiter:junit-jupiter:jar:5.5.2/org.junit.jupiter:junit-jupiter-api:jar:5.5.2</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.junit.jupiter:junit-jupiter:jar:5.5.2/org.junit.jupiter:junit-jupiter-api:jar:5.5.2/org.apiguardian:apiguardian-api:jar:1.1.0</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.junit.jupiter:junit-jupiter:jar:5.5.2/org.junit.jupiter:junit-jupiter-api:jar:5.5.2/org.opentest4j:opentest4j:jar:1.2.0</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.junit.jupiter:junit-jupiter:jar:5.5.2/org.junit.jupiter:junit-jupiter-api:jar:5.5.2/org.junit.platform:junit-platform-commons:jar:1.5.2</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.junit.jupiter:junit-jupiter:jar:5.5.2/org.junit.jupiter:junit-jupiter-params:jar:5.5.2</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.junit.jupiter:junit-jupiter:jar:5.5.2/org.junit.jupiter:junit-jupiter-engine:jar:5.5.2</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.junit.jupiter:junit-jupiter:jar:5.5.2/org.junit.jupiter:junit-jupiter-engine:jar:5.5.2/org.junit.platform:junit-platform-engine:jar:1.5.2</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.mockito:mockito-junit-jupiter:jar:3.1.0</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.assertj:assertj-core:jar:3.13.2</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.hamcrest:hamcrest:jar:2.1</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.mockito:mockito-core:jar:3.1.0</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.mockito:mockito-core:jar:3.1.0/net.bytebuddy:byte-buddy:jar:1.10.1</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.mockito:mockito-core:jar:3.1.0/net.bytebuddy:byte-buddy-agent:jar:1.10.1</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.mockito:mockito-core:jar:3.1.0/org.objenesis:objenesis:jar:2.6</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.skyscreamer:jsonassert:jar:1.5.0</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.skyscreamer:jsonassert:jar:1.5.0/com.vaadin.external.google:android-json:jar:0.0.20131108.vaadin1</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.springframework:spring-core:jar:5.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.springframework:spring-core:jar:5.2.0.RELEASE/org.springframework:spring-jcl:jar:5.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.springframework:spring-test:jar:5.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:2.2.0.RELEASE/org.xmlunit:xmlunit-core:jar:2.6.3</node>
-            <node x="" y="">org.springframework.security:spring-security-test:jar:5.2.0.RELEASE</node>
-            <node x="" y="">org.springframework.security:spring-security-test:jar:5.2.0.RELEASE/org.springframework.security:spring-security-core:jar:5.2.0.RELEASE</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="0.08216364258815474" x="6739.0" y="592.0" />
-          <SelectedNodes />
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>All</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/WaterApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="551">
-          <caret line="29" column="47" lean-forward="true" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
+          <caret line="45" column="5" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
+          <folding>
+            <element signature="e#1060#1061#0" expanded="true" />
+            <element signature="e#1109#1110#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/5.2.0.RELEASE/spring-security-core-5.2.0.RELEASE.jar!/org/springframework/security/core/userdetails/User.class">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/9.0.27/tomcat-embed-core-9.0.27.jar!/javax/servlet/http/HttpServletRequest.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2934">
-          <caret line="210" column="13" lean-forward="true" selection-start-line="210" selection-start-column="13" selection-end-line="210" selection-end-column="13" />
+        <state relative-caret-position="114">
+          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-config/5.2.0.RELEASE/spring-security-config-5.2.0.RELEASE.jar!/org/springframework/security/config/annotation/web/configuration/WebSecurityConfigurerAdapter.class">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/9.0.27/tomcat-embed-core-9.0.27.jar!/javax/servlet/ServletRequest.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="152" selection-start-line="152" selection-end-line="152" />
+        <state relative-caret-position="114">
+          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/User.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/9.0.27/tomcat-embed-core-9.0.27.jar!/javax/servlet/http/HttpServletRequestWrapper.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/config/SecuriyConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="31" selection-end-line="40" />
+        <state relative-caret-position="133">
+          <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+          <folding>
+            <element signature="e#526#527#0" expanded="true" />
+            <element signature="e#556#557#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -846,119 +740,361 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/UserExample.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/5.2.0.RELEASE/spring-security-core-5.2.0.RELEASE.jar!/org/springframework/security/authentication/UsernamePasswordAuthenticationToken.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="257" column="29" lean-forward="true" selection-start-line="257" selection-start-column="29" selection-end-line="257" selection-end-column="29" />
+        <state relative-caret-position="-330">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.1.10/druid-1.1.10.jar!/com/alibaba/druid/support/http/WebStatFilter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="184" selection-start-line="184" selection-end-line="184" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/9.0.27/tomcat-embed-core-9.0.27.jar!/org/apache/catalina/core/ApplicationFilterChain.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="74" selection-start-line="74" selection-end-line="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/util/MultiReadHttpServletRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="948">
+          <caret line="122" selection-start-line="122" selection-end-line="122" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.2.0.RELEASE/spring-web-5.2.0.RELEASE.jar!/org/springframework/web/filter/OncePerRequestFilter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/util/JwtUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/util/ResponseUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="18" column="58" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.2.0.RELEASE/spring-security-web-5.2.0.RELEASE.jar!/org/springframework/security/web/authentication/logout/LogoutFilter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="64" selection-start-line="64" selection-end-line="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.2.0.RELEASE/spring-security-web-5.2.0.RELEASE.jar!/org/springframework/security/web/FilterChainProxy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="172" selection-start-line="172" selection-end-line="172" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/5.2.0.RELEASE/spring-security-core-5.2.0.RELEASE.jar!/org/springframework/security/core/context/SecurityContext.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/5.2.0.RELEASE/spring-security-core-5.2.0.RELEASE.jar!/org/springframework/security/authentication/AuthenticationManager.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/service/UserForSecurityService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="41" column="23" selection-end-line="58" />
+        <state relative-caret-position="152">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Login/CusAuthenticationManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="14" column="72" selection-start-line="14" selection-start-column="72" selection-end-line="14" selection-end-column="72" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/UserdetailsMapper.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/Userdetails.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/UserdetailsMapper.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/Userinfo.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/UserinfoMapper.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/generatorConfig.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="62" column="34" selection-start-line="62" selection-start-column="34" selection-end-line="62" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/UserinfoMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="48" lean-forward="true" selection-start-line="13" selection-start-column="48" selection-end-line="13" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="30" column="50" selection-start-line="30" selection-start-column="50" selection-end-line="30" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/Mybatis/mybatis-config.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/SecurityUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+          <folding>
+            <element signature="e#656#657#0" expanded="true" />
+            <element signature="e#694#695#0" expanded="true" />
+            <element signature="e#754#755#0" expanded="true" />
+            <element signature="e#808#809#0" expanded="true" />
+            <element signature="e#852#853#0" expanded="true" />
+            <element signature="e#890#891#0" expanded="true" />
+            <element signature="e#954#955#0" expanded="true" />
+            <element signature="e#1008#1009#0" expanded="true" />
+            <element signature="e#1044#1045#0" expanded="true" />
+            <element signature="e#1072#1073#0" expanded="true" />
+            <element signature="e#1118#1119#0" expanded="true" />
+            <element signature="e#1152#1153#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1218#1219#0" expanded="true" />
+            <element signature="e#1266#1267#0" expanded="true" />
+            <element signature="e#1306#1307#0" expanded="true" />
+            <element signature="e#2400#2401#0" expanded="true" />
+            <element signature="e#2495#2496#0" expanded="true" />
+            <element signature="e#2580#2581#0" expanded="true" />
+            <element signature="e#2664#2665#0" expanded="true" />
+            <element signature="e#2753#2754#0" expanded="true" />
+            <element signature="e#2828#2829#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Login/AdminAuthenticationSuccessHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="29" column="1" lean-forward="true" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Login/AdminAutenticationProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3562#3563#0" expanded="true" />
+            <element signature="e#3589#3590#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/5.2.0.RELEASE/spring-security-core-5.2.0.RELEASE.jar!/org/springframework/security/access/intercept/AbstractSecurityInterceptor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="131" selection-start-line="131" selection-end-line="131" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/other/Constant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="56" selection-start-line="3" selection-start-column="56" selection-end-line="3" selection-end-column="56" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/config/CorsConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="21" column="9" lean-forward="true" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+        <state relative-caret-position="19">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/Fileter/CorsFilter.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-config/5.2.0.RELEASE/spring-security-config-5.2.0.RELEASE.jar!/org/springframework/security/config/annotation/web/builders/HttpSecurity.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/enumeration/ResultCode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="21" column="37" lean-forward="true" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
-          <folding>
-            <element signature="e#582#583#0" expanded="true" />
-            <element signature="e#609#610#0" expanded="true" />
-            <element signature="e#646#647#0" expanded="true" />
-            <element signature="e#678#679#0" expanded="true" />
-            <element signature="e#709#710#0" expanded="true" />
-            <element signature="e#736#737#0" expanded="true" />
-            <element signature="e#776#777#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/SecurityUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="17" column="9" lean-forward="true" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/UserRoleMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="36" column="36" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/UserRoleMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="181" column="29" selection-start-line="181" selection-start-column="14" selection-end-line="181" selection-end-column="29" />
+        <state relative-caret-position="138">
+          <caret line="337" column="24" selection-start-line="337" selection-start-column="24" selection-end-line="337" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/service/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="47" column="32" lean-forward="true" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="316">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/WaterApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
-          <caret line="9" column="13" lean-forward="true" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#390#391#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1365">
-          <caret line="126" column="43" lean-forward="true" selection-start-line="126" selection-start-column="43" selection-end-line="126" selection-end-column="43" />
+        <state relative-caret-position="183">
+          <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/MenuController.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.2.0.RELEASE/spring-security-web-5.2.0.RELEASE.jar!/org/springframework/security/web/authentication/AbstractAuthenticationProcessingFilter.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="24" column="43" lean-forward="true" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="43" />
+        <state relative-caret-position="150">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Filter/AdminAuthenticationProcessingFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/MenuMapper.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/Filter/CorsFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="300" column="428" selection-start-line="300" selection-start-column="3" selection-end-line="300" selection-end-column="428" />
+        <state relative-caret-position="361">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/5.2.0.RELEASE/spring-security-core-5.2.0.RELEASE.jar!/org/springframework/security/access/hierarchicalroles/RoleHierarchy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/5.2.0.RELEASE/spring-security-core-5.2.0.RELEASE.jar!/org/springframework/security/access/hierarchicalroles/RoleHierarchyImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1475">
+          <caret line="27" column="11" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Filter/MyAutenticaitonFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.2.0.RELEASE/spring-security-web-5.2.0.RELEASE.jar!/org/springframework/security/web/access/ExceptionTranslationFilter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="69" selection-start-line="69" selection-end-line="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/security/UrlFilterInvocationSecurityMetadatasource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65">
+          <caret line="38" column="3" selection-start-line="38" selection-start-column="3" selection-end-line="38" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/security/CustomAccessDecisioManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-703">
+          <caret line="29" column="29" lean-forward="true" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/config/SecuriyConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1077">
+          <caret line="112" column="68" lean-forward="true" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="68" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

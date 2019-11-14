@@ -60,10 +60,10 @@
         	<columnOverride column="ename" javaType="java.lang.String" jdbcType="varchar"></columnOverride>
         	<columnOverride column="equipic" javaType="java.lang.String" jdbcType="varchar"></columnOverride>
         </table> -->
-        <table tableName="user"></table>
-        <table tableName="user_role"></table>
-        <table tableName="role"></table>
-        <table tableName="role_menu"></table>
-        <table tableName="menu"></table>
+        <table tableName="userInfo"></table>
+        <!--<table tableName="user_role"></table>-->
+        <!--<table tableName="role"></table>-->
+        <!--<table tableName="role_menu"></table>-->
+        <!--<table tableName="menu"></table>-->
     </context>
 </generatorConfiguration>

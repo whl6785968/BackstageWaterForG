@@ -5,12 +5,16 @@ import com.sandalen.water.dao.MenuMapper;
 import com.sandalen.water.dao.RoleMapper;
 import com.sandalen.water.dao.RoleMenuMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
+@CacheConfig(cacheNames = "menu_cache")
 public class MenuService {
 
     @Autowired
@@ -53,5 +57,10 @@ public class MenuService {
             roleMenu.setRoleId(role_id);
             roleMenuMapper.insert(roleMenu);
         }
+    }
+
+    public List<Menu> getAllMenu(){
+        List<Menu> allMenu = menuMapper.getAllMenu();
+        return allMenu;
     }
 }

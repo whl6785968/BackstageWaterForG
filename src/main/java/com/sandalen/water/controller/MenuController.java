@@ -60,4 +60,10 @@ public class MenuController {
         return RespBean.error("修改失败");
     }
 
+    @RequestMapping("/getAllMenu")
+    public RespBean getAllMenu(){
+        List<Menu> allMenu = menuService.getAllMenu();
+        return RespBean.ok("成功获取数据",allMenu);
+    }
+
 }

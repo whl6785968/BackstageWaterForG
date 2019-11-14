@@ -9,10 +9,7 @@ import com.sandalen.water.util.JwtUtils;
 import com.sandalen.water.vo.UserRoleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -35,53 +32,6 @@ public class UserController {
             return RespBean.ok("成功获取数据",menus);
         }
         return RespBean.error("获取数据失败");
-
-    }
-
-    @RequestMapping("/getUserByToken")
-    public RespBean getUserByToken(String token){
-        if(token != null){
-            String userId = jwtUtils.getUserId(token);
-            return RespBean.ok("成功查询",userId);
-        }
-        return RespBean.error("查询失败");
-    }
-
-    @RequestMapping("/login")
-    public RespBean login(@RequestBody LoginUser loginUser, HttpServletRequest request, HttpServletResponse response){
-        System.out.println("dengdeng");
-        Cookie cookie;
-        JSONObject jsonObject = new JSONObject();
-        UserExample userExample = new UserExample();
-        UserExample.Criteria criteria = userExample.createCriteria();
-        criteria.andUseridEqualTo(loginUser.getUsername());
-        User user1 = userService.getUser(userExample);
-        if(user1 == null){
-            return RespBean.error("该用户不存在");
-        }
-        else {
-            if(!loginUser.getPassword().equals(user1.getPwd())){
-                return RespBean.error("密码错误");
-            }
-            else {
-                String token = jwtUtils.getToken(user1);
-                Cookie[] cookies = request.getCookies();
-                cookie = CookieUtils.getCookie(cookies, "X-Token");
-                if(cookie != null){
-                    cookie.setValue(token);
-                }
-                else {
-                    cookie = new Cookie("X-Token",token);
-                    cookie.setMaxAge(36000);
-                    cookie.setPath("/");
-                }
-                response.addCookie(cookie);
-                jsonObject.put("token",token);
-                jsonObject.put("user",user1);
-
-                return RespBean.ok("登录成功",jsonObject);
-            }
-        }
 
     }
 
@@ -122,6 +72,7 @@ public class UserController {
 
     @RequestMapping("/getRoleById")
     public RespBean getRoleById(String userid){
+        System.out.println(userid);
         Role role = userService.getRoleById(userid);
         if(role == null){
             return RespBean.error("获取角色失败");
@@ -129,4 +80,6 @@ public class UserController {
 
         return RespBean.ok("获取成功",role);
     }
+
+
 }

@@ -178,4 +178,8 @@
       role_id = #{roleId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getRoleByUserId" resultType="com.sandalen.water.bean.Role" parameterType="java.lang.String">
+    select r.roleId,r.role_name from user_role ur ,role r where ur.role_id = r.roleId and ur.user_id = #{id};
+  </select>
 </mapper>

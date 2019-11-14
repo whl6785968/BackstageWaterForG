@@ -4,6 +4,7 @@ import com.sandalen.water.bean.*;
 import com.sandalen.water.dao.MenuMapper;
 import com.sandalen.water.dao.UserMapper;
 import com.sandalen.water.dao.UserRoleMapper;
+import com.sandalen.water.dao.UserinfoMapper;
 import com.sandalen.water.vo.UserRoleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,9 @@ public class UserService {
 
     @Autowired
     private UserRoleMapper userRoleMapper;
+
+    @Autowired
+    private UserinfoMapper userinfoMapper;
 
     public List<Menu> getMenuByUserId(String userId){
         List<Menu> menus = menuMapper.getMenuByUserId(userId);
@@ -58,5 +62,21 @@ public class UserService {
     public Role getRoleById(String userid){
         Role role = userRoleMapper.getRoleByUserId(userid);
         return role;
+    }
+
+    public Userinfo getUserDetailsById(String userId){
+        UserinfoExample example = new UserinfoExample();
+        UserinfoExample.Criteria criteria = example.createCriteria();
+        criteria.andUidEqualTo(userId);
+
+        List<Userinfo> userdetails = userinfoMapper.selectByExample(example);
+        if(userdetails != null){
+            return userdetails.get(0);
+        }
+        return null;
+    }
+
+    public void updateUserDetails(Userinfo userdetails){
+        userinfoMapper.updateByPrimaryKey(userdetails);
     }
 }

@@ -33,6 +33,18 @@ public class RespBean {
         return new RespBean(500,msg,null);
     }
 
+    public static RespBean unStatus(String msg,int status){
+        return new RespBean(status,msg,null);
+    }
+
+    public static RespBean unStatus(String msg,int status,Object obj){
+        return new RespBean(status,msg,obj);
+    }
+
+    public static RespBean expired(String msg){
+        return new RespBean(401,msg,null);
+    }
+
 
     public Integer getStatus() {
         return status;

@@ -1,5 +1,6 @@
-package com.sandalen.water.Fileter;
+package com.sandalen.water.Filter;
 
+import com.sun.deploy.net.HttpUtils;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -8,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//@Component
+
 @WebFilter(filterName = "CorsFilter")
 public class CorsFilter implements Filter {
     @Override
@@ -16,7 +17,7 @@ public class CorsFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
 
         HttpServletRequest reqs = (HttpServletRequest) req;
-        String origin = (String) reqs.getRemoteHost() + ":" + reqs.getRemotePort();
+        String origin = reqs.getRemoteHost() + ":" + reqs.getRemotePort();
         System.out.println(origin);
 
         // response.setHeader("Access-Control-Allow-Origin",reqs.getHeader("Origin"));
@@ -25,6 +26,9 @@ public class CorsFilter implements Filter {
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, PATCH, DELETE, PUT");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "*");
+        if(((HttpServletRequest) req).getMethod().equals("OPTIONS")){
+            ((HttpServletResponse) res).setStatus(HttpServletResponse.SC_OK);
+        }
         chain.doFilter(req, res);
 
     }

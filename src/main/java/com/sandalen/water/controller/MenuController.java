@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping("/menu")
+@RequestMapping("/sys/menu")
 @RestController
 public class MenuController {
     @Autowired

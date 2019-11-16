@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sandalen.water.dao.EquipmentMapper" >
+  <resultMap id="BaseResultMap" type="com.sandalen.water.bean.Equipment" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="productionTime" property="productiontime" jdbcType="TIMESTAMP" />
+    <result column="availableTime" property="availabletime" jdbcType="INTEGER" />
+    <result column="productionPlace" property="productionplace" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, model, productionTime, availableTime, productionPlace, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sandalen.water.bean.EquipmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from equipment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from equipment
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from equipment
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sandalen.water.bean.EquipmentExample" >
+    delete from equipment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sandalen.water.bean.Equipment" >
+    insert into equipment (id, name, model, 
+      productionTime, availableTime, productionPlace, 
+      status)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, 
+      #{productiontime,jdbcType=TIMESTAMP}, #{availabletime,jdbcType=INTEGER}, #{productionplace,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sandalen.water.bean.Equipment" >
+    insert into equipment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="productiontime != null" >
+        productionTime,
+      </if>
+      <if test="availabletime != null" >
+        availableTime,
+      </if>
+      <if test="productionplace != null" >
+        productionPlace,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="productiontime != null" >
+        #{productiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="availabletime != null" >
+        #{availabletime,jdbcType=INTEGER},
+      </if>
+      <if test="productionplace != null" >
+        #{productionplace,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sandalen.water.bean.EquipmentExample" resultType="java.lang.Integer" >
+    select count(*) from equipment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update equipment
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null" >
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productiontime != null" >
+        productionTime = #{record.productiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.availabletime != null" >
+        availableTime = #{record.availabletime,jdbcType=INTEGER},
+      </if>
+      <if test="record.productionplace != null" >
+        productionPlace = #{record.productionplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update equipment
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      productionTime = #{record.productiontime,jdbcType=TIMESTAMP},
+      availableTime = #{record.availabletime,jdbcType=INTEGER},
+      productionPlace = #{record.productionplace,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sandalen.water.bean.Equipment" >
+    update equipment
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="productiontime != null" >
+        productionTime = #{productiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="availabletime != null" >
+        availableTime = #{availabletime,jdbcType=INTEGER},
+      </if>
+      <if test="productionplace != null" >
+        productionPlace = #{productionplace,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER}
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sandalen.water.bean.Equipment" >
+    update equipment
+    set name = #{name,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      productionTime = #{productiontime,jdbcType=TIMESTAMP},
+      availableTime = #{availabletime,jdbcType=INTEGER},
+      productionPlace = #{productionplace,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <resultMap id="EquipPositive" type="com.sandalen.water.bean.Equipment">
+    <id column="id" property="id" jdbcType="VARCHAR"></id>
+    <result column="name" property="name" jdbcType="VARCHAR"></result>
+    <result column="model" property="model" jdbcType="VARCHAR"></result>
+    <result column="productionTime" property="productiontime" jdbcType="TIMESTAMP"></result>
+    <result column="availableTime" property="availabletime" jdbcType="INTEGER"></result>
+    <result column="productionPlace" property="productionplace" jdbcType="VARCHAR"></result>
+    <result column="status" property="status" jdbcType="INTEGER"></result>
+    <association property="station" javaType="com.sandalen.water.bean.Station">
+      <id column="sid" property="id"></id>
+      <result column="sname" property="name"></result>
+      <result column="currLevel" property="currlevel"></result>
+      <result column="preLevel" property="prelevel"></result>
+    </association>
+  </resultMap>
+
+  <select id="getEquipAndStation" resultMap="EquipPositive" parameterType="com.sandalen.water.bean.SearchCondition">
+    select e.id as id,e.name as name,e.model as model,e.productionTime as productionTime,e.availableTime as availableTime,e.productionPlace as productionPlace,e.status as status,s.id as sid,s.name as sname,s.currLevel as currLevel,s.preLevel as preLevel from equipment e,equip_sta es,station s
+    <where>
+      e.id = es.eid and es.sid = s.id
+      <if test="id != null and id != ''">
+        and e.id like '%${id}%'
+      </if>
+      <if test="equipName != null and equipName != ''">
+        and e.name like '%${equipName}%'
+      </if>
+      <if test="equipModel != null and equipModel != ''">
+        and e.model = #{equipModel,jdbcType=VARCHAR}
+      </if>
+      <if test="station != null and station != ''">
+        and s.name = #{station,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null and status != ''">
+        and e.status = #{status,jdbcType=INTEGER}
+      </if>
+      <if test="level != null and level != ''">
+        and s.currLevel = #{level,jdbcType=INTEGER}
+      </if>
+    </where>
+
+  </select>
+</mapper>

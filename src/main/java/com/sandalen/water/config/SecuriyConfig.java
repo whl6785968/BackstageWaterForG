@@ -68,38 +68,6 @@ public class SecuriyConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(new CorsFilter(),ChannelProcessingFilter.class);
 
 
-
-
-
-//        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http.antMatcher("/**").authorizeRequests();
-
-
-//        http.addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class);
-//        http.exceptionHandling().authenticationEntryPoint(new AdminAuthenticationEntryPoint());
-//
-//
-//        registry.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
-//            @Override
-//            public <O extends FilterSecurityInterceptor> O postProcess(O o) {
-//                o.setSecurityMetadataSource(new UrlFilterInvocationSecurityMetadatasource());
-//                o.setAccessDecisionManager(new CustomAccessDecisioManager());
-//                return o;
-//            }
-//        });
-//
-//        registry.antMatchers("/login").permitAll();
-//        registry.antMatchers(HttpMethod.OPTIONS, "/**").denyAll();
-//
-//        AdminAutenticationProvider provider = new AdminAutenticationProvider();
-//        http.addFilterAt(new AdminAuthenticationProcessingFilter(new CusAuthenticationManager(provider)), UsernamePasswordAuthenticationFilter.class)
-//                .addFilterBefore(new MyAutenticaitonFilter(), BasicAuthenticationFilter.class);
-//        registry.anyRequest().authenticated().and().cors().and().csrf().disable();
-//        registry.and().headers().frameOptions().disable();
-
-
-
-
-
     }
 
     @Override

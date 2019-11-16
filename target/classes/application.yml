@@ -32,3 +32,8 @@ mybatis:
 
 server:
   port: 8088
+
+sandalen:
+  auth:
+    loginTimesLimit: 7
+    loginLockedTime: 10

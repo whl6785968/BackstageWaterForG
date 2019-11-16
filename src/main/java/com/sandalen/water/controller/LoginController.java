@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 
 @RestController
@@ -65,14 +66,6 @@ public class LoginController {
 
     }
 
-    @RequestMapping("/getUserByToken")
-    public RespBean getUserByToken(@RequestHeader(name = "X-Token") String token){
-        if(token != null){
-            String userId = jwtUtils.getUserId(token);
-            return RespBean.ok("成功查询",userId);
-        }
-        return RespBean.error("查询失败");
-    }
 
     @RequestMapping("/login_page")
     public RespBean login_page(){
@@ -80,4 +73,8 @@ public class LoginController {
 
         return RespBean.error("还未登录");
     }
+
+
+
+
 }

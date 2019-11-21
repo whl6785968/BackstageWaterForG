@@ -13,6 +13,28 @@ public class Station {
 
     private Integer prelevel;
 
+    private String responsible;
+
+    private Userinfo userinfo;
+
+    private District district;
+
+    public District getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(District district) {
+        this.district = district;
+    }
+
+    public Userinfo getUserinfo() {
+        return userinfo;
+    }
+
+    public void setUserinfo(Userinfo userinfo) {
+        this.userinfo = userinfo;
+    }
+
     public String getId() {
         return id;
     }
@@ -59,5 +81,13 @@ public class Station {
 
     public void setPrelevel(Integer prelevel) {
         this.prelevel = prelevel;
+    }
+
+    public String getResponsible() {
+        return responsible;
+    }
+
+    public void setResponsible(String responsible) {
+        this.responsible = responsible == null ? null : responsible.trim();
     }
 }

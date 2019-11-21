@@ -483,6 +483,76 @@ public class StationExample {
             addCriterion("preLevel not between", value1, value2, "prelevel");
             return (Criteria) this;
         }
+
+        public Criteria andResponsibleIsNull() {
+            addCriterion("responsible is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResponsibleIsNotNull() {
+            addCriterion("responsible is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResponsibleEqualTo(String value) {
+            addCriterion("responsible =", value, "responsible");
+            return (Criteria) this;
+        }
+
+        public Criteria andResponsibleNotEqualTo(String value) {
+            addCriterion("responsible <>", value, "responsible");
+            return (Criteria) this;
+        }
+
+        public Criteria andResponsibleGreaterThan(String value) {
+            addCriterion("responsible >", value, "responsible");
+            return (Criteria) this;
+        }
+
+        public Criteria andResponsibleGreaterThanOrEqualTo(String value) {
+            addCriterion("responsible >=", value, "responsible");
+            return (Criteria) this;
+        }
+
+        public Criteria andResponsibleLessThan(String value) {
+            addCriterion("responsible <", value, "responsible");
+            return (Criteria) this;
+        }
+
+        public Criteria andResponsibleLessThanOrEqualTo(String value) {
+            addCriterion("responsible <=", value, "responsible");
+            return (Criteria) this;
+        }
+
+        public Criteria andResponsibleLike(String value) {
+            addCriterion("responsible like", value, "responsible");
+            return (Criteria) this;
+        }
+
+        public Criteria andResponsibleNotLike(String value) {
+            addCriterion("responsible not like", value, "responsible");
+            return (Criteria) this;
+        }
+
+        public Criteria andResponsibleIn(List<String> values) {
+            addCriterion("responsible in", values, "responsible");
+            return (Criteria) this;
+        }
+
+        public Criteria andResponsibleNotIn(List<String> values) {
+            addCriterion("responsible not in", values, "responsible");
+            return (Criteria) this;
+        }
+
+        public Criteria andResponsibleBetween(String value1, String value2) {
+            addCriterion("responsible between", value1, value2, "responsible");
+            return (Criteria) this;
+        }
+
+        public Criteria andResponsibleNotBetween(String value1, String value2) {
+            addCriterion("responsible not between", value1, value2, "responsible");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

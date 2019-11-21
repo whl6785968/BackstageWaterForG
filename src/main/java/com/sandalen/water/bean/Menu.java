@@ -21,9 +21,19 @@ public class Menu {
 
     private Integer requireauth;
 
+    private Integer enable;
+
     private List<Menu> children;
 
     private List<Role> roles;
+
+    public Integer getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Integer enable) {
+        this.enable = enable;
+    }
 
     public List<Role> getRoles() {
         return roles;

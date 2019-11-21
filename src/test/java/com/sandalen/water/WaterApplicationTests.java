@@ -1,19 +1,15 @@
 package com.sandalen.water;
 
 import org.junit.jupiter.api.Test;
-import org.mybatis.generator.api.MyBatisGenerator;
-import org.mybatis.generator.config.Configuration;
-import org.mybatis.generator.config.xml.ConfigurationParser;
-import org.mybatis.generator.exception.InvalidConfigurationException;
-import org.mybatis.generator.exception.XMLParserException;
-import org.mybatis.generator.internal.DefaultShellCallback;
+
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;;
+import java.util.Calendar;
+import java.util.Date;
+
 
 @SpringBootTest
 class WaterApplicationTests {
@@ -22,4 +18,13 @@ class WaterApplicationTests {
     void contextLoads() {
     }
 
+    @Test
+    public void testDate() throws ParseException {
+        Date date = new Date();
+        System.out.println(date);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formatDate = format.format(date);
+
+
+    }
 }

@@ -11,6 +11,7 @@
     <result column="keepAlive" property="keepalive" jdbcType="BIT" />
     <result column="parentId" property="parentid" jdbcType="INTEGER" />
     <result column="requireAuth" property="requireauth" jdbcType="INTEGER" />
+    <result column="enable" property="enable" jdbcType="INTEGER"></result>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -143,6 +144,9 @@
       <if test="requireauth != null" >
         requireAuth,
       </if>
+      <if test="enable != null" >
+        requireAuth,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -171,6 +175,9 @@
       </if>
       <if test="requireauth != null" >
         #{requireauth,jdbcType=INTEGER},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -210,6 +217,9 @@
       <if test="record.requireauth != null" >
         requireAuth = #{record.requireauth,jdbcType=INTEGER},
       </if>
+      <if test="record.enable != null" >
+        enable = #{record.enable,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -226,6 +236,7 @@
       keepAlive = #{record.keepalive,jdbcType=BIT},
       parentId = #{record.parentid,jdbcType=INTEGER},
       requireAuth = #{record.requireauth,jdbcType=INTEGER}
+      enable = #{record.enable,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -257,6 +268,9 @@
       <if test="requireauth != null" >
         requireAuth = #{requireauth,jdbcType=INTEGER},
       </if>
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -269,10 +283,10 @@
       iconCls = #{iconcls,jdbcType=VARCHAR},
       keepAlive = #{keepalive,jdbcType=BIT},
       parentId = #{parentid,jdbcType=INTEGER},
-      requireAuth = #{requireauth,jdbcType=INTEGER}
+      requireAuth = #{requireauth,jdbcType=INTEGER},
+      enable = #{enbale,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
   <resultMap id="getMenuList" type="com.sandalen.water.bean.Menu">
     <id column="id" property="id" jdbcType="INTEGER"></id>
     <result column="url" property="url" jdbcType="VARCHAR"></result>
@@ -282,6 +296,7 @@
     <result column="iconCls" property="iconcls" jdbcType="VARCHAR"></result>
     <result column="keepAlive" property="keepalive" jdbcType="BOOLEAN"></result>
     <result column="requireAuth" property="requireauth" jdbcType="INTEGER"></result>
+    <result column="enable" property="enable" jdbcType="INTEGER"></result>
     <collection property="roles" ofType="com.sandalen.water.bean.Role">
       <id column="roleId" property="roleid"/>
       <result column="roleName" property="roleName"/>
@@ -295,6 +310,7 @@
       <result column="iconCls2" property="iconcls" jdbcType="VARCHAR"></result>
       <result column="keepAlive2" property="keepalive" jdbcType="BOOLEAN"></result>
       <result column="requireAuth2" property="requireauth" jdbcType="INTEGER"></result>
+      <result column="enable2" property="enable" jdbcType="INTEGER"></result>
       <collection property="children" ofType="com.sandalen.water.bean.Menu">
         <id column="id3" property="id"/>
         <result column="title3" property="title3" jdbcType="VARCHAR"/>
@@ -302,9 +318,9 @@
     </collection>
 
   </resultMap>
-  
+
   <select id="getMenuByUserId" resultMap="getMenuList" parameterType="java.lang.String">
-   select distinct m1.id,m1.path,m1.component,m1.title,m1.iconCls,m1.keepAlive,m1.requireAuth,m2.id as id2,m2.path as path2,m2.component as component2,m2.title as title2,m2.iconCls as iconCls2,m2.keepAlive as keepAlive2,m2.requireAuth as requireAuth2 from user_role ur,role r,role_menu rm,menu m1,menu m2 where  m1.id  = m2.parentId and r.roleId = ur.role_id and r.roleId = rm.role_id and rm.menu_id = m2.id and m2.requireAuth = 1 and user_id = #{id};
+   select distinct m1.id,m1.path,m1.component,m1.title,m1.iconCls,m1.keepAlive,m1.requireAuth,m1.enable as enable,m2.id as id2,m2.path as path2,m2.component as component2,m2.title as title2,m2.iconCls as iconCls2,m2.keepAlive as keepAlive2,m2.requireAuth as requireAuth2,m2.enable as enable2 from user_role ur,role r,role_menu rm,menu m1,menu m2 where  m1.id  = m2.parentId and r.roleId = ur.role_id and r.roleId = rm.role_id and rm.menu_id = m2.id and m2.requireAuth = 1 and user_id = #{id};
   </select>
 
   <select id="getAllMenuTree" resultMap="getMenuList">
@@ -313,7 +329,9 @@
 
 
   <select id="getAllMenu" resultMap="getMenuList">
-    select m.*,r.roleId as roleId,r.role_name as roleName from menu m left join role_menu mr on m.`id`=mr.`menu_id` left join role r on mr.`role_id`=r.`roleId` order by m.`id` desc;
+      select m.*,r.roleId as roleId,r.role_name as roleName from menu m left join role_menu mr on m.`id`=mr.`menu_id` left join role r on mr.`role_id`=r.`roleId` order by m.`id` desc;
   </select>
+
+
 
 </mapper>

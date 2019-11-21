@@ -60,10 +60,10 @@
         	<columnOverride column="ename" javaType="java.lang.String" jdbcType="varchar"></columnOverride>
         	<columnOverride column="equipic" javaType="java.lang.String" jdbcType="varchar"></columnOverride>
         </table> -->
-        <table tableName="equipment"></table>
-        <table tableName="station"></table>
-        <table tableName="equip_sta"></table>
-        <table tableName="waterData"></table>
-        <!--<table tableName="menu"></table>-->
+        <!--<table tableName="equipment"></table>-->
+        <!--<table tableName="station"></table>-->
+        <!--<table tableName="equip_sta"></table>-->
+        <table tableName="district"></table>
+        <table tableName="station_district"></table>
     </context>
 </generatorConfiguration>

@@ -3,8 +3,13 @@ package com.sandalen.water.dao;
 import com.sandalen.water.bean.Waterdata;
 import com.sandalen.water.bean.WaterdataExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@Mapper
 public interface WaterdataMapper {
     int countByExample(WaterdataExample example);
 

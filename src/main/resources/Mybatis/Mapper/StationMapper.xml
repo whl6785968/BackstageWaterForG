@@ -8,6 +8,7 @@
     <result column="latitude" property="latitude" jdbcType="DOUBLE" />
     <result column="currLevel" property="currlevel" jdbcType="INTEGER" />
     <result column="preLevel" property="prelevel" jdbcType="INTEGER" />
+    <result column="responsible" property="responsible" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, longtitude, latitude, currLevel, preLevel
+    id, name, longtitude, latitude, currLevel, preLevel, responsible
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sandalen.water.bean.StationExample" >
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.sandalen.water.bean.Station" >
     insert into station (id, name, longtitude, 
-      latitude, currLevel, preLevel
-      )
+      latitude, currLevel, preLevel, 
+      responsible)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{longtitude,jdbcType=DOUBLE}, 
-      #{latitude,jdbcType=DOUBLE}, #{currlevel,jdbcType=INTEGER}, #{prelevel,jdbcType=INTEGER}
-      )
+      #{latitude,jdbcType=DOUBLE}, #{currlevel,jdbcType=INTEGER}, #{prelevel,jdbcType=INTEGER}, 
+      #{responsible,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sandalen.water.bean.Station" >
     insert into station
@@ -129,6 +130,9 @@
       <if test="prelevel != null" >
         preLevel,
       </if>
+      <if test="responsible != null" >
+        responsible,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -148,6 +152,9 @@
       </if>
       <if test="prelevel != null" >
         #{prelevel,jdbcType=INTEGER},
+      </if>
+      <if test="responsible != null" >
+        #{responsible,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -178,6 +185,9 @@
       <if test="record.prelevel != null" >
         preLevel = #{record.prelevel,jdbcType=INTEGER},
       </if>
+      <if test="record.responsible != null" >
+        responsible = #{record.responsible,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +200,8 @@
       longtitude = #{record.longtitude,jdbcType=DOUBLE},
       latitude = #{record.latitude,jdbcType=DOUBLE},
       currLevel = #{record.currlevel,jdbcType=INTEGER},
-      preLevel = #{record.prelevel,jdbcType=INTEGER}
+      preLevel = #{record.prelevel,jdbcType=INTEGER},
+      responsible = #{record.responsible,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +224,9 @@
       <if test="prelevel != null" >
         preLevel = #{prelevel,jdbcType=INTEGER},
       </if>
+      <if test="responsible != null" >
+        responsible = #{responsible,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -222,7 +236,46 @@
       longtitude = #{longtitude,jdbcType=DOUBLE},
       latitude = #{latitude,jdbcType=DOUBLE},
       currLevel = #{currlevel,jdbcType=INTEGER},
-      preLevel = #{prelevel,jdbcType=INTEGER}
+      preLevel = #{prelevel,jdbcType=INTEGER},
+      responsible = #{responsible,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <resultMap id="StationMap" type="com.sandalen.water.bean.Station">
+      <id column="sid" property="id" jdbcType="VARCHAR"></id>
+      <result column="sname" property="name" jdbcType="VARCHAR"></result>
+      <result column="longtitude" property="longtitude" jdbcType="DOUBLE"></result>
+      <result column="latitude" property="latitude" jdbcType="DOUBLE"></result>
+      <result column="currLevel" property="currlevel" jdbcType="INTEGER"></result>
+      <result column="preLevel" property="prelevel" jdbcType="INTEGER"></result>
+      <result column="responsible" property="responsible" jdbcType="VARCHAR"></result>
+      <association property="userinfo" javaType="com.sandalen.water.bean.Userinfo">
+          <id column="uid" property="uid" jdbcType="VARCHAR"></id>
+          <result column="uname" property="name" jdbcType="VARCHAR"></result>
+      </association>
+      <association property="district" javaType="com.sandalen.water.bean.District">
+          <id column="did" property="id" jdbcType="VARCHAR"></id>
+          <result column="dname" property="name" jdbcType="VARCHAR"></result>
+      </association>
+  </resultMap>
+
+  <select id="getAllInfoForStation" resultMap="StationMap" parameterType="java.util.Map">
+    select s.id as sid,s.name as sname,s.longtitude,s.latitude,s.currLevel,s.preLevel,s.responsible,ui.uid as uid,ui.name as uname,d.id as did,d.name as dname from station s,userInfo ui,station_district sd,district d
+    <where>
+      s.responsible = ui.uid and sd.sid = s.id and sd.did = d.id
+
+      <if test="district != null and district != ''">
+        and d.id = #{district,jdbcType=VARCHAR}
+      </if>
+
+      <if test="responsible != null and responsible != ''">
+        and s.responsible = #{responsible,jdbcType=VARCHAR}
+      </if>
+
+      <if test="nlevel != null and nlevel != ''">
+        and s.currLevel = #{nlevel,jdbcType=INTEGER}
+      </if>
+    </where>
+
+  </select>
 </mapper>

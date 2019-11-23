@@ -20,13 +20,18 @@ public class CustomAccessDecisioManager implements AccessDecisionManager {
     //第三个参数即是FilterInvocation的getAttribute所返回的东西
     @Override
     public void decide(Authentication auth, Object o, Collection<ConfigAttribute> collection) throws AccessDeniedException, InsufficientAuthenticationException {
+
         Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+        for(GrantedAuthority a : authorities){
+            System.out.println("当前用户的角色是" + a.getAuthority());
+        }
         RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
         String hierachy = "ROLE_ADMIN > ROLE_CLIENT > ROLE_VISITOR";
         roleHierarchy.setHierarchy(hierachy);
         for (ConfigAttribute c : collection){
             Collection<GrantedAuthority> reachableGrantedAuthorities = roleHierarchy.getReachableGrantedAuthorities(authorities);
             for (GrantedAuthority authority : reachableGrantedAuthorities){
+                System.out.println("当前用户所能使用的权限有："+authority.getAuthority());
                 if(c.getAttribute().equals(authority.getAuthority())){
                     return;
                 }

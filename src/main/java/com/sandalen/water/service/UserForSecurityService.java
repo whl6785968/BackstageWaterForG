@@ -33,10 +33,7 @@ public class UserForSecurityService implements UserDetailsService {
     private UserMapper userMapper;
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        System.out.println(
-                "security username is " + s
-        );
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException { ;
         UserRoleExample example = new UserRoleExample();
         example.createCriteria().andUserIdEqualTo(s);
         List<UserRole> userRoles = userRoleMapper.selectByExample(example);

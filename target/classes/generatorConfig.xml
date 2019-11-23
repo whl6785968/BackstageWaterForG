@@ -63,7 +63,7 @@
         <!--<table tableName="equipment"></table>-->
         <!--<table tableName="station"></table>-->
         <!--<table tableName="equip_sta"></table>-->
-        <table tableName="district"></table>
-        <table tableName="station_district"></table>
+        <table tableName="msg"></table>
+        <!--<table tableName="msg_user"></table>-->
     </context>
 </generatorConfiguration>

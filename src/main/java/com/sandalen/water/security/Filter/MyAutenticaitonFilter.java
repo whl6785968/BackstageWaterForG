@@ -1,8 +1,7 @@
 package com.sandalen.water.security.Filter;
 
-import com.sandalen.water.bean.User;
 import com.sandalen.water.bean.UserExample;
-import com.sandalen.water.other.Constant;
+import com.sandalen.water.other.Constants;
 import com.sandalen.water.security.Login.AdminAuthenticationEntryPoint;
 import com.sandalen.water.service.UserForSecurityService;
 import com.sandalen.water.service.UserService;
@@ -52,12 +51,7 @@ public class MyAutenticaitonFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        System.out.println(request.getContentType());
-        System.out.println(request.getMethod());
-//        if(request.getMethod() == "Options"){
-//
-//        }
-        String jwtToekn = request.getHeader(Constant.REQUEST_HEADER);
+        String jwtToekn = request.getHeader(Constants.REQUEST_HEADER);
 
         try{
             if(!StringUtils.isEmpty(jwtToekn) && !"undefined".equals(jwtToekn)){

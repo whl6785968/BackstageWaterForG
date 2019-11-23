@@ -38,7 +38,7 @@ public class UrlFilterInvocationSecurityMetadatasource implements FilterInvocati
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
         AntPathMatcher antPathMatcher = new AntPathMatcher();
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
-        System.out.println("request url is " + requestUrl);
+        System.out.println("请求的URL是" + requestUrl);
         List<Menu> allMenu = urlFilterInvocationSecurityMetadatasource.menuService.getAllMenu();
         for (Menu menu:allMenu){
             if(antPathMatcher.match(menu.getUrl(),requestUrl)){

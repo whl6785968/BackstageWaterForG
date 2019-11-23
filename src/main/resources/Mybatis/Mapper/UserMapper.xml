@@ -177,5 +177,9 @@
     select ur.id,u.userId,ur.role_id,r.role_name from user u,user_role ur,role r where u.userId = ur.user_id and r.roleId = ur.role_id and u.userId = #{id} ;
   </select>
 
+  <select id="getAdminUser" resultType="com.sandalen.water.bean.User">
+      select u.* from user u,user_role ur,role r where u.userId = ur.user_id and ur.role_id = r.roleId and r.roleId = '777';
+  </select>
+
 
 </mapper>

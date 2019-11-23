@@ -3,6 +3,7 @@
 <mapper namespace="com.sandalen.water.dao.MsgMapper" >
   <resultMap id="BaseResultMap" type="com.sandalen.water.bean.Msg" >
     <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="postId" property="postid" jdbcType="VARCHAR" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="imgList" property="imglist" jdbcType="VARCHAR" />
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, title, content, imgList, isEmergency, isReviewd, postTime, type, uid
+    id, postId, title, content, imgList, isEmergency, isReviewd, postTime, type, uid
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sandalen.water.bean.MsgExample" >
     select
@@ -104,20 +105,23 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sandalen.water.bean.Msg" >
-    insert into msg (id, title, content, 
-      imgList, isEmergency, isReviewd, 
-      postTime, type, uid
-      )
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
-      #{imglist,jdbcType=VARCHAR}, #{isemergency,jdbcType=INTEGER}, #{isreviewd,jdbcType=INTEGER}, 
-      #{posttime,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}
-      )
+    insert into msg (id, postId, title, 
+      content, imgList, isEmergency, 
+      isReviewd, postTime, type, 
+      uid)
+    values (#{id,jdbcType=INTEGER}, #{postid,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{imglist,jdbcType=VARCHAR}, #{isemergency,jdbcType=INTEGER}, 
+      #{isreviewd,jdbcType=INTEGER}, #{posttime,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR}, 
+      #{uid,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sandalen.water.bean.Msg" >
     insert into msg
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="postid != null" >
+        postId,
       </if>
       <if test="title != null" >
         title,
@@ -147,6 +151,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
+      </if>
+      <if test="postid != null" >
+        #{postid,jdbcType=VARCHAR},
       </if>
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
@@ -186,6 +193,9 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.postid != null" >
+        postId = #{record.postid,jdbcType=VARCHAR},
+      </if>
       <if test="record.title != null" >
         title = #{record.title,jdbcType=VARCHAR},
       </if>
@@ -218,6 +228,7 @@
   <update id="updateByExample" parameterType="map" >
     update msg
     set id = #{record.id,jdbcType=INTEGER},
+      postId = #{record.postid,jdbcType=VARCHAR},
       title = #{record.title,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=VARCHAR},
       imgList = #{record.imglist,jdbcType=VARCHAR},
@@ -233,6 +244,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.sandalen.water.bean.Msg" >
     update msg
     <set >
+      <if test="postid != null" >
+        postId = #{postid,jdbcType=VARCHAR},
+      </if>
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
       </if>
@@ -262,7 +276,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sandalen.water.bean.Msg" >
     update msg
-    set title = #{title,jdbcType=VARCHAR},
+    set postId = #{postid,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
       imgList = #{imglist,jdbcType=VARCHAR},
       isEmergency = #{isemergency,jdbcType=INTEGER},
@@ -274,13 +289,14 @@
   </update>
 
   <resultMap id="MsgMap" type="com.sandalen.water.bean.Msg">
-    <id column="mid" property="id" jdbcType="INTEGER"></id>
+    <id column="postId" property="postid" jdbcType="VARCHAR"></id>
     <result column="title" property="title" jdbcType="VARCHAR"></result>
     <result column="content" property="content" jdbcType="VARCHAR"></result>
     <result column="imgList" property="imglist" jdbcType="VARCHAR"></result>
     <result column="isEmergency" property="isemergency" jdbcType="INTEGER"></result>
     <result column="postTime" property="posttime" jdbcType="TIMESTAMP"></result>
     <result column="type" property="type" jdbcType="VARCHAR"></result>
+    <result column="isReviewed" property="isreviewd" jdbcType="INTEGER"></result>
     <association property="userinfo" javaType="com.sandalen.water.bean.Userinfo">
       <result column="uid" property="uid" jdbcType="VARCHAR"></result>
       <result column="uname" property="name" jdbcType="VARCHAR"></result>
@@ -289,11 +305,19 @@
     </association>
   </resultMap>
 
-  <select id="getUnReviewMsg" resultMap="MsgMap" parameterType="java.lang.Integer">
-    select m.id as mid,m.title as title,m.content as content,m.imgList as imgList,m.isEmergency as isEmergency,m.postTime as postTime,m.type as type,ui.uid as uid,ui.name as uname,ui.avatar as avatar,ui.descr as descr from msg m,userinfo ui where m.isReviewd = #{isReviewed} and m.uid = ui.uid;
+  <select id="getUnReviewMsg" resultMap="MsgMap">
+    select m.postId as postId,m.title as title,m.content as content,m.imgList as imgList,m.isEmergency as isEmergency,m.postTime as postTime,m.type as type,ui.uid as uid,ui.name as uname,ui.avatar as avatar,ui.descr as descr from msg m,userinfo ui where m.isReviewd = 0 and m.uid = ui.uid order by m.postTime desc ;
   </select>
 
-  <select id="getUnReviewMsgDetail" resultMap="MsgMap" parameterType="java.lang.Integer">
-    select m.id as mid,m.title as title,m.content as content,m.imgList as imgList,m.isEmergency as isEmergency,m.postTime as postTime,m.type as type,ui.uid as uid,ui.name as uname,ui.avatar as avatar,ui.descr as descr from msg m,userinfo ui where m.id = #{id} and m.uid = ui.uid;
+  <select id="getUnReviewMsgDetail" resultMap="MsgMap" parameterType="java.lang.String">
+    select m.postId as postId,m.title as title,m.content as content,m.imgList as imgList,m.isEmergency as isEmergency,m.postTime as postTime,m.type as type,m.isReviewd as isReviewed,ui.uid as uid,ui.name as uname,ui.avatar as avatar,ui.descr as descr from msg m,userinfo ui where m.postId = #{id} and m.uid = ui.uid;
+  </select>
+
+  <select id="getReadableMsgDetail" resultMap="MsgMap" parameterType="java.lang.Integer">
+    select m.postId as postId,m.id as mid,m.title as title,m.content as content,m.imgList as imgList,m.isEmergency as isEmergency,m.postTime as postTime,m.type as type,ui.uid as uid,ui.name as uname,ui.avatar as avatar,ui.descr as descr from msg m,userinfo ui where m.id = #{id} and m.isReviewd = 1 and m.uid = ui.uid;
+  </select>
+
+  <select id="getReadableMsg" resultMap="MsgMap">
+    select m.postId as postId,m.title as title,m.content as content,m.imgList as imgList,m.isEmergency as isEmergency,m.postTime as postTime,m.type as type,ui.uid as uid,ui.name as uname,ui.avatar as avatar,ui.descr as descr from msg m,userinfo ui where m.isReviewd = 1 and m.uid = ui.uid order by m.postTime desc;
   </select>
 </mapper>

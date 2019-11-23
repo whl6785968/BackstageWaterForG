@@ -33,7 +33,11 @@ public interface MsgMapper {
 
     int updateByPrimaryKey(Msg record);
 
-    List<Msg> getUnReviewMsg(int isReviewed);
+    List<Msg> getUnReviewMsg();
 
-    Msg getUnReviewMsgDetail(int postId);
+    Msg getUnReviewMsgDetail(String postId);
+
+    List<Msg> getReadableMsg();
+
+    Msg getReadableMsgDetail(int postId);
 }

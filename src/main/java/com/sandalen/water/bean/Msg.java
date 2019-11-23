@@ -5,6 +5,8 @@ import java.util.Date;
 public class Msg {
     private Integer id;
 
+    private String postid;
+
     private String title;
 
     private String content;
@@ -37,6 +39,14 @@ public class Msg {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getPostid() {
+        return postid;
+    }
+
+    public void setPostid(String postid) {
+        this.postid = postid == null ? null : postid.trim();
     }
 
     public String getTitle() {

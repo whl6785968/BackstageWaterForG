@@ -35,5 +35,8 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     List<UserRoleVo> getUserRole();
+
     UserRoleVo getRoleByUserId(String user_id);
+
+    List<User> getAdminUser();
 }

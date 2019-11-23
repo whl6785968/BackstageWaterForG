@@ -79,4 +79,9 @@ public class UserService {
     public void updateUserDetails(Userinfo userdetails){
         userinfoMapper.updateByPrimaryKey(userdetails);
     }
+
+    public List<User> getAdminUser(){
+        List<User> adminUser = userMapper.getAdminUser();
+        return adminUser;
+    }
 }

@@ -174,52 +174,62 @@ public class MsgUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andMidEqualTo(Integer value) {
+        public Criteria andMidEqualTo(String value) {
             addCriterion("mid =", value, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidNotEqualTo(Integer value) {
+        public Criteria andMidNotEqualTo(String value) {
             addCriterion("mid <>", value, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidGreaterThan(Integer value) {
+        public Criteria andMidGreaterThan(String value) {
             addCriterion("mid >", value, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidGreaterThanOrEqualTo(Integer value) {
+        public Criteria andMidGreaterThanOrEqualTo(String value) {
             addCriterion("mid >=", value, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidLessThan(Integer value) {
+        public Criteria andMidLessThan(String value) {
             addCriterion("mid <", value, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidLessThanOrEqualTo(Integer value) {
+        public Criteria andMidLessThanOrEqualTo(String value) {
             addCriterion("mid <=", value, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidIn(List<Integer> values) {
+        public Criteria andMidLike(String value) {
+            addCriterion("mid like", value, "mid");
+            return (Criteria) this;
+        }
+
+        public Criteria andMidNotLike(String value) {
+            addCriterion("mid not like", value, "mid");
+            return (Criteria) this;
+        }
+
+        public Criteria andMidIn(List<String> values) {
             addCriterion("mid in", values, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidNotIn(List<Integer> values) {
+        public Criteria andMidNotIn(List<String> values) {
             addCriterion("mid not in", values, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidBetween(Integer value1, Integer value2) {
+        public Criteria andMidBetween(String value1, String value2) {
             addCriterion("mid between", value1, value2, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidNotBetween(Integer value1, Integer value2) {
+        public Criteria andMidNotBetween(String value1, String value2) {
             addCriterion("mid not between", value1, value2, "mid");
             return (Criteria) this;
         }
@@ -291,6 +301,66 @@ public class MsgUserExample {
 
         public Criteria andUidNotBetween(String value1, String value2) {
             addCriterion("uid not between", value1, value2, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReadIsNull() {
+            addCriterion("is_read is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReadIsNotNull() {
+            addCriterion("is_read is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReadEqualTo(Integer value) {
+            addCriterion("is_read =", value, "isRead");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReadNotEqualTo(Integer value) {
+            addCriterion("is_read <>", value, "isRead");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReadGreaterThan(Integer value) {
+            addCriterion("is_read >", value, "isRead");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReadGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_read >=", value, "isRead");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReadLessThan(Integer value) {
+            addCriterion("is_read <", value, "isRead");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReadLessThanOrEqualTo(Integer value) {
+            addCriterion("is_read <=", value, "isRead");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReadIn(List<Integer> values) {
+            addCriterion("is_read in", values, "isRead");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReadNotIn(List<Integer> values) {
+            addCriterion("is_read not in", values, "isRead");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReadBetween(Integer value1, Integer value2) {
+            addCriterion("is_read between", value1, value2, "isRead");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReadNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_read not between", value1, value2, "isRead");
             return (Criteria) this;
         }
     }

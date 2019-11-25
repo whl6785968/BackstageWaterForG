@@ -37,7 +37,9 @@ public interface MsgMapper {
 
     Msg getUnReviewMsgDetail(String postId);
 
-    List<Msg> getReadableMsg();
+    List<Msg> getReadableMsg(String userId);
 
     Msg getReadableMsgDetail(int postId);
+
+    int getUnReadMsgCount(String userId);
 }

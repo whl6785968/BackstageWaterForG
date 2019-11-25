@@ -55,8 +55,8 @@ public class SecuriyConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         AdminAutenticationProvider provider = new AdminAutenticationProvider();
-        http.cors().and().csrf().disable().authorizeRequests().
-                withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+        http.cors().and().csrf().disable().authorizeRequests().antMatchers("/ws/**").permitAll()
+                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
         @Override
         public <O extends FilterSecurityInterceptor> O postProcess(O o) {
             o.setSecurityMetadataSource(new UrlFilterInvocationSecurityMetadatasource());
@@ -85,6 +85,6 @@ public class SecuriyConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("index.html","/static/**","/favicon.ico","/login_page");
+        web.ignoring().antMatchers("index.html","/static/**","/favicon.ico","/login_page","/ws/**");
     }
 }

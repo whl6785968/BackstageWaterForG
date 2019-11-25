@@ -8,6 +8,8 @@ import com.sandalen.water.service.MsgService;
 import com.sandalen.water.service.UserService;
 import com.sandalen.water.util.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,16 +35,27 @@ public class MsgController {
         msg.setPosttime(new Date());
         String postId = IdUtils.getId();
         msg.setPostid(postId);
+        String uid = msg.getUid();
         int posting = msgService.posting(msg);
 
         if(posting != 0){
             List<User> adminUser = userService.getAdminUser();
             for(User user:adminUser){
-                MsgUser msgUser = new MsgUser();
-                msgUser.setMid(postId);
-                msgUser.setUid(user.getUserid());
-                msgUser.setIsRead(0);
-                msgService.insertMsgUser(msgUser);
+                if(!user.getUserid().equals(uid)){
+                    MsgUser msgUser = new MsgUser();
+                    msgUser.setMid(postId);
+                    msgUser.setUid(user.getUserid());
+                    msgUser.setIsRead(0);
+                    msgService.insertMsgUser(msgUser);
+                }
+                else{
+                    MsgUser msgUser = new MsgUser();
+                    msgUser.setMid(postId);
+                    msgUser.setUid(user.getUserid());
+                    msgUser.setIsRead(1);
+                    msgService.insertMsgUser(msgUser);
+                }
+
             }
 
             return RespBean.ok("发布成功");
@@ -50,11 +63,16 @@ public class MsgController {
         return RespBean.error("发布失败");
     }
 
-
+    @MessageMapping("/getMsgCount")
+    @SendTo("/topic/pullMsg")
+    public RespBean getMsgCount(){
+        System.out.println("服务端接收到新消息了");
+        return RespBean.ok("有新消息了");
+    }
 
     @RequestMapping("/getReadableMsg")
-    public RespBean getReadableMsg(){
-        List<Msg> readableMsg = msgService.getReadableMsg();
+    public RespBean getReadableMsg(String userId){
+        List<Msg> readableMsg = msgService.getReadableMsg(userId);
         return RespBean.ok("获取数据成功",readableMsg);
     }
 
@@ -79,5 +97,30 @@ public class MsgController {
         }
 
         return RespBean.error("帖子不存在或者获取数据失败");
+    }
+
+    @RequestMapping("/getUnReadMsgCountByUser")
+    public RespBean getUnReadMsgCountByUser(String userId){
+        System.out.println("userId is " + userId    );
+        int unReadMsgCount = msgService.getUnReadMsgCount(userId);
+        return RespBean.ok("获取成功",unReadMsgCount);
+    }
+
+    @RequestMapping("/hasRead")
+    public RespBean hasRead(String postId,String userId){
+        int i = msgService.hasRead(postId, userId);
+        if(i == 0){
+            return RespBean.error("修改失败");
+        }
+        return RespBean.ok("修改成功");
+    }
+
+    @RequestMapping("/deletePost")
+    public RespBean deletePost(String postId,String userId){
+        int i = msgService.deletePost(postId, userId);
+        if(i == 0){
+            return RespBean.error("删除失败");
+        }
+        return RespBean.ok("修改成功");
     }
 }

@@ -39,4 +39,6 @@ public interface UserMapper {
     UserRoleVo getRoleByUserId(String user_id);
 
     List<User> getAdminUser();
+
+    List<String> getNormalUser();
 }

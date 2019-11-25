@@ -23,8 +23,8 @@ public class SysMsgController {
     }
 
     @RequestMapping("/passPost")
-    public RespBean passPost(String postId){
-        int i = msgService.passPost(postId);
+    public RespBean passPost(String postId,String userId){
+        int i = msgService.passPost(postId,userId);
 
         if(i == 0){
             return RespBean.error("帖子不存在或者操作失败");

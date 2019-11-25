@@ -181,5 +181,9 @@
       select u.* from user u,user_role ur,role r where u.userId = ur.user_id and ur.role_id = r.roleId and r.roleId = '777';
   </select>
 
+  <select id="getNormalUser" resultType="java.lang.String">
+    select ur.user_id from role r,user_role ur where ur.role_id = r.roleId and r.roleId = '001';
+  </select>
+
 
 </mapper>

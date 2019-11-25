@@ -25,6 +25,16 @@ public class Msg {
 
     private Userinfo userinfo;
 
+    private int isRead;
+
+    public int getIsRead() {
+        return isRead;
+    }
+
+    public void setIsRead(int isRead) {
+        this.isRead = isRead;
+    }
+
     public Userinfo getUserinfo() {
         return userinfo;
     }

@@ -297,6 +297,7 @@
     <result column="postTime" property="posttime" jdbcType="TIMESTAMP"></result>
     <result column="type" property="type" jdbcType="VARCHAR"></result>
     <result column="isReviewed" property="isreviewd" jdbcType="INTEGER"></result>
+    <result column="isRead" property="isRead" javaType="INTEGER"></result>
     <association property="userinfo" javaType="com.sandalen.water.bean.Userinfo">
       <result column="uid" property="uid" jdbcType="VARCHAR"></result>
       <result column="uname" property="name" jdbcType="VARCHAR"></result>
@@ -317,7 +318,12 @@
     select m.postId as postId,m.id as mid,m.title as title,m.content as content,m.imgList as imgList,m.isEmergency as isEmergency,m.postTime as postTime,m.type as type,ui.uid as uid,ui.name as uname,ui.avatar as avatar,ui.descr as descr from msg m,userinfo ui where m.id = #{id} and m.isReviewd = 1 and m.uid = ui.uid;
   </select>
 
-  <select id="getReadableMsg" resultMap="MsgMap">
-    select m.postId as postId,m.title as title,m.content as content,m.imgList as imgList,m.isEmergency as isEmergency,m.postTime as postTime,m.type as type,ui.uid as uid,ui.name as uname,ui.avatar as avatar,ui.descr as descr from msg m,userinfo ui where m.isReviewd = 1 and m.uid = ui.uid order by m.postTime desc;
+  <select id="getReadableMsg" resultMap="MsgMap" resultType="java.lang.String">
+    select m.postId as postId,m.title as title,m.content as content,m.imgList as imgList,m.isEmergency as isEmergency,m.postTime as postTime,m.type as type,ui.uid as uid,ui.name as uname,ui.avatar as avatar,ui.descr as descr,mu.is_read as isRead from msg m,userinfo ui,msg_user mu where mu.uid = #{id} and mu.mid = m.postId and m.isReviewd = 1 and m.uid = ui.uid order by m.postTime desc;
   </select>
+
+  <select id="getUnReadMsgCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select count(*) from msg m,msg_user mu where m.postId = mu.mid and mu.uid = #{id} and is_read = 0;
+  </select>
+
 </mapper>

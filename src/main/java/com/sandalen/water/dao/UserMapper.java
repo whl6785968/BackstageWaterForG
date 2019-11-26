@@ -41,4 +41,5 @@ public interface UserMapper {
     List<User> getAdminUser();
 
     List<String> getNormalUser();
+
 }

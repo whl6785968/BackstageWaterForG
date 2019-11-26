@@ -3,8 +3,13 @@ package com.sandalen.water.dao;
 import com.sandalen.water.bean.District;
 import com.sandalen.water.bean.DistrictExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Mapper
+@Repository
 public interface DistrictMapper {
     int countByExample(DistrictExample example);
 

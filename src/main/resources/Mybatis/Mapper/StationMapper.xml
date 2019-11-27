@@ -278,4 +278,8 @@
     </where>
 
   </select>
+
+  <select id="getCountByLevel" resultType="com.sandalen.water.bean.Station">
+    select * from station s,station_district sd,district d where s.id = sd.sid and sd.did = d.id
+  </select>
 </mapper>

@@ -37,4 +37,6 @@ public interface StationMapper {
     int updateByPrimaryKey(Station record);
 
     List<Station> getAllInfoForStation(Map<String, Object> map);
+
+    List<Station> getCountByLevel();
 }

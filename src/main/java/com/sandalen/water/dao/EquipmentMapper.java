@@ -35,4 +35,6 @@ public interface EquipmentMapper {
     int updateByPrimaryKey(Equipment record);
 
     List<Equipment> getEquipAndStation(SearchCondition searchCondition);
+
+    List<Equipment> getBreakDownEquip();
 }

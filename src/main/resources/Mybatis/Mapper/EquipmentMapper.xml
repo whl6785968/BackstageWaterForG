@@ -254,6 +254,11 @@
       <result column="sname" property="name"></result>
       <result column="currLevel" property="currlevel"></result>
       <result column="preLevel" property="prelevel"></result>
+      <association property="userinfo" javaType="com.sandalen.water.bean.Userinfo">
+          <id column="uuid" property="uid" jdbcType="VARCHAR"></id>
+          <result column="uname" property="name" jdbcType="VARCHAR"></result>
+          <result column="link" property="link" jdbcType="VARCHAR"></result>
+      </association>
     </association>
   </resultMap>
 
@@ -281,5 +286,9 @@
       </if>
     </where>
 
+  </select>
+
+  <select id="getBreakDownEquip" resultMap="EquipPositive">
+    select e.id as id,e.name as name,e.model as model,e.productionPlace as productionPlace,s.id as sid,s.name as sname,ui.uid as uuid,ui.name as uname,ui.link as link from equipment e,equip_sta es,station s,userinfo ui where s.id = es.sid and es.eid = e.id and s.responsible = ui.uid and status = 2;
   </select>
 </mapper>

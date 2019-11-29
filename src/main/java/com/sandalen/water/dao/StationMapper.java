@@ -39,4 +39,8 @@ public interface StationMapper {
     List<Station> getAllInfoForStation(Map<String, Object> map);
 
     List<Station> getCountByLevel();
+
+    List<Station> getStationByDistrict(String id);
+
+    int getCountByDistrict(Map map);
 }

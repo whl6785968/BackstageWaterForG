@@ -35,6 +35,12 @@ public class DataRelatedService {
     @Autowired
     private EquipStaMapper equipStaMapper;
 
+    @Autowired
+    private HistoryListMapper historyListMapper;
+
+    @Autowired
+    private HistoryRecordMapper historyRecordMapper;
+
     public List<Equipment> getEquipAndStation(SearchCondition searchCondition){
         List<Equipment> equipAndStation = equipmentMapper.getEquipAndStation(searchCondition);
         return equipAndStation;
@@ -109,81 +115,74 @@ public class DataRelatedService {
 
     }
 
-    public Map<String,Object> getCountByLevel(){
-        List<Station> stations = stationMapper.getCountByLevel();
-
-        int oneCount = 0;
-        int twoConut = 0;
-        int threeCount = 0;
-        int fourCount = 0;
-        int fiveCount = 0;
-        int preOneCount = 0;
-        int preTwoCount = 0;
-        int preThreeCount = 0;
-        int preFourCount = 0;
-        int preFiveCount = 0;
-        for(Station station:stations){
-            switch (station.getCurrlevel()){
-                case 1:
-                    oneCount += 1;
-                    break;
-                case 2:
-                    twoConut += 1;
-                    break;
-                case 3:
-                    threeCount += 1;
-                    break;
-                case 4:
-                    fourCount += 1;
-                    break;
-                case 5:
-                    fiveCount += 1;
-                    break;
-            }
-        }
-
-        for(Station station:stations){
-            switch (station.getPrelevel()){
-                case 1:
-                    preOneCount += 1;
-                    break;
-                case 2:
-                    preTwoCount += 1;
-                    break;
-                case 3:
-                    preThreeCount += 1;
-                    break;
-                case 4:
-                    preFourCount += 1;
-                    break;
-                case 5:
-                    preFiveCount += 1;
-                    break;
-            }
-        }
-
-        ArrayList<Integer> curr = new ArrayList<>();
-        curr.add(oneCount);
-        curr.add(twoConut);
-        curr.add(threeCount);
-        curr.add(fourCount);
-        curr.add(fiveCount);
-
-        ArrayList<Integer> pre = new ArrayList<>();
-        pre.add(preOneCount);
-        pre.add(preTwoCount);
-        pre.add(preThreeCount);
-        pre.add(preFourCount);
-        pre.add(preFiveCount);
-
-        Map<String,Object> map = new HashMap<>();
-        map.put("curr",curr);
-        map.put("pre",pre);
-        return map;
-    }
-
     public List<Equipment> getBreakDownEquip(){
         List<Equipment> breakDownEquip = equipmentMapper.getBreakDownEquip();
         return breakDownEquip;
+    }
+
+
+    public List<HistoryList> getHistoryList(){
+        HistoryListExample example = new HistoryListExample();
+        List<HistoryList> historyLists = historyListMapper.selectByExample(example);
+        return historyLists;
+    }
+
+    public List<HistoryRecord> getHistoryDetails(String createTime){
+        HistoryRecordExample example = new HistoryRecordExample();
+        HistoryRecordExample.Criteria criteria = example.createCriteria();
+        criteria.andCreateTimeEqualTo(createTime);
+
+        List<HistoryRecord> historyRecords = historyRecordMapper.selectByExample(example);
+        return historyRecords;
+    }
+
+    public Map<String,List<Integer>> getHistoryByDistrict(String createTime){
+        Map<String,List<Integer>> map = new HashMap<>();
+        List<District> allDistrict = getAllDistrict();
+        for (District district : allDistrict){
+            String id = district.getId();
+            String name = district.getName();
+            HistoryRecordExample example = new HistoryRecordExample();
+            HistoryRecordExample.Criteria criteria = example.createCriteria();
+            criteria.andDidEqualTo(id);
+            criteria.andCreateTimeEqualTo(createTime);
+            List<HistoryRecord> historyRecords = historyRecordMapper.selectByExample(example);
+            List<Integer> list = new ArrayList<>();
+
+            int oneCount = 0;
+            int twoConut = 0;
+            int threeCount = 0;
+            int fourCount = 0;
+            int fiveCount = 0;
+            for(HistoryRecord historyRecord : historyRecords){
+                switch (historyRecord.getCurrLevel()){
+                    case 1:
+                        oneCount += 1;
+                        break;
+                    case 2:
+                        twoConut += 1;
+                        break;
+                    case 3:
+                        threeCount += 1;
+                        break;
+                    case 4:
+                        fourCount += 1;
+                        break;
+                    case 5:
+                        fiveCount += 1;
+                        break;
+                }
+            }
+            list.add(oneCount);
+            list.add(twoConut);
+            list.add(threeCount);
+            list.add(fourCount);
+            list.add(fiveCount);
+
+            map.put(name,list);
+
+        }
+
+        return map;
     }
 }

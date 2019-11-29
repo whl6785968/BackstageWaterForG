@@ -5,6 +5,7 @@ import com.sandalen.water.bean.EquipmentExample;
 import java.util.List;
 
 import com.sandalen.water.bean.SearchCondition;
+import com.sandalen.water.bean.Waterdata;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -37,4 +38,6 @@ public interface EquipmentMapper {
     List<Equipment> getEquipAndStation(SearchCondition searchCondition);
 
     List<Equipment> getBreakDownEquip();
+
+    List<Waterdata> getFourAndFiveData();
 }

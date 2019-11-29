@@ -282,4 +282,12 @@
   <select id="getCountByLevel" resultType="com.sandalen.water.bean.Station">
     select * from station s,station_district sd,district d where s.id = sd.sid and sd.did = d.id
   </select>
+
+  <select id="getStationByDistrict" resultMap="StationMap" parameterType="java.lang.String">
+    select s.id as sid,s.name sname,s.longtitude as longtitude,s.latitude as latitude,s.currLevel as currLevel,s.preLevel as preLevel,s.responsible as responsible,d.id as did,d.name as dname from station s,station_district sd,district d where s.id = sd.sid and sd.did = d.id and d.id = #{id};
+  </select>
+
+  <select id="getCountByDistrict" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) from station s,station_district sd,district d where s.id = sd.sid and sd.did = d.id and d.id = #{id} and s.currLevel = #{level};
+  </select>
 </mapper>

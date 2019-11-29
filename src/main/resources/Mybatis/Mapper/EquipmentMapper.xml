@@ -291,4 +291,7 @@
   <select id="getBreakDownEquip" resultMap="EquipPositive">
     select e.id as id,e.name as name,e.model as model,e.productionPlace as productionPlace,s.id as sid,s.name as sname,ui.uid as uuid,ui.name as uname,ui.link as link from equipment e,equip_sta es,station s,userinfo ui where s.id = es.sid and es.eid = e.id and s.responsible = ui.uid and status = 2;
   </select>
+  <select id="getFourAndFiveData" resultType="com.sandalen.water.bean.Waterdata">
+      select w.* from station s ,equip_sta es,equipment e,waterdata w where s.id = es.sid and es.eid = e.id and e.id = w.eid and currLevel > preLevel and (currLevel = 4 or currLevel = 5);
+  </select>
 </mapper>

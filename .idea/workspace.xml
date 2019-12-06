@@ -2,23 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="51271783-d4b8-440d-8f3b-e71da6de1d4a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/HistoryList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/HistoryListExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/HistoryRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/HistoryRecordExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/HistoryListMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/HistoryRecordMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/HistoryListMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/HistoryRecordMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/PropertiesClass/IsoForestProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/algo/IsoForest/IForest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/algo/IsoForest/ITree.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/algo/IsoForest/ITreeBranch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/algo/IsoForest/ITreeLeaf.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/algo/IsoForest/IsoForest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/AlgoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/AlgoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/util/AlgoUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/util/IOUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/util/MathUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IsoForest.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_6.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/ReportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/EquipmentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/EquipmentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/StationMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/StationMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/DataRelatedService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/DataRelatedService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/EquipmentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/EquipmentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/StationMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/StationMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/generatorConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sandalen/water/other/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sandalen/water/other/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/water.iml" beforeDir="false" afterPath="$PROJECT_DIR$/water.iml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -29,12 +31,24 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/service/AlgoService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="382">
+              <caret line="78" column="55" selection-start-line="78" selection-start-column="55" selection-end-line="78" selection-end-column="55" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/ReportController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/util/MathUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="16" column="17" lean-forward="true" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="31" />
+            <state relative-caret-position="242">
+              <caret line="40" column="42" selection-start-line="40" selection-start-column="42" selection-end-line="40" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -43,22 +57,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/SysDataController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/AlgoController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+            <state relative-caret-position="238">
+              <caret line="28" column="41" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/service/DataRelatedService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="139" column="56" selection-start-line="139" selection-start-column="56" selection-end-line="139" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -83,6 +88,8 @@
       <find>userExample</find>
       <find>Sysout</find>
       <find>Sys</find>
+      <find>loadFile</find>
+      <find>isoForestProperties</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -91,22 +98,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/WaterApplication.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/other/MyProperties.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/Equipment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/SearchCondition.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/WaterdataMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/Menu.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/aaMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/MenuMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/Station.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/CustomAccessDecisioManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Filter/MyAutenticaitonFilter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/security/UrlFilterInvocationSecurityMetadatasource.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/UserForSecurityService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/Filter/CorsFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/other/Constant.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/other/Constants.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/FileProcessController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/util/UploadUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/util/DateUtils.java" />
@@ -130,7 +122,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/StationDistrictMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/EquipStaMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/PageBean.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/DataRelatedController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/SysDataController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/EquipmentMapper.xml" />
@@ -142,6 +133,22 @@
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/HistoryListMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/DataRelatedService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/ReportController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/algo/IsoForest/ITree.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/algo/IsoForest/ITreeBranch.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/algo/IsoForest/ITreeLeaf.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/algo/IsoForest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/algo/IsoForest/IForest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/util/IOUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/other/Constants.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/IsoForest.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/PropertiesClass/IsoForestProperties.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/algo/IsoForest/IsoForest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/util/AlgoUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/service/AlgoService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/AlgoController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sandalen/water/util/MathUtils.java" />
       </list>
     </option>
   </component>
@@ -178,22 +185,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="water" type="58d84e3e:PackageViewProjectNode" />
-              <item name="water" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="water" type="58d84e3e:PackageViewProjectNode" />
-              <item name="water" type="616d4139:PackageViewModuleNode" />
-              <item name="com.sandalen.water" type="1f31426a:PackageElementNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -380,7 +371,61 @@
               <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="sandalen" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="water" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="controller" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="algo" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="water" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="water" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="sandalen" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="water" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="algo" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="IsoForest" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="water" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="water" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="sandalen" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="water" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="util" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="water" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="water" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="water" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="water" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="model" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="water" type="58d84e3e:PackageViewProjectNode" />
+              <item name="water" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="water" type="58d84e3e:PackageViewProjectNode" />
+              <item name="water" type="616d4139:PackageViewModuleNode" />
+              <item name="com.sandalen.water" type="1f31426a:PackageElementNode" />
             </path>
           </expand>
           <select />
@@ -395,32 +440,32 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574844713836" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1575622533298" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="spring.boot" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\water\src\main\java\com\sandalen\water\dao" />
-      <recent name="F:\water\src\main\java\com\sandalen\water\bean" />
-      <recent name="F:\water\src\main\resources\Mybatis\Mapper" />
-      <recent name="F:\water\src\main\resources\static\static" />
-      <recent name="F:\water\src\main\resources\static" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.sandalen.water.config" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\water\src\main\resources\static" />
       <recent name="F:\water\src\main\java\com\sandalen\water\dao" />
       <recent name="F:\water\src\main\java\com\sandalen\water\bean" />
       <recent name="F:\water\src\main\resources\Mybatis" />
       <recent name="F:\water\src\main\resources\Mybatis\Mapper" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.sandalen.water.config" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\water\src\main\java\com\sandalen\water\algo" />
+      <recent name="F:\water\src\main\java\com\sandalen\water\dao" />
+      <recent name="F:\water\src\main\java\com\sandalen\water\bean" />
+      <recent name="F:\water\src\main\resources\Mybatis\Mapper" />
+      <recent name="F:\water\src\main\resources\static\static" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -436,6 +481,19 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.WaterApplication">
+    <configuration name="IsoForest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.sandalen.water.algo.IsoForest.IsoForest" />
+      <module name="water" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sandalen.water.algo.IsoForest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="WaterApplicationTests.generator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="water" />
       <extension name="coverage">
@@ -477,6 +535,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.IsoForest" />
         <item itemvalue="JUnit.WaterApplicationTests.testDate" />
         <item itemvalue="JUnit.WaterApplicationTests.generator" />
       </list>
@@ -525,7 +584,9 @@
       <workItem from="1574729512942" duration="7646000" />
       <workItem from="1574815465274" duration="18432000" />
       <workItem from="1574988211600" duration="7072000" />
-      <workItem from="1575007344219" duration="5379000" />
+      <workItem from="1575007344219" duration="5457000" />
+      <workItem from="1575094393540" duration="605000" />
+      <workItem from="1575593600078" duration="16306000" />
     </task>
     <task id="LOCAL-00001" summary="second commit">
       <created>1573549090960</created>
@@ -597,7 +658,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574844696864</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="TO DO OTHER THINGS">
+      <created>1575018055818</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1575018055818</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -633,13 +701,21 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="248415000" />
+    <option name="totallyTimeSpent" value="265404000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21983914" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22520107" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -649,17 +725,17 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.40084985" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.32577905" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.46458924" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.29886687" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32956153" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
-      <window_info anchor="bottom" id="Version Control" order="12" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.3286119" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.3286119" />
       <window_info anchor="bottom" id="Java Enterprise" order="14" weight="0.3286119" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -707,6 +783,30 @@
           <properties />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sandalen/water/util/IOUtils.java</url>
+          <line>13</line>
+          <properties />
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sandalen/water/algo/IsoForest/IsoForest.java</url>
+          <line>69</line>
+          <properties />
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/AlgoController.java</url>
+          <line>33</line>
+          <properties />
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sandalen/water/util/AlgoUtils.java</url>
+          <line>25</line>
+          <properties />
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/SysDataController.java</url>
           <line>78</line>
@@ -723,220 +823,10 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/util/IdUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sandalen/water/bean/Msg.java" />
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/sandalen/water/WaterApplicationTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/MsgUserMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/MsgUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/MsgExample.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="95" selection-start-line="95" selection-end-line="95" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/util/ResponseUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/Filter/CorsFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Filter/MyAutenticaitonFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Filter/AdminAuthenticationProcessingFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/config/SecuriyConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="87" column="97" selection-start-line="87" selection-start-column="97" selection-end-line="87" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/security/UrlFilterInvocationSecurityMetadatasource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="47" column="60" lean-forward="true" selection-start-line="47" selection-start-column="60" selection-end-line="47" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/config/WebSocketConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="16" column="59" lean-forward="true" selection-start-line="16" selection-start-column="59" selection-end-line="16" selection-end-column="59" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/MsgUserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2933">
-          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/service/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="83" column="47" selection-start-line="83" selection-start-column="47" selection-end-line="83" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/SysUserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/SysMsgController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="26" column="49" selection-start-line="26" selection-start-column="49" selection-end-line="26" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/Msg.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
-          <folding>
-            <element signature="e#477#478#0" expanded="true" />
-            <element signature="e#518#519#0" expanded="true" />
-            <element signature="e#554#555#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/MsgMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="299" column="65" selection-start-line="299" selection-start-column="65" selection-end-line="299" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/MsgController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="112" column="42" selection-start-line="112" selection-start-column="42" selection-end-line="112" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/MsgMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="39" column="42" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/Mybatis/Mapper/UserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="187" column="2" selection-start-line="187" selection-start-column="2" selection-end-line="187" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/UserMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="43" column="4" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/DistrictMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/StationDistrictMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.2.0.RELEASE/spring-web-5.2.0.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="58" selection-start-line="58" selection-end-line="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/Equipment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="31" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="102" column="52" selection-start-line="102" selection-start-column="52" selection-end-line="102" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -1021,13 +911,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/Waterdata.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-494">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/dao/StationMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="295">
@@ -1064,10 +947,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/service/DataRelatedService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/ReportController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="139" column="56" selection-start-line="139" selection-start-column="56" selection-end-line="139" selection-end-column="56" />
+        <state relative-caret-position="190">
+          <caret line="16" column="17" lean-forward="true" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1081,10 +967,264 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/ReportController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/util/ResponseUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="16" column="17" lean-forward="true" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="31" />
+        <state relative-caret-position="-141">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/algo/IsoForest/ITree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/algo/IsoForest/ITreeLeaf.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="31" selection-start-column="31" selection-end-column="31" />
+          <folding>
+            <element signature="e#175#176#0" expanded="true" />
+            <element signature="e#207#208#0" expanded="true" />
+            <element signature="e#235#236#0" expanded="true" />
+            <element signature="e#262#263#0" expanded="true" />
+            <element signature="e#299#300#0" expanded="true" />
+            <element signature="e#331#332#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/algo/IsoForest/ITreeBranch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+          <folding>
+            <element signature="e#451#452#0" expanded="true" />
+            <element signature="e#478#479#0" expanded="true" />
+            <element signature="e#517#518#0" expanded="true" />
+            <element signature="e#549#550#0" expanded="true" />
+            <element signature="e#580#581#0" expanded="true" />
+            <element signature="e#608#609#0" expanded="true" />
+            <element signature="e#649#650#0" expanded="true" />
+            <element signature="e#683#684#0" expanded="true" />
+            <element signature="e#720#721#0" expanded="true" />
+            <element signature="e#753#754#0" expanded="true" />
+            <element signature="e#805#806#0" expanded="true" />
+            <element signature="e#849#850#0" expanded="true" />
+            <element signature="e#882#883#0" expanded="true" />
+            <element signature="e#914#915#0" expanded="true" />
+            <element signature="e#961#962#0" expanded="true" />
+            <element signature="e#1003#1004#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/config/SecuriyConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/Usersecurityinfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/LoginUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/SecurityUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="29" column="42" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/algo/IsoForest/IForest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/other/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/util/IOUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/util/MultiReadHttpServletRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="61" column="19" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-190">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Login/AdminAuthenticationEntryPoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="156" column="21" selection-start-line="156" selection-start-column="21" selection-end-line="156" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/IsoForest.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="20" lean-forward="true" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/security/Login/AdminAutenticationProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/model/IsoForest.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/PropertiesClass/IsoForestProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#413#414#0" expanded="true" />
+            <element signature="e#446#447#0" expanded="true" />
+            <element signature="e#579#580#0" expanded="true" />
+            <element signature="e#612#613#0" expanded="true" />
+            <element signature="e#740#741#0" expanded="true" />
+            <element signature="e#771#772#0" expanded="true" />
+            <element signature="e#816#817#0" expanded="true" />
+            <element signature="e#856#857#0" expanded="true" />
+            <element signature="e#888#889#0" expanded="true" />
+            <element signature="e#916#917#0" expanded="true" />
+            <element signature="e#958#959#0" expanded="true" />
+            <element signature="e#992#993#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/Waterdata.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/algo/IsoForest/IsoForest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="25" column="38" lean-forward="true" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/util/AlgoUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/bean/Equipment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/service/DataRelatedService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/controller/AlgoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="28" column="41" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/service/AlgoService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="78" column="55" selection-start-line="78" selection-start-column="55" selection-end-line="78" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sandalen/water/util/MathUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="40" column="42" selection-start-line="40" selection-start-column="42" selection-end-line="40" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

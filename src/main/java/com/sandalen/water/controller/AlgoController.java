@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/algo/basic/")
 public class AlgoController {
     @Autowired
     private AlgoService algoService;
@@ -25,7 +27,7 @@ public class AlgoController {
 
     @RequestMapping("/errCheck")
     public RespBean errCheck() throws IOException {
-        Map<String, Object> errInfo = algoService.isoForest();
+        List<Map<String, Object>> errInfo = algoService.isoForest();
         return RespBean.ok("操作成功",errInfo);
     }
 

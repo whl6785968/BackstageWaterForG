@@ -37,15 +37,15 @@ public class AlgoService {
     @Autowired
     private IsoForestProperties isoForestProperties;
 
-    public Map<String,Object> isoForest() throws IOException {
+    public List<Map<String,Object>> isoForest() throws IOException {
         String modelStr = IOUtils.getModelStr(isoForestProperties.getModel_path());
         IForest iForest = IOUtils.load_model(modelStr, IForest.class);
 
         SearchCondition searchCondition = new SearchCondition();
         List<Equipment> equipAndStation = dataRelatedService.getEquipAndStation(searchCondition);
 
+        List<Map<String,Object>> real_result = new ArrayList<>();
 
-        Map<String,Object> result = new HashMap<>();
         for (int i = 0;i < equipAndStation.size();i++){
             WaterdataExample waterdataExample = new WaterdataExample();
             WaterdataExample.Criteria criteria = waterdataExample.createCriteria();
@@ -54,6 +54,8 @@ public class AlgoService {
 
             List<DenseMatrix64F> bad_data = new ArrayList<>();
             List<DenseMatrix64F> good_data = new ArrayList<>();
+            List<DenseMatrix64F> data = new ArrayList<>();
+            List<Double> label = new ArrayList<>();
             Map<String, Object> map = new HashMap<>();
             double bad_count = 0.0;
             for (int j = 0;j < waterdata.size(); j++){
@@ -66,22 +68,36 @@ public class AlgoService {
 
                 if (iForest.predict(denseMatrix64F) == -1.0){
                     bad_data.add(denseMatrix64F);
+                    label.add(-1.0);
                 }
                 else {
                     good_data.add(denseMatrix64F);
+                    label.add(1.0);
                 }
 
-                bad_count = bad_data.size();
-                List<Double> bad_data_mean = MathUtils.getMeanForDenseMatrix(bad_data);
-                map.put("bad_count",bad_count);
-                map.put("bad_data",bad_data);
-                map.put("bad_percent",bad_count/waterdata.size());
-                map.put("bad_data_mean",bad_data_mean);
+                data.add(denseMatrix64F);
             }
-            String key = equipAndStation.get(i).getId() + ":" + equipAndStation.get(i).getStation().getName();
-            result.put(key,map);
+
+            List<Double> corr = MathUtils.calcCorr(data, label);
+            System.out.println(corr.toString());
+
+//            MathUtils.doubleTCheck(bad_data,good_data)
+            bad_count = bad_data.size();
+            List<Double> bad_data_mean = MathUtils.getMeanForDenseMatrix(bad_data);
+            List<Double> good_data_mean = MathUtils.getMeanForDenseMatrix(good_data);
+            map.put("bad_count",bad_count);
+            map.put("bad_data",bad_data);
+            map.put("bad_percent",MathUtils.keepDecimal(bad_count/waterdata.size(),3));
+            map.put("bad_data_mean",bad_data_mean);
+            map.put("good_data_mean",good_data_mean);
+            map.put("data_corr",corr);
+            map.put("equipmentId",equipAndStation.get(i).getId());
+            map.put("equipmentName",equipAndStation.get(i).getName());
+            map.put("station",equipAndStation.get(i).getStation().getName());
+
+            real_result.add(map);
         }
-        return result;
+        return real_result;
     }
 
     public int isError(Waterdata waterdata) throws IOException {

@@ -1,0 +1,44 @@
+{
+  "groups": [
+    {
+      "name": "isoforest",
+      "type": "com.sandalen.water.PropertiesClass.IsoForestProperties",
+      "sourceType": "com.sandalen.water.PropertiesClass.IsoForestProperties"
+    },
+    {
+      "name": "sandalen",
+      "type": "com.sandalen.water.other.MyProperties",
+      "sourceType": "com.sandalen.water.other.MyProperties"
+    },
+    {
+      "name": "sandalen.auth",
+      "type": "com.sandalen.water.other.MyProperties$Auth",
+      "sourceType": "com.sandalen.water.other.MyProperties",
+      "sourceMethod": "getAuth()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "isoforest.model-path",
+      "type": "java.lang.String",
+      "sourceType": "com.sandalen.water.PropertiesClass.IsoForestProperties"
+    },
+    {
+      "name": "isoforest.num-trees",
+      "type": "java.lang.Integer",
+      "sourceType": "com.sandalen.water.PropertiesClass.IsoForestProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "isoforest.score",
+      "type": "java.lang.Double",
+      "sourceType": "com.sandalen.water.PropertiesClass.IsoForestProperties"
+    },
+    {
+      "name": "isoforest.train-data",
+      "type": "java.lang.String",
+      "sourceType": "com.sandalen.water.PropertiesClass.IsoForestProperties"
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sandalen.water.dao.WaterdataMapper" >
+  <resultMap id="BaseResultMap" type="com.sandalen.water.bean.Waterdata" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ph" property="ph" jdbcType="DOUBLE" />
+    <result column="disslove" property="disslove" jdbcType="DOUBLE" />
+    <result column="nh" property="nh" jdbcType="DOUBLE" />
+    <result column="kmno" property="kmno" jdbcType="DOUBLE" />
+    <result column="totalp" property="totalp" jdbcType="DOUBLE" />
+    <result column="create_tame" property="createTame" jdbcType="TIMESTAMP" />
+    <result column="eid" property="eid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, ph, disslove, nh, kmno, totalp, create_tame, eid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sandalen.water.bean.WaterdataExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from waterdata
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from waterdata
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from waterdata
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sandalen.water.bean.WaterdataExample" >
+    delete from waterdata
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sandalen.water.bean.Waterdata" >
+    insert into waterdata (id, ph, disslove, 
+      nh, kmno, totalp, create_tame, 
+      eid)
+    values (#{id,jdbcType=INTEGER}, #{ph,jdbcType=DOUBLE}, #{disslove,jdbcType=DOUBLE}, 
+      #{nh,jdbcType=DOUBLE}, #{kmno,jdbcType=DOUBLE}, #{totalp,jdbcType=DOUBLE}, #{createTame,jdbcType=TIMESTAMP}, 
+      #{eid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sandalen.water.bean.Waterdata" >
+    insert into waterdata
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ph != null" >
+        ph,
+      </if>
+      <if test="disslove != null" >
+        disslove,
+      </if>
+      <if test="nh != null" >
+        nh,
+      </if>
+      <if test="kmno != null" >
+        kmno,
+      </if>
+      <if test="totalp != null" >
+        totalp,
+      </if>
+      <if test="createTame != null" >
+        create_tame,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ph != null" >
+        #{ph,jdbcType=DOUBLE},
+      </if>
+      <if test="disslove != null" >
+        #{disslove,jdbcType=DOUBLE},
+      </if>
+      <if test="nh != null" >
+        #{nh,jdbcType=DOUBLE},
+      </if>
+      <if test="kmno != null" >
+        #{kmno,jdbcType=DOUBLE},
+      </if>
+      <if test="totalp != null" >
+        #{totalp,jdbcType=DOUBLE},
+      </if>
+      <if test="createTame != null" >
+        #{createTame,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sandalen.water.bean.WaterdataExample" resultType="java.lang.Integer" >
+    select count(*) from waterdata
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update waterdata
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.ph != null" >
+        ph = #{record.ph,jdbcType=DOUBLE},
+      </if>
+      <if test="record.disslove != null" >
+        disslove = #{record.disslove,jdbcType=DOUBLE},
+      </if>
+      <if test="record.nh != null" >
+        nh = #{record.nh,jdbcType=DOUBLE},
+      </if>
+      <if test="record.kmno != null" >
+        kmno = #{record.kmno,jdbcType=DOUBLE},
+      </if>
+      <if test="record.totalp != null" >
+        totalp = #{record.totalp,jdbcType=DOUBLE},
+      </if>
+      <if test="record.createTame != null" >
+        create_tame = #{record.createTame,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.eid != null" >
+        eid = #{record.eid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update waterdata
+    set id = #{record.id,jdbcType=INTEGER},
+      ph = #{record.ph,jdbcType=DOUBLE},
+      disslove = #{record.disslove,jdbcType=DOUBLE},
+      nh = #{record.nh,jdbcType=DOUBLE},
+      kmno = #{record.kmno,jdbcType=DOUBLE},
+      totalp = #{record.totalp,jdbcType=DOUBLE},
+      create_tame = #{record.createTame,jdbcType=TIMESTAMP},
+      eid = #{record.eid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sandalen.water.bean.Waterdata" >
+    update waterdata
+    <set >
+      <if test="ph != null" >
+        ph = #{ph,jdbcType=DOUBLE},
+      </if>
+      <if test="disslove != null" >
+        disslove = #{disslove,jdbcType=DOUBLE},
+      </if>
+      <if test="nh != null" >
+        nh = #{nh,jdbcType=DOUBLE},
+      </if>
+      <if test="kmno != null" >
+        kmno = #{kmno,jdbcType=DOUBLE},
+      </if>
+      <if test="totalp != null" >
+        totalp = #{totalp,jdbcType=DOUBLE},
+      </if>
+      <if test="createTame != null" >
+        create_tame = #{createTame,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sandalen.water.bean.Waterdata" >
+    update waterdata
+    set ph = #{ph,jdbcType=DOUBLE},
+      disslove = #{disslove,jdbcType=DOUBLE},
+      nh = #{nh,jdbcType=DOUBLE},
+      kmno = #{kmno,jdbcType=DOUBLE},
+      totalp = #{totalp,jdbcType=DOUBLE},
+      create_tame = #{createTame,jdbcType=TIMESTAMP},
+      eid = #{eid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

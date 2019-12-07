@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sandalen.water.dao.StationMapper" >
+  <resultMap id="BaseResultMap" type="com.sandalen.water.bean.Station" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="longtitude" property="longtitude" jdbcType="DOUBLE" />
+    <result column="latitude" property="latitude" jdbcType="DOUBLE" />
+    <result column="currLevel" property="currlevel" jdbcType="INTEGER" />
+    <result column="preLevel" property="prelevel" jdbcType="INTEGER" />
+    <result column="responsible" property="responsible" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, longtitude, latitude, currLevel, preLevel, responsible
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sandalen.water.bean.StationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from station
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from station
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from station
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sandalen.water.bean.StationExample" >
+    delete from station
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sandalen.water.bean.Station" >
+    insert into station (id, name, longtitude, 
+      latitude, currLevel, preLevel, 
+      responsible)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{longtitude,jdbcType=DOUBLE}, 
+      #{latitude,jdbcType=DOUBLE}, #{currlevel,jdbcType=INTEGER}, #{prelevel,jdbcType=INTEGER}, 
+      #{responsible,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sandalen.water.bean.Station" >
+    insert into station
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="longtitude != null" >
+        longtitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="currlevel != null" >
+        currLevel,
+      </if>
+      <if test="prelevel != null" >
+        preLevel,
+      </if>
+      <if test="responsible != null" >
+        responsible,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="longtitude != null" >
+        #{longtitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="currlevel != null" >
+        #{currlevel,jdbcType=INTEGER},
+      </if>
+      <if test="prelevel != null" >
+        #{prelevel,jdbcType=INTEGER},
+      </if>
+      <if test="responsible != null" >
+        #{responsible,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sandalen.water.bean.StationExample" resultType="java.lang.Integer" >
+    select count(*) from station
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update station
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longtitude != null" >
+        longtitude = #{record.longtitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.latitude != null" >
+        latitude = #{record.latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.currlevel != null" >
+        currLevel = #{record.currlevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.prelevel != null" >
+        preLevel = #{record.prelevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.responsible != null" >
+        responsible = #{record.responsible,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update station
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      longtitude = #{record.longtitude,jdbcType=DOUBLE},
+      latitude = #{record.latitude,jdbcType=DOUBLE},
+      currLevel = #{record.currlevel,jdbcType=INTEGER},
+      preLevel = #{record.prelevel,jdbcType=INTEGER},
+      responsible = #{record.responsible,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sandalen.water.bean.Station" >
+    update station
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="longtitude != null" >
+        longtitude = #{longtitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="currlevel != null" >
+        currLevel = #{currlevel,jdbcType=INTEGER},
+      </if>
+      <if test="prelevel != null" >
+        preLevel = #{prelevel,jdbcType=INTEGER},
+      </if>
+      <if test="responsible != null" >
+        responsible = #{responsible,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sandalen.water.bean.Station" >
+    update station
+    set name = #{name,jdbcType=VARCHAR},
+      longtitude = #{longtitude,jdbcType=DOUBLE},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      currLevel = #{currlevel,jdbcType=INTEGER},
+      preLevel = #{prelevel,jdbcType=INTEGER},
+      responsible = #{responsible,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <resultMap id="StationMap" type="com.sandalen.water.bean.Station">
+      <id column="sid" property="id" jdbcType="VARCHAR"></id>
+      <result column="sname" property="name" jdbcType="VARCHAR"></result>
+      <result column="longtitude" property="longtitude" jdbcType="DOUBLE"></result>
+      <result column="latitude" property="latitude" jdbcType="DOUBLE"></result>
+      <result column="currLevel" property="currlevel" jdbcType="INTEGER"></result>
+      <result column="preLevel" property="prelevel" jdbcType="INTEGER"></result>
+      <result column="responsible" property="responsible" jdbcType="VARCHAR"></result>
+      <association property="userinfo" javaType="com.sandalen.water.bean.Userinfo">
+          <id column="uid" property="uid" jdbcType="VARCHAR"></id>
+          <result column="uname" property="name" jdbcType="VARCHAR"></result>
+      </association>
+      <association property="district" javaType="com.sandalen.water.bean.District">
+          <id column="did" property="id" jdbcType="VARCHAR"></id>
+          <result column="dname" property="name" jdbcType="VARCHAR"></result>
+      </association>
+  </resultMap>
+
+  <select id="getAllInfoForStation" resultMap="StationMap" parameterType="java.util.Map">
+    select s.id as sid,s.name as sname,s.longtitude,s.latitude,s.currLevel,s.preLevel,s.responsible,ui.uid as uid,ui.name as uname,d.id as did,d.name as dname from station s,userInfo ui,station_district sd,district d
+    <where>
+      s.responsible = ui.uid and sd.sid = s.id and sd.did = d.id
+
+      <if test="district != null and district != ''">
+        and d.id = #{district,jdbcType=VARCHAR}
+      </if>
+
+      <if test="responsible != null and responsible != ''">
+        and s.responsible = #{responsible,jdbcType=VARCHAR}
+      </if>
+
+      <if test="nlevel != null and nlevel != ''">
+        and s.currLevel = #{nlevel,jdbcType=INTEGER}
+      </if>
+    </where>
+
+  </select>
+
+  <select id="getCountByLevel" resultType="com.sandalen.water.bean.Station">
+    select * from station s,station_district sd,district d where s.id = sd.sid and sd.did = d.id
+  </select>
+
+  <select id="getStationByDistrict" resultMap="StationMap" parameterType="java.lang.String">
+    select s.id as sid,s.name sname,s.longtitude as longtitude,s.latitude as latitude,s.currLevel as currLevel,s.preLevel as preLevel,s.responsible as responsible,d.id as did,d.name as dname from station s,station_district sd,district d where s.id = sd.sid and sd.did = d.id and d.id = #{id};
+  </select>
+
+  <select id="getCountByDistrict" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) from station s,station_district sd,district d where s.id = sd.sid and sd.did = d.id and d.id = #{id} and s.currLevel = #{level};
+  </select>
+</mapper>

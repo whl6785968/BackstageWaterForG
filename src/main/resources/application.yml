@@ -1,7 +1,7 @@
 spring:
   datasource:
     username: root
-    password: whl5291598
+    password: xxx
     url: jdbc:mysql://localhost/watermoni?useSSL=false&&serverTimezone=UTC&&characterEncoding=utf-8
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource

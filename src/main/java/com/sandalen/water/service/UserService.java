@@ -1,10 +1,7 @@
 package com.sandalen.water.service;
 
 import com.sandalen.water.bean.*;
-import com.sandalen.water.dao.MenuMapper;
-import com.sandalen.water.dao.UserMapper;
-import com.sandalen.water.dao.UserRoleMapper;
-import com.sandalen.water.dao.UserinfoMapper;
+import com.sandalen.water.dao.*;
 import com.sandalen.water.vo.UserRoleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +10,7 @@ import java.util.List;
 
 @Service
 public class UserService {
+
     @Autowired
     private MenuMapper menuMapper;
 
@@ -83,5 +81,15 @@ public class UserService {
     public List<User> getAdminUser(){
         List<User> adminUser = userMapper.getAdminUser();
         return adminUser;
+    }
+
+    public int updateUserInfo(Userinfo userinfo){
+        int i = userinfoMapper.updateByPrimaryKey(userinfo);
+        return i;
+    }
+
+    public int updatePassword(User user){
+        int i = userMapper.updateByPrimaryKey(user);
+        return i;
     }
 }

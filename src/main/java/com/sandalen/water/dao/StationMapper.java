@@ -2,8 +2,6 @@ package com.sandalen.water.dao;
 
 import com.sandalen.water.bean.Station;
 import com.sandalen.water.bean.StationExample;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,8 +9,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-@Mapper
 @Repository
+@Mapper
 public interface StationMapper {
     int countByExample(StationExample example);
 

@@ -6,6 +6,11 @@
       "sourceType": "com.sandalen.water.PropertiesClass.IsoForestProperties"
     },
     {
+      "name": "neo4j",
+      "type": "com.sandalen.water.PropertiesClass.Neo4jProperties",
+      "sourceType": "com.sandalen.water.PropertiesClass.Neo4jProperties"
+    },
+    {
       "name": "sandalen",
       "type": "com.sandalen.water.other.MyProperties",
       "sourceType": "com.sandalen.water.other.MyProperties"
@@ -15,6 +20,11 @@
       "type": "com.sandalen.water.other.MyProperties$Auth",
       "sourceType": "com.sandalen.water.other.MyProperties",
       "sourceMethod": "getAuth()"
+    },
+    {
+      "name": "sms",
+      "type": "com.sandalen.water.PropertiesClass.SMSProperties",
+      "sourceType": "com.sandalen.water.PropertiesClass.SMSProperties"
     }
   ],
   "properties": [
@@ -38,6 +48,31 @@
       "name": "isoforest.train-data",
       "type": "java.lang.String",
       "sourceType": "com.sandalen.water.PropertiesClass.IsoForestProperties"
+    },
+    {
+      "name": "neo4j.password",
+      "type": "java.lang.String",
+      "sourceType": "com.sandalen.water.PropertiesClass.Neo4jProperties"
+    },
+    {
+      "name": "neo4j.u-r-i",
+      "type": "java.lang.String",
+      "sourceType": "com.sandalen.water.PropertiesClass.Neo4jProperties"
+    },
+    {
+      "name": "neo4j.username",
+      "type": "java.lang.String",
+      "sourceType": "com.sandalen.water.PropertiesClass.Neo4jProperties"
+    },
+    {
+      "name": "sms.key",
+      "type": "java.lang.String",
+      "sourceType": "com.sandalen.water.PropertiesClass.SMSProperties"
+    },
+    {
+      "name": "sms.uid",
+      "type": "java.lang.String",
+      "sourceType": "com.sandalen.water.PropertiesClass.SMSProperties"
     }
   ],
   "hints": []

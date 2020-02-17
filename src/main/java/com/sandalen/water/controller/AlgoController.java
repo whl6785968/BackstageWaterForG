@@ -1,5 +1,6 @@
 package com.sandalen.water.controller;
 
+import com.sandalen.water.bean.ErrRecord;
 import com.sandalen.water.bean.RespBean;
 import com.sandalen.water.bean.Waterdata;
 import com.sandalen.water.service.AlgoService;
@@ -34,7 +35,18 @@ public class AlgoController {
     @RequestMapping("/isError")
     public RespBean isError(@RequestBody Waterdata waterdata) throws IOException {
         int error = algoService.isError(waterdata);
-
         return RespBean.ok("预测成功",error);
+    }
+
+    @RequestMapping("/tst")
+    public RespBean tst() throws IOException {
+        algoService.err_check();
+        return RespBean.ok("ss");
+    }
+
+    @RequestMapping("/getErrRecord")
+    public RespBean getErrRecord(){
+        List<ErrRecord> errRecord = algoService.getErrRecord();
+        return RespBean.ok("获取数据成功",errRecord);
     }
 }

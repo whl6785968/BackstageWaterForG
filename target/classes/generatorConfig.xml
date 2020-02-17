@@ -64,6 +64,6 @@
         <!--<table tableName="station"></table>-->
         <!--<table tableName="equip_sta"></table>-->
         <!--<table tableName="msg"></table>-->
-        <table tableName="history_list"></table>
+        <table tableName="err_record"></table>
     </context>
 </generatorConfiguration>

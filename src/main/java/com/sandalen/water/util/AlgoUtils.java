@@ -28,4 +28,8 @@ public class AlgoUtils {
 
         return iForest;
     }
+
+    public static void main(String[] args) throws IOException {
+        getIsoForest();
+    }
 }

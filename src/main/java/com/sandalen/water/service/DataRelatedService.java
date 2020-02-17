@@ -7,10 +7,7 @@ import com.sandalen.water.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class DataRelatedService {
@@ -40,6 +37,7 @@ public class DataRelatedService {
 
     @Autowired
     private HistoryRecordMapper historyRecordMapper;
+
 
     public List<Equipment> getEquipAndStation(SearchCondition searchCondition){
         List<Equipment> equipAndStation = equipmentMapper.getEquipAndStation(searchCondition);
@@ -184,5 +182,56 @@ public class DataRelatedService {
         }
 
         return map;
+    }
+
+    public List<Waterdata> getWaterdataByEid(String eid){
+        WaterdataExample waterdataExample = new WaterdataExample();
+        WaterdataExample.Criteria criteria = waterdataExample.createCriteria();
+        criteria.andEidEqualTo(eid);
+        List<Waterdata> waterdata = waterdataMapper.selectByExample(waterdataExample);
+        return waterdata;
+    }
+
+    public Station getStationById(String sid){
+        StationExample stationExample = new StationExample();
+        StationExample.Criteria criteria = stationExample.createCriteria();
+        criteria.andIdEqualTo(sid);
+        List<Station> stations = stationMapper.selectByExample(stationExample);
+        Station station = null;
+        if (stations.size() != 0 && stations != null){
+             station = stations.get(0);
+        }
+
+        return station;
+    }
+
+    public String getEidBySid(String sid){
+        EquipStaExample equipStaExample = new EquipStaExample();
+        EquipStaExample.Criteria criteria = equipStaExample.createCriteria();
+        criteria.andSidEqualTo(sid);
+        List<EquipSta> equipStas = equipStaMapper.selectByExample(equipStaExample);
+        String eid = null;
+        if(equipStas.size() != 0 && equipStas != null){
+            eid = equipStas.get(0).getEid();
+        }
+
+        return eid;
+    }
+
+    public int update_alert(int isAlert,String stationId){
+        StationExample stationExample = new StationExample();
+        StationExample.Criteria criteria = stationExample.createCriteria();
+        criteria.andIdEqualTo(stationId);
+        List<Station> stations = stationMapper.selectByExample(stationExample);
+        Station station = stations.get(0);
+        if(isAlert == 0){
+            station.setIsAlert(1);
+        }
+        else {
+            station.setIsAlert(0);
+        }
+
+        int i = stationMapper.updateByPrimaryKey(station);
+        return i;
     }
 }

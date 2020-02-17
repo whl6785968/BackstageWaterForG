@@ -1,15 +1,42 @@
 package com.sandalen.water.util;
 
+import com.sandalen.water.PropertiesClass.IsoForestProperties;
+import com.sandalen.water.algo.IsoForest.IForest;
+import com.sandalen.water.bean.Equipment;
+import com.sandalen.water.bean.Station;
+import com.sandalen.water.bean.Waterdata;
+import com.sandalen.water.service.DataRelatedService;
 import org.ejml.data.DenseMatrix64F;
 import org.ejml.ops.CommonOps;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.ujmp.core.util.MathUtil;
 
+import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+@Component
 public class MathUtils {
+
+    @Autowired
+    private IsoForestProperties isoForestProperties;
+    private static IsoForestProperties realIsoForestProperties;
+
+    @Autowired
+    private DataRelatedService dataRelatedService;
+    private static DataRelatedService realDataRelatedService;
+
+    @PostConstruct
+    public void init(){
+       realDataRelatedService = this.dataRelatedService;
+       realIsoForestProperties = this.isoForestProperties;
+    }
+
+
     public static double getMean(List<Double> list){
         double sum = 0;
         for (int i = 0;i < list.size();i++){
@@ -191,6 +218,160 @@ public class MathUtils {
         return result;
     }
 
+    public static List<DenseMatrix64F> transfer_to_dense(List<Waterdata> waterdataList){
+        List<DenseMatrix64F> denseMatrix64FList = new ArrayList<>();
+        for (int i = 0;i < waterdataList.size();i++){
+            DenseMatrix64F denseMatrix64F = new DenseMatrix64F(1, 5);
+            denseMatrix64F.set(0,0,waterdataList.get(i).getPh());
+            denseMatrix64F.set(0,1,waterdataList.get(i).getDisslove());
+            denseMatrix64F.set(0,2,waterdataList.get(i).getNh());
+            denseMatrix64F.set(0,3,waterdataList.get(i).getKmno());
+            denseMatrix64F.set(0,4,waterdataList.get(i).getTotalp());
+            denseMatrix64FList.add(denseMatrix64F);
+        }
+
+        return denseMatrix64FList;
+
+    }
+    public static Double get_err_percent(List<Waterdata> waterdataList, IForest iForest){
+        List<DenseMatrix64F> denseMatrix64FList = transfer_to_dense(waterdataList);
+        double sum = 0.0;
+        for(DenseMatrix64F data:denseMatrix64FList){
+            double prediction = iForest.predict(data);
+            if (prediction == -1.0){
+                sum += 1.0;
+            }
+        }
+
+        double err_percent = sum / waterdataList.size();
+
+        return err_percent;
+    }
+
+    public static Map<String,List<String>> analysis_basin1(Equipment equipment) throws IOException {
+        Map<String,List<String>> map = new HashMap();
+        Station station = equipment.getStation();
+        String upStreams = analysis_basin2(station.getId(),true);
+        String[] upStream_array = upStreams.split("->");
+        List<String> upstream_list = new ArrayList<>();
+        for (int i = 0;i < upStream_array.length - 1;i++){
+            if (!upStream_array[i].equals("")){
+                upstream_list.add(upStream_array[i]);
+            }
+        }
+
+        String downstreams = analysis_basin2(station.getId(),false);
+        String[] downstream_array = downstreams.split("->");
+        List<String> downstream_list = new ArrayList<>();
+        for (int i = 1;i < downstream_array.length;i++){
+            if(!downstream_array[i].equals("")){
+                downstream_list.add(downstream_array[i]);
+            }
+        }
+
+        map.put("upstream",upstream_list);
+        map.put("downstream",downstream_list);
+
+        return map;
+    }
+
+    public static String analysis_basin2(String stationId,boolean isUpstream) throws IOException {
+        String modelStr = IOUtils.getModelStr(realIsoForestProperties.getModel_path());
+        IForest iForest = IOUtils.load_model(modelStr, IForest.class);
+
+        if(stationId == null || stationId == ""){
+            return "";
+        }
+
+        Station station = realDataRelatedService.getStationById(stationId);
+        String eid = realDataRelatedService.getEidBySid(stationId);
+        List<Waterdata> waterdataList = realDataRelatedService.getWaterdataByEid(eid);
+        Double err_percent = get_err_percent(waterdataList, iForest);
+        String sid = null;
+        if (isUpstream){
+            sid = station.getUpstreamId();
+            if(err_percent > 0.05){
+                return analysis_basin2(sid,true) + "->" +station.getName();
+            }
+            else {
+                return "";
+            }
+        }
+        else {
+            sid = station.getDownstreamId();
+            if(err_percent > 0.05){
+                return  station.getName() + "->" + analysis_basin2(sid,false) ;
+            }
+            else {
+                return "";
+            }
+        }
+    }
+
+    public static boolean isAscend(List<Waterdata> waterdataList){
+        boolean isAscend = false;
+//        List<Double> ph = new ArrayList<>();
+        List<Double> dissolve = new ArrayList<>();
+        List<Double> nh = new ArrayList<>();
+        List<Double> kmno = new ArrayList<>();
+        for (int i = 0;i < waterdataList.size();i++) {
+            dissolve.set(i,waterdataList.get(i).getDisslove());
+            nh.set(i,waterdataList.get(i).getNh());
+            kmno.set(i,waterdataList.get(i).getKmno());
+        }
+
+        boolean d = isAscend2(dissolve, false);
+        boolean n = isAscend2(nh,true);
+        boolean k = isAscend2(kmno,true);
+
+        if(d || n || k){
+            return true;
+        }
+
+        return false;
+
+    }
+
+    public static boolean isAscend2(List<Double> data,boolean isLarger){
+        int ascend_count = 0;
+        for (int i = 1;i < data.size();i++){
+            if(isLarger){
+                if((data.get(i) - data.get(i-1)) > 0){
+                    ascend_count += 1;
+                }
+            }
+            else {
+                if((data.get(i) - data.get(i-1)) < 0){
+                    ascend_count += 1;
+                }
+            }
+
+        }
+
+        double ascend_percent = ascend_count / (data.size()-1);
+
+        if (ascend_percent > 0.8){
+            return true;
+        }
+
+        return false;
+
+    }
+
+
+
+    public static void s(){
+        String[] as = {"1","2","3","4"};
+        StringBuffer sb = new StringBuffer();
+        for (String a : as ){
+            sb.append(a + ",");
+        }
+
+        System.out.println(sb.toString());
+    }
+
+
+
 //    public static List<Boolean> isT(List<DenseMatrix64F> x,List<DenseMatrix64F> y){
 //        List<Boolean> result = new ArrayList<>();
 //        for (int i = 0;i < x.get(0).numCols;i++){
@@ -206,4 +387,8 @@ public class MathUtils {
 //
 //        return result;
 //    }
+
+    public static void main(String[] args) throws IOException {
+        s();
+    }
 }

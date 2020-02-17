@@ -22,6 +22,13 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  rabbitmq:
+    host: 192.168.231.216
+    port: 5672
+    username: guest
+    password: guest
+#  main:
+#    allow-bean-definition-overriding: true
 #  resources:
 #    add-mappings: true
 #    static-locations: classpath:/
@@ -37,3 +44,5 @@ sandalen:
   auth:
     loginTimesLimit: 7
     loginLockedTime: 10
+
+

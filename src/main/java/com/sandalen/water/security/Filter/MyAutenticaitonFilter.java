@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//访问鉴权-每次访问都需经过这个地方
 @Component
 public class MyAutenticaitonFilter extends OncePerRequestFilter {
     @Autowired

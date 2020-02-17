@@ -254,6 +254,10 @@
       <result column="sname" property="name"></result>
       <result column="currLevel" property="currlevel"></result>
       <result column="preLevel" property="prelevel"></result>
+      <result column="upstream_id" property="upstreamId"></result>
+      <result column="downstream_id" property="downstreamId"></result>
+      <result column="responsible" property="responsible"></result>
+      <result column="is_alert" property="isAlert"></result>
       <association property="userinfo" javaType="com.sandalen.water.bean.Userinfo">
           <id column="uuid" property="uid" jdbcType="VARCHAR"></id>
           <result column="uname" property="name" jdbcType="VARCHAR"></result>
@@ -263,7 +267,7 @@
   </resultMap>
 
   <select id="getEquipAndStation" resultMap="EquipPositive" parameterType="com.sandalen.water.bean.SearchCondition">
-    select e.id as id,e.name as name,e.model as model,e.productionTime as productionTime,e.availableTime as availableTime,e.productionPlace as productionPlace,e.status as status,s.id as sid,s.name as sname,s.currLevel as currLevel,s.preLevel as preLevel from equipment e,equip_sta es,station s
+    select e.id as id,e.name as name,e.model as model,e.productionTime as productionTime,e.availableTime as availableTime,e.productionPlace as productionPlace,e.status as status,s.id as sid,s.name as sname,s.currLevel as currLevel,s.preLevel as preLevel,s.upstream_id as upstream_id,s.downstream_id as downstream_id,s.responsible as responsible,s.is_alert as is_alert from equipment e,equip_sta es,station s
     <where>
       e.id = es.eid and es.sid = s.id
       <if test="id != null and id != ''">

@@ -553,6 +553,206 @@ public class StationExample {
             addCriterion("responsible not between", value1, value2, "responsible");
             return (Criteria) this;
         }
+
+        public Criteria andUpstreamIdIsNull() {
+            addCriterion("upstream_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpstreamIdIsNotNull() {
+            addCriterion("upstream_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpstreamIdEqualTo(String value) {
+            addCriterion("upstream_id =", value, "upstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpstreamIdNotEqualTo(String value) {
+            addCriterion("upstream_id <>", value, "upstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpstreamIdGreaterThan(String value) {
+            addCriterion("upstream_id >", value, "upstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpstreamIdGreaterThanOrEqualTo(String value) {
+            addCriterion("upstream_id >=", value, "upstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpstreamIdLessThan(String value) {
+            addCriterion("upstream_id <", value, "upstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpstreamIdLessThanOrEqualTo(String value) {
+            addCriterion("upstream_id <=", value, "upstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpstreamIdLike(String value) {
+            addCriterion("upstream_id like", value, "upstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpstreamIdNotLike(String value) {
+            addCriterion("upstream_id not like", value, "upstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpstreamIdIn(List<String> values) {
+            addCriterion("upstream_id in", values, "upstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpstreamIdNotIn(List<String> values) {
+            addCriterion("upstream_id not in", values, "upstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpstreamIdBetween(String value1, String value2) {
+            addCriterion("upstream_id between", value1, value2, "upstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpstreamIdNotBetween(String value1, String value2) {
+            addCriterion("upstream_id not between", value1, value2, "upstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownstreamIdIsNull() {
+            addCriterion("downstream_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownstreamIdIsNotNull() {
+            addCriterion("downstream_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownstreamIdEqualTo(String value) {
+            addCriterion("downstream_id =", value, "downstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownstreamIdNotEqualTo(String value) {
+            addCriterion("downstream_id <>", value, "downstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownstreamIdGreaterThan(String value) {
+            addCriterion("downstream_id >", value, "downstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownstreamIdGreaterThanOrEqualTo(String value) {
+            addCriterion("downstream_id >=", value, "downstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownstreamIdLessThan(String value) {
+            addCriterion("downstream_id <", value, "downstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownstreamIdLessThanOrEqualTo(String value) {
+            addCriterion("downstream_id <=", value, "downstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownstreamIdLike(String value) {
+            addCriterion("downstream_id like", value, "downstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownstreamIdNotLike(String value) {
+            addCriterion("downstream_id not like", value, "downstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownstreamIdIn(List<String> values) {
+            addCriterion("downstream_id in", values, "downstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownstreamIdNotIn(List<String> values) {
+            addCriterion("downstream_id not in", values, "downstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownstreamIdBetween(String value1, String value2) {
+            addCriterion("downstream_id between", value1, value2, "downstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownstreamIdNotBetween(String value1, String value2) {
+            addCriterion("downstream_id not between", value1, value2, "downstreamId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAlertIsNull() {
+            addCriterion("is_alert is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAlertIsNotNull() {
+            addCriterion("is_alert is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAlertEqualTo(Integer value) {
+            addCriterion("is_alert =", value, "isAlert");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAlertNotEqualTo(Integer value) {
+            addCriterion("is_alert <>", value, "isAlert");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAlertGreaterThan(Integer value) {
+            addCriterion("is_alert >", value, "isAlert");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAlertGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_alert >=", value, "isAlert");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAlertLessThan(Integer value) {
+            addCriterion("is_alert <", value, "isAlert");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAlertLessThanOrEqualTo(Integer value) {
+            addCriterion("is_alert <=", value, "isAlert");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAlertIn(List<Integer> values) {
+            addCriterion("is_alert in", values, "isAlert");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAlertNotIn(List<Integer> values) {
+            addCriterion("is_alert not in", values, "isAlert");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAlertBetween(Integer value1, Integer value2) {
+            addCriterion("is_alert between", value1, value2, "isAlert");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAlertNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_alert not between", value1, value2, "isAlert");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

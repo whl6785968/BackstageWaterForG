@@ -19,6 +19,8 @@ public class Waterdata {
 
     private String eid;
 
+    private Integer level;
+
     public Integer getId() {
         return id;
     }
@@ -81,5 +83,13 @@ public class Waterdata {
 
     public void setEid(String eid) {
         this.eid = eid == null ? null : eid.trim();
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 }

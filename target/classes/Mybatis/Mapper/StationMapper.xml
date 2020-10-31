@@ -299,6 +299,7 @@
     <result column="responsible" property="responsible" jdbcType="VARCHAR"></result>
     <result column="upstream_id" property="upstreamId" jdbcType="VARCHAR"></result>
     <result column="downstream_id" property="downstreamId" jdbcType="VARCHAR"></result>
+    <result column="is_alert" property="isAlert" jdbcType="INTEGER"></result>
     <association property="userinfo" javaType="com.sandalen.water.bean.Userinfo">
       <id column="uid" property="uid" jdbcType="VARCHAR"></id>
       <result column="uname" property="name" jdbcType="VARCHAR"></result>
@@ -307,13 +308,25 @@
       <id column="did" property="id" jdbcType="VARCHAR"></id>
       <result column="dname" property="name" jdbcType="VARCHAR"></result>
     </association>
+    <association property="errRecord" javaType="com.sandalen.water.bean.ErrRecord">
+      <id column="eid" property="id" jdbcType="INTEGER"></id>
+      <result column="judge" property="judge" jdbcType="VARCHAR"></result>
+      <result column="chargerName" property="chargerName" jdbcType="VARCHAR"></result>
+      <result column="createTime" property="createTime" jdbcType="VARCHAR"></result>
+    </association>
+    <association property="province" javaType="com.sandalen.water.bean.Province">
+      <id column="pid" property="id" jdbcType="INTEGER"></id>
+      <result column="pname" property="name" jdbcType="VARCHAR"></result>
+    </association>
   </resultMap>
 
   <select id="getAllInfoForStation" resultMap="StationMap" parameterType="java.util.Map">
     select s.id as sid,s.name as sname,s.longtitude,s.latitude,s.currLevel,s.preLevel,s.responsible,s.upstream_id as upstream_id,
-    s.downstream_id as downstream_id,ui.uid as uid,ui.name as uname,d.id as did,d.name as dname from station s,userInfo ui,station_district sd,district d
+    s.downstream_id as downstream_id,s.is_alert as is_alert,
+    ui.uid as uid,ui.name as uname,d.id as did,d.name as dname,p.id as pid,p.name as pname
+    from station s,userInfo ui,station_district sd,district d,province p,station_province sp
     <where>
-      s.responsible = ui.uid and sd.sid = s.id and sd.did = d.id
+      s.responsible = ui.uid and sd.sid = s.id and sd.did = d.id and p.id = sp.pid and sp.sid = s.id
 
       <if test="district != null and district != ''">
         and d.id = #{district,jdbcType=VARCHAR}
@@ -340,5 +353,13 @@
 
   <select id="getCountByDistrict" parameterType="java.util.Map" resultType="java.lang.Integer">
     select count(*) from station s,station_district sd,district d where s.id = sd.sid and sd.did = d.id and d.id = #{id} and s.currLevel = #{level};
+  </select>
+
+  <select id="getErrStationAndRecord" resultMap="StationMap">
+    select s.id as sid,s.name as sname,e.judge as judge,e.charger_name as chargerName,e.create_time as createTime from station s,err_record e where s.id = e.sid and s.is_alert = 1;
+  </select>
+
+  <select id="getNewestWaterData" resultType="com.sandalen.water.bean.NewestWaterData">
+    select d.name as district,p.name as province,s.id,s.name as station,s.is_alert as status,tt.ph as ph,tt.disslove as dis,tt.nh as nh,tt.kmno as kmno,tt.totalp as totalp,tt.level as level,tt.create_tame as create_time from station s,equip_sta es,station_province sp,province p,station_district sd,district d,(select distinct * from waterdata w,(select max(create_tame) newest_time from waterdata group by eid) t where w.create_tame = t.newest_time) tt where s.id = es.sid and tt.eid = es.eid and s.id = sp.sid and sp.pid = p.id and s.id = sd.sid and sd.did = d.id;
   </select>
 </mapper>

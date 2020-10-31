@@ -165,7 +165,6 @@ public class AlgoService {
                 sub_desc = "编号"+equip.getId()+"设备状态异常";
                 desc = "站点"+station_name+"中"+sub_desc+"，请负责人尽快排查和解决，自动判断原因为" +
                         "设备状态异常";
-//                SMSUtils.send(smsProperties.getUid(),smsProperties.getKey(),number,desc);
 
             }
             else if(equipStatus == 1){
@@ -228,8 +227,9 @@ public class AlgoService {
                 errRecord.setCreateTime(new Date());
                 errRecord.setSid(stationId);
                 errRecordMapper.insert(errRecord);
-                System.out.println(sub_desc);
-                System.out.println(desc);
+//                System.out.println(sub_desc);
+//                System.out.println(desc);
+                SMSUtils.send(smsProperties.getUid(),smsProperties.getKey(),number,desc+sub_desc);
             }
         }
     }

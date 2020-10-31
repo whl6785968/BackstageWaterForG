@@ -44,7 +44,11 @@ public class ReportController {
         return RespBean.ok("获取数据成功",breakDownEquip);
     }
 
-
+    @RequestMapping("/getNewestData")
+    public RespBean getNewestData(){
+        List<NewestWaterData> newestData = dataRelatedService.getNewestData();
+        return RespBean.ok("success",newestData);
+    }
 
 
 

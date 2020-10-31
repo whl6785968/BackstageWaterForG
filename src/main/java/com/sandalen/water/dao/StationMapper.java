@@ -1,5 +1,6 @@
 package com.sandalen.water.dao;
 
+import com.sandalen.water.bean.NewestWaterData;
 import com.sandalen.water.bean.Station;
 import com.sandalen.water.bean.StationExample;
 import java.util.List;
@@ -41,4 +42,8 @@ public interface StationMapper {
     List<Station> getStationByDistrict(String id);
 
     int getCountByDistrict(Map map);
+
+    List<Station> getErrStationAndRecord();
+
+    List<NewestWaterData> getNewestWaterData();
 }

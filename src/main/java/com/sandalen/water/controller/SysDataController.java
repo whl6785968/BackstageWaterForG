@@ -20,19 +20,24 @@ public class SysDataController {
 
     @RequestMapping("/getAllStation")
     public RespBean getAllStation(int page,int pageSize){
-        System.out.println(page);
-        System.out.println(pageSize);
         HashMap<String, Object> map = new HashMap<>();
         PageHelper.startPage(page,pageSize);
         List<Station> allInfoForStation = dataRelatedService.getAllInfoForStation(map);
 
         PageInfo<Station> stationPageInfo = new PageInfo<>(allInfoForStation);
 
+
         if(allInfoForStation != null){
             return RespBean.ok("获取数据成功",stationPageInfo);
         }
 
         return RespBean.error("获取数据失败");
+    }
+
+    @RequestMapping("/getBasinStructure")
+    public RespBean getBasinStructure(String stationId){
+        List<String> list = dataRelatedService.getRelBySid(stationId);
+        return RespBean.ok("success",list);
     }
 
     @RequestMapping("/getAllUser")
@@ -43,9 +48,11 @@ public class SysDataController {
     }
 
     @RequestMapping("/getAllDistrict")
-    public RespBean getAllDistrict(){
+    public RespBean getAllDistrict(int page,int pageSize){
+        PageHelper.startPage(page,pageSize);
         List<District> allDistrict = dataRelatedService.getAllDistrict();
-        return RespBean.ok("获取数据成功",allDistrict);
+        PageInfo<District> pageInfo = new PageInfo<>(allDistrict);
+        return RespBean.ok("获取数据成功",pageInfo);
     }
 
     @RequestMapping("/addStation")
@@ -58,6 +65,26 @@ public class SysDataController {
         return RespBean.error("添加失败");
     }
 
+    @RequestMapping("/modifyStation")
+    public RespBean modifyStation(@RequestBody Station station){
+        int i = dataRelatedService.modifyStation(station);
+        if(i != 0){
+            return RespBean.ok("修改成功");
+        }
+        return RespBean.error("修改失败");
+    }
+
+
+    @RequestMapping("/deleteStation")
+    public RespBean deleteStation(String stationId){
+        int i = dataRelatedService.deleteStation(stationId);
+
+        if(i != 0){
+            return RespBean.ok("修改成功");
+        }
+        return RespBean.error("修改失败");
+    }
+
 
     @RequestMapping("/addDistrict")
     public RespBean addDistrict(@RequestBody District district){
@@ -68,11 +95,32 @@ public class SysDataController {
         return RespBean.error("添加失败");
     }
 
+    @RequestMapping("/modifyDistrict")
+    public RespBean modifyDistrict(@RequestBody District district){
+        int i = dataRelatedService.modifyDistrict(district);
+        if(i > 0){
+            return RespBean.ok("修改成功");
+        }
+        return RespBean.error("修改失败");
+    }
+
+    @RequestMapping("/deleteDistrict")
+    public RespBean deleteDistrict(String id){
+        int i = dataRelatedService.deleteDistrict(id);
+        if(i > 0){
+            return RespBean.ok("删除成功");
+        }
+        return RespBean.error("删除失败");
+
+    }
+
     @RequestMapping("/getAllEquip")
-    public RespBean getAllEquip(){
+    public RespBean getAllEquip(int page,int pageSize){
+        PageHelper.startPage(page,pageSize);
         SearchCondition searchCondition = new SearchCondition();
         List<Equipment> equipAndStation = dataRelatedService.getEquipAndStation(searchCondition);
-        return RespBean.ok("获取数据成功",equipAndStation);
+        PageInfo<Equipment> pageInfo = new PageInfo<>(equipAndStation);
+        return RespBean.ok("获取数据成功",pageInfo);
     }
 
     @RequestMapping("/addEquip")
@@ -82,5 +130,14 @@ public class SysDataController {
             return RespBean.ok("添加成功");
         }
         return RespBean.error("添加失败");
+    }
+
+    @RequestMapping("/modifyEquip")
+    public RespBean modifyEquip(@RequestBody Equipment equipment){
+        int i = dataRelatedService.modifyEquip(equipment);
+        if(i != 0){
+            return RespBean.ok("修改成功");
+        }
+        return RespBean.error("修改失败");
     }
 }

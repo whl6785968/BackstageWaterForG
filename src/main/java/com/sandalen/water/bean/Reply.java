@@ -15,6 +15,18 @@ public class Reply {
 
     private String uid;
 
+    private String postId;
+
+    private Userinfo userinfo;
+
+    public Userinfo getUserinfo() {
+        return userinfo;
+    }
+
+    public void setUserinfo(Userinfo userinfo) {
+        this.userinfo = userinfo;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +73,13 @@ public class Reply {
 
     public void setUid(String uid) {
         this.uid = uid == null ? null : uid.trim();
+    }
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId == null ? null : postId.trim();
     }
 }

@@ -1,8 +1,5 @@
 package com.sandalen.water.Filter;
 
-import com.sun.deploy.net.HttpUtils;
-import org.springframework.stereotype.Component;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;

@@ -2,7 +2,9 @@ package com.sandalen.water.service;
 
 import com.sandalen.water.algo.IsoForest.IForest;
 import com.sandalen.water.bean.Station;
+import com.sandalen.water.bean.StationExample;
 import com.sandalen.water.bean.Waterdata;
+import com.sandalen.water.dao.StationMapper;
 import com.sandalen.water.util.IOUtils;
 import com.sandalen.water.util.MathUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ import java.util.List;
 public class DataService {
     @Autowired
     private DataRelatedService dataRelatedService;
+
+    @Autowired
+    private StationMapper stationMapper;
 
     public String analysis_basin2(String stationId) throws IOException {
 
@@ -36,6 +41,21 @@ public class DataService {
         else {
             return null;
         }
+    }
+
+    public List<Station> getErrStation(){
+        StationExample example = new StationExample();
+        StationExample.Criteria criteria = example.createCriteria();
+        criteria.andIsAlertEqualTo(1);
+
+        List<Station> stations = stationMapper.selectByExample(example);
+
+        return stations;
+    }
+
+    public List<Station> getErrStationAndRecord(){
+        List<Station> stations = stationMapper.getErrStationAndRecord();
+        return stations;
     }
 
     public static void main(String[] args) throws IOException {

@@ -64,6 +64,7 @@
         <!--<table tableName="station"></table>-->
         <!--<table tableName="equip_sta"></table>-->
         <!--<table tableName="msg"></table>-->
-        <table tableName="err_record"></table>
+        <table tableName="waterdata"></table>
+        <!--<table tableName="station_province"></table>-->
     </context>
 </generatorConfiguration>

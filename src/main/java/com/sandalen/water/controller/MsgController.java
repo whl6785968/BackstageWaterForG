@@ -1,9 +1,6 @@
 package com.sandalen.water.controller;
 
-import com.sandalen.water.bean.Msg;
-import com.sandalen.water.bean.MsgUser;
-import com.sandalen.water.bean.RespBean;
-import com.sandalen.water.bean.User;
+import com.sandalen.water.bean.*;
 import com.sandalen.water.service.MsgService;
 import com.sandalen.water.service.UserService;
 import com.sandalen.water.util.IdUtils;
@@ -122,5 +119,26 @@ public class MsgController {
             return RespBean.error("删除失败");
         }
         return RespBean.ok("修改成功");
+    }
+
+    @RequestMapping("/reply")
+    public RespBean reply(String post_id,String user_id,String content){
+        Reply reply = new Reply();
+        reply.setReplyId(IdUtils.getId());
+        reply.setReplyTime(new Date(System.currentTimeMillis()));
+        reply.setContent(content);
+        reply.setUid(user_id);
+        reply.setPostId(post_id);
+        int i = msgService.reply(reply);
+        if(i == 0){
+            return RespBean.error("回复失败");
+        }
+        return RespBean.ok("回复成功");
+    }
+
+    @RequestMapping("/getReply")
+    public RespBean getReply(String post_id){
+        List<Reply> replies = msgService.getReply(post_id);
+        return RespBean.ok("获取数据成功",replies);
     }
 }

@@ -33,13 +33,14 @@ spring:
 #    add-mappings: true
 #    static-locations: classpath:/
 
+
 mybatis:
   config-location: classpath:Mybatis/mybatis-config.xml
   mapper-locations: classpath:Mybatis/Mapper/*.xml
 
 server:
   port: 8088
-
+  address: 0.0.0.0
 sandalen:
   auth:
     loginTimesLimit: 7

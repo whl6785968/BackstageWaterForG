@@ -4,8 +4,11 @@ package com.sandalen.water.service;
 import com.github.pagehelper.PageHelper;
 import com.sandalen.water.bean.*;
 import com.sandalen.water.dao.*;
+import com.sandalen.water.other.CypherUtils;
+import com.sandalen.water.util.Neo4jUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 
@@ -38,6 +41,8 @@ public class DataRelatedService {
     @Autowired
     private HistoryRecordMapper historyRecordMapper;
 
+    @Autowired
+    private StationProvinceMapper stationProvinceMapper;
 
     public List<Equipment> getEquipAndStation(SearchCondition searchCondition){
         List<Equipment> equipAndStation = equipmentMapper.getEquipAndStation(searchCondition);
@@ -78,11 +83,24 @@ public class DataRelatedService {
     }
 
     public int addStation(Station station){
+
+//        station.setUpstreamId(null);
+//        station.setDownstreamId(null);
+        station.setIsAlert(0);
         int insert = stationMapper.insert(station);
+
         StationDistrict stationDistrict = new StationDistrict();
         stationDistrict.setSid(station.getId());
         stationDistrict.setDid(station.getDistrict().getId());
         int insert1 = stationDistrictMapper.insert(stationDistrict);
+
+        StationProvince stationProvince = new StationProvince();
+        stationProvince.setSid(station.getId());
+        stationProvince.setPid(station.getProvince().getId());
+        stationProvinceMapper.insert(stationProvince);
+
+        Neo4jUtils.createStation(station.getName(),station.getId(),station.getCurrlevel(),station.getIsAlert(),"",station.getUpstreamId(),station.getDownstreamId());
+        Neo4jUtils.createRelWithStationAndCharger(station.getId(),station.getResponsible());
 
         if(insert1 !=0 && insert != 0){
             return 1;
@@ -91,9 +109,137 @@ public class DataRelatedService {
         return 0;
     }
 
+    public int modifyStation(Station station){
+//        if(station.getUpstreamId().equals("null")){
+//            station.setUpstreamId(null);
+//        }
+//
+//        if(station.getDownstreamId().equals("null")){
+//            station.setDownstreamId(null);
+//        }
+        StationExample stationExample = new StationExample();
+        stationExample.createCriteria().andIdEqualTo(station.getId());
+        List<Station> stations = stationMapper.selectByExample(stationExample);
+        Station station1 = stations.get(0);
+        String originCharger = station1.getResponsible();
+
+        int i = stationMapper.updateByPrimaryKey(station);
+
+
+        StationDistrictExample stationDistrictExample = new StationDistrictExample();
+        stationDistrictExample.createCriteria().andSidEqualTo(station.getId());
+        List<StationDistrict> stationDistricts = stationDistrictMapper.selectByExample(stationDistrictExample);
+        StationDistrict stationDistrict = stationDistricts.get(0);
+        stationDistrict.setDid(station.getDistrict().getId());
+        int i1 = stationDistrictMapper.updateByPrimaryKey(stationDistrict);
+
+        StationProvinceExample stationProvinceExample = new StationProvinceExample();
+        stationProvinceExample.createCriteria().andSidEqualTo(station.getId());
+        List<StationProvince> stationProvinces = stationProvinceMapper.selectByExample(stationProvinceExample);
+        StationProvince stationProvince = stationProvinces.get(0);
+        stationProvince.setPid(station.getProvince().getId());
+        stationProvinceMapper.updateByPrimaryKey(stationProvince);
+
+        //修改Neo4j
+        String station_name = station.getName();
+        int level = station.getCurrlevel();
+        int status = station.getIsAlert();
+        Neo4jUtils.updateStation(station.getId(),station_name,level,status);
+
+        //修改负责人
+        Neo4jUtils.deleteRel(originCharger,station.getId());
+        Neo4jUtils.createRelWithStationAndCharger(station.getId(),station.getResponsible());
+
+        if(i != 0 && i1 != 0){
+            return 1;
+        }
+
+        return 0;
+    }
+
+    public int deleteStation(String stationId){
+        //删除与站点有关的设备
+        EquipStaExample equipStaExample = new EquipStaExample();
+        equipStaExample.createCriteria().andSidEqualTo(stationId);
+        equipStaMapper.deleteByExample(equipStaExample);
+
+
+//        List<EquipSta> equipStas = equipStaMapper.selectByExample(equipStaExample);
+//        if(!CollectionUtils.isEmpty(equipStas)){
+//            for (EquipSta equipSta : equipStas){
+//                equipSta.setSid("000");
+//                equipStaMapper.updateByExample(equipSta,equipStaExample);
+//                equipStaMapper.deleteByExample(equipStaExample);
+//            }
+//        }
+//
+        //删除站点与流域之间的关系
+        StationDistrictExample stationDistrictExample = new StationDistrictExample();
+        stationDistrictExample.createCriteria().andSidEqualTo(stationId);
+        stationDistrictMapper.deleteByExample(stationDistrictExample);
+
+        //删除站点与省市之间的关系
+        StationProvinceExample stationProvinceExample = new StationProvinceExample();
+        stationProvinceExample.createCriteria().andSidEqualTo(stationId);
+        stationProvinceMapper.deleteByExample(stationProvinceExample);
+
+        //删除neo4j中的关系
+        Neo4jUtils.deleteEntity(stationId);
+
+//        StationExample stationExample1 = new StationExample();
+//        List<Station> stations = stationMapper.selectByExample(stationExample1);
+//        for (Station station : stations){
+//            if(station.getDownstreamId() != null){
+//                if(station.getDownstreamId().equals(stationId)){
+//                    station.setDownstreamId(null);
+//                }
+//            }
+//            if(station.getUpstreamId() != null){
+//                if(station.getUpstreamId().equals(stationId)){
+//                    station.setUpstreamId(null);
+//                }
+//            }
+//
+//
+//            stationMapper.updateByPrimaryKey(station);
+//        }
+
+        //删除站点
+        StationExample stationExample = new StationExample();
+        stationExample.createCriteria().andIdEqualTo(stationId);
+        int i = stationMapper.deleteByExample(stationExample);
+
+        return i;
+
+
+    }
+
+    public List<String> getRelBySid(String stationId){
+        List<String> relBySid = Neo4jUtils.getRelBySid(stationId);
+        return relBySid;
+    }
+
     public int addDistrict(District district){
         int insert = districtMapper.insert(district);
         return insert;
+    }
+
+    public int modifyDistrict(District district){
+//        DistrictExample districtExample = new DistrictExample();
+//        districtExample.createCriteria().andIdEqualTo(district.getId());
+        int i = districtMapper.updateByPrimaryKey(district);
+        return i;
+    }
+
+    public int deleteDistrict(String id){
+        StationDistrictExample stationDistrictExample = new StationDistrictExample();
+        stationDistrictExample.createCriteria().andDidEqualTo(id);
+        int i = stationDistrictMapper.deleteByExample(stationDistrictExample);
+
+        int i1 = districtMapper.deleteByPrimaryKey(id);
+
+
+        return i1;
     }
 
     public int addEquip(Equipment equipment){
@@ -111,6 +257,33 @@ public class DataRelatedService {
 
         return 0;
 
+    }
+
+    //
+    public int modifyEquip(Equipment equipment){
+        EquipStaExample equipStaExample = new EquipStaExample();
+        equipStaExample.createCriteria().andEidEqualTo(equipment.getId());
+        List<EquipSta> equipStas = equipStaMapper.selectByExample(equipStaExample);
+        if(equipStas != null && equipStas.size() != 0){
+            EquipSta equipSta = equipStas.get(0);
+            equipSta.setSid(equipment.getStation().getId());
+            int i1 = equipStaMapper.updateByExample(equipSta, equipStaExample);
+
+            int i = equipmentMapper.updateByPrimaryKey(equipment);
+
+            if( i1 != 0 || i != 0){
+                return 1;
+            }
+
+            return 0;
+        }
+
+        return 0;
+    }
+
+    public List<NewestWaterData> getNewestData(){
+        List<NewestWaterData> newestWaterData = stationMapper.getNewestWaterData();
+        return newestWaterData;
     }
 
     public List<Equipment> getBreakDownEquip(){

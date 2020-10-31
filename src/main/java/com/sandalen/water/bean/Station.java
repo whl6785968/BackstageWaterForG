@@ -25,6 +25,26 @@ public class Station {
 
     private District district;
 
+    private ErrRecord errRecord;
+
+    private Province province;
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
+    }
+
+    public ErrRecord getErrRecord() {
+        return errRecord;
+    }
+
+    public void setErrRecord(ErrRecord errRecord) {
+        this.errRecord = errRecord;
+    }
+
     public Userinfo getUserinfo() {
         return userinfo;
     }

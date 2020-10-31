@@ -1,11 +1,9 @@
 package com.sandalen.water.service;
 
-import com.sandalen.water.bean.Msg;
-import com.sandalen.water.bean.MsgExample;
-import com.sandalen.water.bean.MsgUser;
-import com.sandalen.water.bean.MsgUserExample;
+import com.sandalen.water.bean.*;
 import com.sandalen.water.dao.MsgMapper;
 import com.sandalen.water.dao.MsgUserMapper;
+import com.sandalen.water.dao.ReplyMapper;
 import com.sandalen.water.dao.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -23,6 +21,9 @@ public class MsgService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private ReplyMapper replyMapper;
 
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
@@ -139,5 +140,15 @@ public class MsgService {
         int i = msgUserMapper.deleteByExample(msgUserExample);
 
         return i;
+    }
+
+    public int reply(Reply reply){
+        int insert = replyMapper.insert(reply);
+        return insert;
+    }
+
+    public List<Reply> getReply(String post_id){
+        List<Reply> replies = replyMapper.getReply(post_id);
+        return replies;
     }
 }

@@ -60,7 +60,7 @@ CREATE TABLE `district` (
 
 LOCK TABLES `district` WRITE;
 /*!40000 ALTER TABLE `district` DISABLE KEYS */;
-INSERT INTO `district` VALUES ('001','玄武湖片区'),('002','石臼湖片区'),('003','秦淮河流域'),('004','长江南京流域');
+INSERT INTO `district` VALUES ('001','玄武湖片区'),('002','石臼湖片区'),('003','秦淮河流域'),('004','南京长江流域');
 /*!40000 ALTER TABLE `district` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,7 +80,7 @@ CREATE TABLE `equip_sta` (
   KEY `sid` (`sid`),
   CONSTRAINT `equip_sta_ibfk_1` FOREIGN KEY (`eid`) REFERENCES `equipment` (`id`),
   CONSTRAINT `equip_sta_ibfk_2` FOREIGN KEY (`sid`) REFERENCES `station` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +89,7 @@ CREATE TABLE `equip_sta` (
 
 LOCK TABLES `equip_sta` WRITE;
 /*!40000 ALTER TABLE `equip_sta` DISABLE KEYS */;
-INSERT INTO `equip_sta` VALUES (1,'00202440000000003','001'),(2,'00202440000000004','002'),(3,'00202440000000005','001'),(5,'00202440000000006','003'),(6,'00202440000000007','004'),(7,'00202440000000008','005'),(9,'00202440000000009','006');
+INSERT INTO `equip_sta` VALUES (1,'00202440000000003','001'),(2,'00202440000000004','002'),(3,'00202440000000005','006'),(5,'00202440000000006','003'),(6,'00202440000000007','004'),(7,'00202440000000008','005'),(8,'00202440000000009','000');
 /*!40000 ALTER TABLE `equip_sta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,8 +118,69 @@ CREATE TABLE `equipment` (
 
 LOCK TABLES `equipment` WRITE;
 /*!40000 ALTER TABLE `equipment` DISABLE KEYS */;
-INSERT INTO `equipment` VALUES ('00202440000000003','便携式水质检测仪','G781 SN051201711000128','2019-11-15 06:41:55',7,'波思途智能有效股份公司',1),('00202440000000004','高级水质检测仪','GPRS232-734','2019-11-16 02:12:48',7,'波思途智能有效股份公司',3),('00202440000000005','便携式水质检测仪','G781 SN051201711000128','2019-11-16 02:12:31',7,'波思途智能有效股份公司',2),('00202440000000006','高级水质检测仪','GPRS232-734','2019-11-15 17:08:00',7,'波思途智能有效股份公司',1),('00202440000000007','便携式水质检测仪','G781 SN051201711000128','2019-11-15 17:08:56',7,'波思途智能有效股份公司',3),('00202440000000008','便携式水质检测仪','G781 SN051201711000128','2019-11-28 17:09:49',7,'波思途智能有效股份公司',2),('00202440000000009','高级水质检测仪','GPRS232-734','2019-11-28 17:14:09',7,'波思途智能有效股份公司',1);
+INSERT INTO `equipment` VALUES ('00202440000000003','便携式水质检测仪','G781 SN051201711000128','2019-11-15 06:41:55',7,'波思途智能有效股份公司',1),('00202440000000004','高级水质检测仪','GPRS232-734','2019-11-16 02:12:48',7,'波思途智能有效股份公司',3),('00202440000000005','便携式水质检测仪','G781 SN051201711000128','2019-11-16 02:12:31',7,'波思途智能有效股份公司',2),('00202440000000006','高级水质检测仪','GPRS232-734','2019-11-15 17:08:00',7,'波思途智能有效股份公司',1),('00202440000000007','便携式水质检测仪','G781 SN051201711000128','2019-11-15 17:08:56',7,'波思途智能有效股份公司',3),('00202440000000008','便携式水质检测仪','G781 SN051201711000128','2019-11-28 17:09:49',7,'波思途智能有效股份公司',2),('00202440000000009','高级水质检测仪','GPRS232-734','2019-11-29 17:14:09',7,'sandalen公司',1);
 /*!40000 ALTER TABLE `equipment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `err_record`
+--
+
+DROP TABLE IF EXISTS `err_record`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `err_record` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `record_id` varchar(200) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `judge` varchar(200) NOT NULL,
+  `emergency` int(11) NOT NULL,
+  `charger_id` varchar(32) DEFAULT NULL,
+  `charger_name` varchar(32) DEFAULT NULL,
+  `is_solve` int(11) NOT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `sid` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `record_id` (`record_id`),
+  KEY `charger_id` (`charger_id`),
+  KEY `err_record_ibfk_2` (`sid`),
+  CONSTRAINT `err_record_ibfk_1` FOREIGN KEY (`charger_id`) REFERENCES `user` (`userId`),
+  CONSTRAINT `err_record_ibfk_2` FOREIGN KEY (`sid`) REFERENCES `station` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `err_record`
+--
+
+LOCK TABLES `err_record` WRITE;
+/*!40000 ALTER TABLE `err_record` DISABLE KEYS */;
+INSERT INTO `err_record` VALUES (1,'fe84875d46a04f6884aac94014cd01f71582008809244','站点玄武湖菱州出现水质异常','自动诊断：上下游水质都未出现异常，考虑设备出现问题或者本站点水质自身问题，需进一步分析',0,'test1','sandalen',0,'2020-02-17 22:53:29','001'),(2,'afa34c330ef24a9c837cc5fc0d785bc01582008809802','站点玄武湖东湖出现水质异常','自动诊断：下游水质出现异常,考虑是玄武湖东湖站点的水质本身出现异常,其中下游异常站点顺序为玄武湖牡丹岛',0,'test1','sandalen',0,'2020-02-17 22:53:30','003'),(3,'3a981396261b4b8b9575482828209a0a1582008810246','站点玄武湖牡丹岛出现水质异常','自动诊断：上游水质出现异常，考虑是上游站点水质出现异常流入站点玄武湖牡丹岛导致异常,上游异常站点顺序为玄武湖东湖',0,'test1','sandalen',0,'2020-02-17 22:53:30','005'),(4,'0b97c3f693844d7dbbc1f750d5f73e361582008811506','站点石臼湖2出现水质异常','自动诊断：上游水质出现异常，考虑是上游站点水质出现异常流入站点石臼湖2导致异常,上游异常站点顺序为石臼湖',0,'test2','张亮',0,'2020-02-17 22:53:32','006');
+/*!40000 ALTER TABLE `err_record` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `flow_direction`
+--
+
+DROP TABLE IF EXISTS `flow_direction`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `flow_direction` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `upstream_id` varchar(32) NOT NULL,
+  `downstream_id` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `flow_direction`
+--
+
+LOCK TABLES `flow_direction` WRITE;
+/*!40000 ALTER TABLE `flow_direction` DISABLE KEYS */;
+/*!40000 ALTER TABLE `flow_direction` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -179,6 +240,38 @@ INSERT INTO `history_record` VALUES (1,'001','玄武湖菱州',2,3,'test1','001'
 UNLOCK TABLES;
 
 --
+-- Table structure for table `knowledge`
+--
+
+DROP TABLE IF EXISTS `knowledge`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `knowledge` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `entity` varchar(32) NOT NULL,
+  `entity_type` varchar(32) NOT NULL,
+  `relation` varchar(32) NOT NULL,
+  `entity_value` varchar(2000) NOT NULL,
+  `node_desc` varchar(2000) DEFAULT NULL,
+  `entity_index` varchar(2000) DEFAULT NULL,
+  `ambiguous` varchar(200) DEFAULT NULL,
+  `entity_id` int(32) DEFAULT NULL,
+  `value_id` int(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `knowledge`
+--
+
+LOCK TABLES `knowledge` WRITE;
+/*!40000 ALTER TABLE `knowledge` DISABLE KEYS */;
+INSERT INTO `knowledge` VALUES (1,'中国地表水水质标准','knowledge','内容','Ⅰ类水',NULL,NULL,NULL,1,2),(2,'Ⅰ类水','knowledge','溶解氧','≥7.5',NULL,NULL,NULL,2,3);
+/*!40000 ALTER TABLE `knowledge` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `menu`
 --
 
@@ -206,7 +299,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (0,'/','/dashboard','dashboard','all',NULL,1,NULL,1,1),(1,'/','/dashboard','dashboard','userManager',NULL,1,0,1,1),(2,'/','/dashboard','dashboard','Data',NULL,1,0,1,1),(3,'/sys/user/**','/userManager/authContol','authControl','authControl',NULL,1,1,1,1),(4,'/data/basic/**','/dataRelated/equipList','checkData','checkData',NULL,1,2,1,1),(5,'/sys/menu/**','/userManager/menuConfig','menuConfig','menuConfig',NULL,1,1,1,1),(6,'/user/basic/**','/dashboard','dashboard','userbasic',NULL,1,0,0,0),(7,'/data/basic/**','/dataRelated/equipList/dataDetails/:id','dataDetails','dataDetails',NULL,1,2,1,0),(8,'/data/basic/**','/dataRelated/map','map','map',NULL,1,2,1,1),(9,'/','dashboard','dashboard','message',NULL,1,0,1,1),(10,'/msg/basic/**','/msg/posting','posting','posting',NULL,1,9,1,1),(11,'/msg/basic/**','/msg/readablePost','readablePost','readablePost',NULL,1,9,1,1),(12,'/sys/msg/**','/msg/review','review','review',NULL,1,9,1,1),(13,'/msg/basic/**','/msg/postDetail/:id','postDetail','postDetail',NULL,1,9,1,0),(14,'/','dashboard','dashboard','report',NULL,1,0,1,1),(15,'/report/basic/**','/report/reportList','reportList','reportList',NULL,1,14,1,1),(16,'/report/basic/**','/report/reportDeatils/:createTime','reportDetails','reportDetails',NULL,1,14,1,0),(17,'/','/dashboard','dashboard','algo',NULL,1,0,1,1),(18,'/algo/basic/**','/algo/anomalyMonitoring','isoForest','anomalyMonitoring',NULL,1,17,1,1);
+INSERT INTO `menu` VALUES (0,'/','/dashboard','dashboard','all',NULL,1,NULL,1,1),(1,'/','/dashboard','dashboard','用户管理',NULL,1,0,1,1),(2,'/','/dashboard','dashboard','数据展示',NULL,1,0,1,1),(3,'/sys/user/**','/userManager/authContol','authControl','权限控制',NULL,1,1,1,1),(4,'/data/basic/**','/dataRelated/equipList','checkData','数据详情',NULL,1,2,1,1),(5,'/sys/menu/**','/userManager/menuConfig','menuConfig','菜单配置',NULL,1,1,1,1),(6,'/user/basic/**','/dashboard','dashboard','userbasic',NULL,1,0,0,0),(7,'/data/basic/**','/dataRelated/equipList/dataDetails/:id','dataDetails','dataDetails',NULL,1,2,1,0),(8,'/data/basic/**','/dataRelated/map','map','站点地图',NULL,1,2,1,1),(9,'/','dashboard','dashboard','消息',NULL,1,0,1,1),(10,'/msg/basic/**','/msg/posting','posting','发送消息',NULL,1,9,1,1),(11,'/msg/basic/**','/msg/readablePost','readablePost','消息列表',NULL,1,9,1,1),(12,'/sys/msg/**','/msg/review','review','消息审查',NULL,1,9,1,1),(13,'/msg/basic/**','/msg/postDetail/:id','postDetail','postDetail',NULL,1,9,1,0),(14,'/','dashboard','dashboard','报告',NULL,1,0,1,1),(15,'/report/basic/**','/report/reportList','reportList','报告列表',NULL,1,14,1,1),(16,'/report/basic/**','/report/reportDeatils/:createTime','reportDetails','reportDetails',NULL,1,14,1,0),(17,'/','/dashboard','dashboard','异常处理',NULL,1,0,1,1),(18,'/algo/basic/**','/algo/anomalyMonitoring','isoForest','异常监控',NULL,1,17,1,1),(19,'/','/dashboard','dashboard','非用户管理',NULL,1,0,1,1),(20,'/sys/data/**','/manager/stationManager','stationManager','站点管理',NULL,1,19,1,1),(21,'/sys/data/**','/manager/districtManager','districtManager','区域管理',NULL,1,19,1,1),(22,'/sys/data/**','/manager/equipManager','equipManager','设备管理',NULL,1,19,1,1),(23,'/','/dashboard','dashboard','知识图谱',NULL,1,0,1,1),(24,'/kg/**','/kg/showKg','showKg','知识图谱展示',NULL,1,23,1,1),(25,'/algo/basic/**','/algo/errRecord','errRecord','异常记录',NULL,1,17,1,1);
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,7 +325,7 @@ CREATE TABLE `msg` (
   UNIQUE KEY `postId` (`postId`),
   KEY `uid` (`uid`),
   CONSTRAINT `msg_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,7 +334,7 @@ CREATE TABLE `msg` (
 
 LOCK TABLES `msg` WRITE;
 /*!40000 ALTER TABLE `msg` DISABLE KEYS */;
-INSERT INTO `msg` VALUES (48,'7a328021afbc446e87bfe7c4487f76271574669482776','111','111','',0,1,'2019-11-25 00:11:23','','test1'),(49,'34e0870d173c42b3ac1d28fd91ff87951574669874599','client test','client test','',0,1,'2019-11-25 00:17:55','','test2'),(50,'89d70fdab63648d6a20104647d7ffcbd1574670154709','admin test','admin test','',0,1,'2019-11-25 00:22:35','','test1'),(51,'37415f0d443c43b1b8907ab15fc4d0261574672157752','珂朵莉祈求无BUG','我是珂学家，BUG全没啦','/static/d1148cebb5804b46b4e1eaa163fb44c5.jpg',0,1,'2019-11-25 00:55:58','','test2'),(52,'a988b5947e6e4c2cb9b87e576fa9a1181574672321609','这是一条永远的not review 消息','谁也发现不了我~','/static/8de7933c92e64ba69ba04e90aea7aa6e.jpg',0,0,'2019-11-25 00:58:42','其他','test1');
+INSERT INTO `msg` VALUES (48,'7a328021afbc446e87bfe7c4487f76271574669482776','111','111','',0,1,'2019-11-25 00:11:23','','test1'),(49,'34e0870d173c42b3ac1d28fd91ff87951574669874599','client test','client test','',0,1,'2019-11-25 00:17:55','','test2'),(50,'89d70fdab63648d6a20104647d7ffcbd1574670154709','admin test','admin test','',0,1,'2019-11-25 00:22:35','','test1'),(51,'37415f0d443c43b1b8907ab15fc4d0261574672157752','珂朵莉祈求无BUG','我是珂学家，BUG全没啦','/static/d1148cebb5804b46b4e1eaa163fb44c5.jpg',0,1,'2019-11-25 00:55:58','','test2'),(52,'a988b5947e6e4c2cb9b87e576fa9a1181574672321609','这是一条永远的not review 消息','谁也发现不了我~','/static/8de7933c92e64ba69ba04e90aea7aa6e.jpg',0,0,'2019-11-25 00:58:42','其他','test1'),(53,'ecbbe95e8943440c820b57e5100b155c1582005063949','测试','没啥形式','/static/7745050b1fca46d19ace94fbfb6fc48e.png,/static/39df9e677675444e92c6e9a679296d7c.jpg',1,1,'2020-02-17 21:51:04','设备故障','test1'),(54,'3d21d1ccd00545528ed54cd02c60920d1582007648532','XXX站点水质出现严重问题，如何解决？','如题，求解','',0,1,'2020-02-17 22:34:09','水质异常','test1'),(55,'0c3abfa4b1af4e37994e1af9c6dc79d71582007949881','水质富营养化','水质富营养化如何解决？？','/static/aaa20b518eea4e43af38746df269ccde.png',0,1,'2020-02-17 22:39:10','水质异常','test1'),(56,'18afe2f904d84ea185064633152440651582346061942','loadrunner tst','loadrunner  tst','',0,1,'2020-02-21 20:34:22','其他','test1'),(57,'154bbe90473a4342861149e1bf9f48ef1582346395787','哈哈哈哈','垃圾load rununer','',0,1,'2020-02-21 20:39:56','其他','test1'),(58,'8ec042cf49b04b25a59c4cb3dddb43d41582346889739','发一个贴子吧，求审核通过','管理员大大网开一面','',0,1,'2020-02-21 20:48:10','其他','test2');
 /*!40000 ALTER TABLE `msg` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,7 +355,7 @@ CREATE TABLE `msg_user` (
   KEY `uid` (`uid`),
   CONSTRAINT `msg_user_ibfk_1` FOREIGN KEY (`mid`) REFERENCES `msg` (`postId`),
   CONSTRAINT `msg_user_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `user` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -271,8 +364,42 @@ CREATE TABLE `msg_user` (
 
 LOCK TABLES `msg_user` WRITE;
 /*!40000 ALTER TABLE `msg_user` DISABLE KEYS */;
-INSERT INTO `msg_user` VALUES (39,'34e0870d173c42b3ac1d28fd91ff87951574669874599','test2',1),(40,'89d70fdab63648d6a20104647d7ffcbd1574670154709','test1',1),(41,'89d70fdab63648d6a20104647d7ffcbd1574670154709','test2',1),(42,'37415f0d443c43b1b8907ab15fc4d0261574672157752','test1',1),(43,'37415f0d443c43b1b8907ab15fc4d0261574672157752','test2',1),(44,'a988b5947e6e4c2cb9b87e576fa9a1181574672321609','test1',1);
+INSERT INTO `msg_user` VALUES (39,'34e0870d173c42b3ac1d28fd91ff87951574669874599','test2',1),(40,'89d70fdab63648d6a20104647d7ffcbd1574670154709','test1',1),(41,'89d70fdab63648d6a20104647d7ffcbd1574670154709','test2',1),(43,'37415f0d443c43b1b8907ab15fc4d0261574672157752','test2',1),(44,'a988b5947e6e4c2cb9b87e576fa9a1181574672321609','test1',1),(45,'ecbbe95e8943440c820b57e5100b155c1582005063949','admin',0),(47,'ecbbe95e8943440c820b57e5100b155c1582005063949','test2',0),(48,'3d21d1ccd00545528ed54cd02c60920d1582007648532','admin',0),(49,'3d21d1ccd00545528ed54cd02c60920d1582007648532','test1',1),(50,'3d21d1ccd00545528ed54cd02c60920d1582007648532','test2',0),(51,'0c3abfa4b1af4e37994e1af9c6dc79d71582007949881','admin',0),(52,'0c3abfa4b1af4e37994e1af9c6dc79d71582007949881','test1',1),(53,'0c3abfa4b1af4e37994e1af9c6dc79d71582007949881','test2',0),(54,'18afe2f904d84ea185064633152440651582346061942','admin',0),(56,'18afe2f904d84ea185064633152440651582346061942','test2',1),(57,'154bbe90473a4342861149e1bf9f48ef1582346395787','admin',0),(58,'154bbe90473a4342861149e1bf9f48ef1582346395787','test1',1),(59,'154bbe90473a4342861149e1bf9f48ef1582346395787','test2',1),(60,'8ec042cf49b04b25a59c4cb3dddb43d41582346889739','admin',1),(62,'8ec042cf49b04b25a59c4cb3dddb43d41582346889739','test2',1);
 /*!40000 ALTER TABLE `msg_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reply`
+--
+
+DROP TABLE IF EXISTS `reply`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reply` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `reply_id` varchar(200) NOT NULL,
+  `content` varchar(10000) NOT NULL,
+  `img_list` varchar(2000) DEFAULT NULL,
+  `reply_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `uid` varchar(32) NOT NULL,
+  `post_id` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `reply_id` (`reply_id`),
+  KEY `uid` (`uid`),
+  KEY `post_id` (`post_id`),
+  CONSTRAINT `reply_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`userId`),
+  CONSTRAINT `reply_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `msg` (`postId`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reply`
+--
+
+LOCK TABLES `reply` WRITE;
+/*!40000 ALTER TABLE `reply` DISABLE KEYS */;
+INSERT INTO `reply` VALUES (1,'f319106afb12466bbeccdf6f683abf981582001669266','<h2><span style=\"font-weight: bold;\">reply test</span></h2>',NULL,'2020-02-17 20:54:29','test1','89d70fdab63648d6a20104647d7ffcbd1574670154709'),(2,'2d299d566e6146dbacf1b680fd08f3771582007735575','<p>你可从以下几点分析：</p><ol><li>查看设备是否异常</li><li>查看上下游水质是否异常</li><li>可以查看附近工厂最近的废水排放量</li></ol>',NULL,'2020-02-17 22:35:36','test1','3d21d1ccd00545528ed54cd02c60920d1582007648532'),(3,'517174e0388f44dda07cbc9bb9c609731582008140379','<p><span style=\"font-size: 1rem;\">水体富营养化的防治对策</span><br></p><p><br>一、控制外源性营养物质输入<br><br>二、减少内源性营养物质负荷<br><br>★ 投放水生动物：螺、蚌等<a href=\"https://www.baidu.com/s?wd=%E5%BA%95%E6%A0%96%E5%8A%A8%E7%89%A9&amp;tn=SE_PcZhidaonwhc_ngpagmjz&amp;rsv_dl=gh_pc_zhidao\" target=\"_blank\">底栖动物</a>可过滤悬浮物质，摄食生物碎屑，其分泌物有絮凝作用，螺有刮食着生藻类功能，虾和若干种类鱼类可摄食藻类、碎屑、<a href=\"https://www.baidu.com/s?wd=%E6%B5%AE%E6%B8%B8%E5%8A%A8%E7%89%A9&amp;tn=SE_PcZhidaonwhc_ngpagmjz&amp;rsv_dl=gh_pc_zhidao\" target=\"_blank\">浮游动物</a>等。这些动物，作为健康水生态系统的补充组成，也有重要作用。 根据水体的特定环境，投放相适应的水生动物，如鱼类、<a href=\"https://www.baidu.com/s?wd=%E5%BA%95%E6%A0%96%E5%8A%A8%E7%89%A9&amp;tn=SE_PcZhidaonwhc_ngpagmjz&amp;rsv_dl=gh_pc_zhidao\" target=\"_blank\">底栖动物</a>。<br><br>★ 建立人工生态体系：人工生态系统利用种植水生植物、养鱼、养鸭、养鹅等形成多条食物链。其中不仅有分解者生物、生产者生物、还有消费者生物，三者分工协作，对污水中的污染物进行更有效的处理与利用，并由此可形成许多条食物链，构成纵横交错的食物网生态系统。如果在各营养级之间保持适宜的数量比和能量比，就可建立良好的生态平衡系统。当一定量的污水进入这种生态塘中，其中的有机污染物不仅被细菌和真菌降解净化，而其降解的最终产物，一些无机化合物作为碳源、氮源和磷源，以太阳能为初始能源，参与食物网中的新陈代谢过程，并从低营养级到高营养级逐级迁移转化，最后转变成水生作物、鱼、虾、蚌、鹅、鸭等产物,人们不仅可以不断的取走这些增殖的产品，而且通过人们的不断的取走和加入的措施来保持水体的综合生态平衡，达到防治水体的富营养化的目的。&nbsp;&nbsp;<br></p>',NULL,'2020-02-17 22:42:20','test1','0c3abfa4b1af4e37994e1af9c6dc79d71582007949881'),(4,'2c4d17714a6d404ea63c716ea518db9d1582346425612','<p>楼主，是load runner把 ，不过我也觉得垃圾</p>',NULL,'2020-02-21 20:40:26','test1','154bbe90473a4342861149e1bf9f48ef1582346395787'),(5,'9cb74455f13c4e53a7d2d4e4d60e2a2b1582346435788','',NULL,'2020-02-21 20:40:36','test1','154bbe90473a4342861149e1bf9f48ef1582346395787'),(6,'4890d0b25d524d3d8a3594ab526761731582346476363','<p>3L，你说的什么</p>',NULL,'2020-02-21 20:41:16','test2','154bbe90473a4342861149e1bf9f48ef1582346395787'),(7,'17410b6293254ae99692fc36b3f8ade41582346505369','<p>不文明的字会被过滤吗</p>',NULL,'2020-02-21 20:41:45','test2','18afe2f904d84ea185064633152440651582346061942'),(8,'4950ce61144840bda8d382f53b57e0db1582346510694','<p>草泥马</p>',NULL,'2020-02-21 20:41:51','test2','18afe2f904d84ea185064633152440651582346061942'),(9,'b55afb232097426a83324b0135805c5b1582346517426','<p>奇了怪了</p>',NULL,'2020-02-21 20:41:57','test2','18afe2f904d84ea185064633152440651582346061942'),(10,'cc425a61fa6a47b19bf2766768c745f91582346951946','<p><span style=\"font-weight: bold;\">38张亮，有脸发帖子？？？</span></p>',NULL,'2020-02-21 20:49:12','admin','8ec042cf49b04b25a59c4cb3dddb43d41582346889739'),(11,'5480640a3b254ffabd21e6e1530968ad1582347141042','<p>hehe<br></p>',NULL,'2020-02-21 20:52:21','test1','8ec042cf49b04b25a59c4cb3dddb43d41582346889739'),(12,'04259b6b00cf45fd9fddfde979b19d111582347154506','<p>qiguai<br></p>',NULL,'2020-02-21 20:52:35','test1','8ec042cf49b04b25a59c4cb3dddb43d41582346889739');
+/*!40000 ALTER TABLE `reply` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -343,7 +470,7 @@ CREATE TABLE `role_menu` (
   KEY `role_id` (`role_id`),
   CONSTRAINT `role_menu_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`),
   CONSTRAINT `role_menu_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`roleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=196 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=244 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -352,7 +479,7 @@ CREATE TABLE `role_menu` (
 
 LOCK TABLES `role_menu` WRITE;
 /*!40000 ALTER TABLE `role_menu` DISABLE KEYS */;
-INSERT INTO `role_menu` VALUES (173,'777',3),(174,'777',5),(175,'777',4),(176,'777',7),(177,'777',8),(178,'777',10),(179,'777',11),(180,'777',12),(181,'777',13),(182,'777',15),(183,'777',16),(184,'001',4),(185,'001',7),(186,'001',8),(187,'001',10),(188,'001',11),(189,'001',13),(190,'001',15),(191,'001',16),(193,'777',18),(195,'001',18);
+INSERT INTO `role_menu` VALUES (184,'001',4),(185,'001',7),(186,'001',8),(187,'001',10),(188,'001',11),(189,'001',13),(190,'001',15),(191,'001',16),(195,'001',18),(227,'777',3),(228,'777',5),(229,'777',4),(230,'777',7),(231,'777',8),(232,'777',10),(233,'777',11),(234,'777',12),(235,'777',13),(236,'777',15),(237,'777',16),(238,'777',18),(239,'777',25),(240,'777',20),(241,'777',21),(242,'777',22),(243,'777',24);
 /*!40000 ALTER TABLE `role_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -371,6 +498,9 @@ CREATE TABLE `station` (
   `currLevel` int(11) DEFAULT NULL,
   `preLevel` int(11) DEFAULT NULL,
   `responsible` varchar(32) DEFAULT NULL,
+  `upstream_id` varchar(32) DEFAULT NULL,
+  `downstream_id` varchar(32) DEFAULT NULL,
+  `is_alert` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -381,7 +511,7 @@ CREATE TABLE `station` (
 
 LOCK TABLES `station` WRITE;
 /*!40000 ALTER TABLE `station` DISABLE KEYS */;
-INSERT INTO `station` VALUES ('001','玄武湖菱州',118.805263,32.076485,2,3,'test1'),('002','石臼湖',118.960993,31.507898,1,2,'test2'),('003','玄武湖东湖',118.806053,32.074526,4,3,'test1'),('004','玄武湖北湖',118.802352,32.08704,3,2,'test1'),('005','玄武湖牡丹岛',118.815081,32.076309,2,3,'test1'),('006','石臼湖2',118.3,37.0025,3,3,'test2');
+INSERT INTO `station` VALUES ('000','无',0,0,0,0,'admin',NULL,NULL,0),('001','玄武湖菱州',118.805263,32.076485,2,3,'test1',NULL,'004',1),('002','石臼湖',118.960993,31.507898,1,2,'test2',NULL,'006',0),('003','玄武湖东湖',118.806053,32.074526,4,3,'test1','004','005',1),('004','玄武湖北湖',118.802352,32.08704,3,2,'test1','001','003',0),('005','玄武湖牡丹岛',118.815081,32.076309,2,3,'test1','003',NULL,1),('006','石臼湖2',118.3,37.0025,3,3,'test3','002',NULL,1);
 /*!40000 ALTER TABLE `station` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -401,7 +531,7 @@ CREATE TABLE `station_district` (
   KEY `did` (`did`),
   CONSTRAINT `station_district_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `station` (`id`),
   CONSTRAINT `station_district_ibfk_2` FOREIGN KEY (`did`) REFERENCES `district` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -410,7 +540,7 @@ CREATE TABLE `station_district` (
 
 LOCK TABLES `station_district` WRITE;
 /*!40000 ALTER TABLE `station_district` DISABLE KEYS */;
-INSERT INTO `station_district` VALUES (1,'001','001'),(2,'002','002'),(3,'003','001'),(4,'004','001'),(5,'005','001'),(6,'006','002');
+INSERT INTO `station_district` VALUES (1,'001','001'),(2,'002','002'),(3,'003','001'),(4,'004','001'),(6,'005','001'),(7,'006','002');
 /*!40000 ALTER TABLE `station_district` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -434,7 +564,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('test1','123'),('test2','456'),('test3','789');
+INSERT INTO `user` VALUES ('admin','whl6785968'),('test1','666'),('test2','456'),('test3','789');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -463,7 +593,7 @@ CREATE TABLE `user_role` (
 
 LOCK TABLES `user_role` WRITE;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (0,'test1','777'),(1,'test2','001'),(2,'test3','002');
+INSERT INTO `user_role` VALUES (0,'test1','777'),(1,'test2','777'),(2,'test3','777'),(4,'admin','777');
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -517,7 +647,7 @@ CREATE TABLE `userinfo` (
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`),
   CONSTRAINT `userinfo_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -526,7 +656,7 @@ CREATE TABLE `userinfo` (
 
 LOCK TABLES `userinfo` WRITE;
 /*!40000 ALTER TABLE `userinfo` DISABLE KEYS */;
-INSERT INTO `userinfo` VALUES (1,'sandalen','男',23,'','18245803818','','创作者','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJ0ZXN0MSJ9.YMSVk5QQSEaELA3q1LKWRa7MIoCrRcdCXoQsDMB-0cc','test1'),(2,'张亮','女',23,'','13843854438','','38','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJ0ZXN0MiJ9.J6Cl14aQYEBbfTBTxl0koMLnO4cGxEYJw0XSnXTnHUY','test2'),(3,'alex','男',22,'','002','','visitor','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJ0ZXN0MyJ9.43LPVz9a8_jQDJtkSBANf0yCOCWlGd_3_jBc2Dv_hyE','test3');
+INSERT INTO `userinfo` VALUES (1,'sandalen','男',23,'','18245803818','','系统开发者','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJ0ZXN0MSJ9.QL8BdcDo6zpxh2H7aSZhEjlVFvDFiEwvASINsMNH1WA','test1'),(2,'张亮','女',23,'','18245803818','','38','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJ0ZXN0MiJ9.j96TyPLzQVYB2e9P_zweeEwPs8HQK4IYWdVLN8Dn1dI','test2'),(3,'alex','男',22,'','18245803818','','visitor','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJ0ZXN0MyJ9.Q-UBhmm21lebKJ2UB0CiEx7iS_8LlQmyH6qaIq4EtU8','test3'),(4,'系统','女',0,NULL,'18245803818',NULL,'系统','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZG1pbiJ9.VCNbPfR9_uzwkLRV-JLpysxfM47683wv1lf8tcfrNjU','admin');
 /*!40000 ALTER TABLE `userinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -548,7 +678,7 @@ CREATE TABLE `usersecurityinfo` (
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`),
   CONSTRAINT `usersecurityinfo_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -557,7 +687,7 @@ CREATE TABLE `usersecurityinfo` (
 
 LOCK TABLES `usersecurityinfo` WRITE;
 /*!40000 ALTER TABLE `usersecurityinfo` DISABLE KEYS */;
-INSERT INTO `usersecurityinfo` VALUES (1,0,1,0,0,'2019-11-15 01:56:45','test1'),(2,0,1,0,0,'2019-11-15 01:56:45','test2');
+INSERT INTO `usersecurityinfo` VALUES (1,0,1,0,0,'2019-11-15 01:56:45','test1'),(2,0,1,0,0,'2019-11-15 01:56:45','test2'),(3,0,1,0,0,'2020-02-16 03:14:50','admin');
 /*!40000 ALTER TABLE `usersecurityinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -602,4 +732,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-07 20:17:27
+-- Dump completed on 2020-04-01 17:01:14

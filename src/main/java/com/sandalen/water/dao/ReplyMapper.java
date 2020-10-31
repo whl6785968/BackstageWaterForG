@@ -3,8 +3,13 @@ package com.sandalen.water.dao;
 import com.sandalen.water.bean.Reply;
 import com.sandalen.water.bean.ReplyExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@Mapper
 public interface ReplyMapper {
     int countByExample(ReplyExample example);
 
@@ -27,4 +32,6 @@ public interface ReplyMapper {
     int updateByPrimaryKeySelective(Reply record);
 
     int updateByPrimaryKey(Reply record);
+
+    List<Reply> getReply(String post_id);
 }

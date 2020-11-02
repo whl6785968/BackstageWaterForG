@@ -32,4 +32,6 @@ public interface WaterdataMapper {
     int updateByPrimaryKeySelective(Waterdata record);
 
     int updateByPrimaryKey(Waterdata record);
+
+    List<Waterdata> getDataBySid(int id);
 }

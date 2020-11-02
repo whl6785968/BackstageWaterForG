@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/data/basic/")
 @RestController
@@ -20,6 +21,24 @@ public class DataRelatedController {
 
     @Autowired
     private DataRelatedService dataRelatedService;
+
+    @RequestMapping("/getDataBySid")
+    public RespBean getDataBySid(int stationId){
+        List<Waterdata> data = dataRelatedService.getWaterDataBySid(stationId);
+        return RespBean.ok("success",data);
+    }
+
+    @RequestMapping("/getWQIByDistrict")
+    public RespBean getWQIByDistrict(){
+        Map<String, Double> wqi = dataRelatedService.getWQIByDistrict();
+        return RespBean.ok("success",wqi);
+    }
+
+    @RequestMapping("/getStations")
+    public RespBean getStations(){
+        List<Station> stations = dataRelatedService.getStations();
+        return RespBean.ok("success",stations);
+    }
 
     @RequestMapping("/getEquipAndStation")
     public RespBean getEquipAndStation(@RequestBody SearchCondition searchCondition){

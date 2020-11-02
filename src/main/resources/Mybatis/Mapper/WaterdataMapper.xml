@@ -270,4 +270,8 @@
       level = #{level,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getDataBySid" resultType="com.sandalen.water.bean.Waterdata" parameterType="java.lang.Integer">
+    select w.* from equip_sta es,equipment e,station s,waterdata w where es.eid = e.id and es.sid = s.id and w.eid = e.id and s.id = #{id};
+  </select>
 </mapper>

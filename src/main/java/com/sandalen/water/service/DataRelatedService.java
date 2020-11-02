@@ -44,9 +44,41 @@ public class DataRelatedService {
     @Autowired
     private StationProvinceMapper stationProvinceMapper;
 
+    public List<Waterdata> getWaterDataBySid(int stationId){
+        List<Waterdata> data = waterdataMapper.getDataBySid(stationId);
+        return data;
+    }
+
     public List<Equipment> getEquipAndStation(SearchCondition searchCondition){
         List<Equipment> equipAndStation = equipmentMapper.getEquipAndStation(searchCondition);
         return equipAndStation;
+    }
+
+    public List<Station> getStations(){
+        StationExample example = new StationExample();
+//        StationExample.Criteria criteria = example.createCriteria();
+
+        List<Station> stations = stationMapper.selectByExample(example);
+        return stations;
+    }
+
+    public Map<String,Double> getWQIByDistrict(){
+        List<NewestWaterData> newestWaterData = stationMapper.getNewestWaterData();
+        Map<String,Double> map = new HashMap<>();
+        Map<String,Double> recordNum = new HashMap<>();
+        for(NewestWaterData data : newestWaterData){
+            double wqi = 0.267 * (data.getDis() / 5.0) + 1.478 * (data.getNh() / 1.0) + 1.367 * (data.getKmno() / 6.0);
+            map.put(data.getDistrict(),map.getOrDefault(data.getDistrict(),0.0)+wqi);
+            recordNum.put(data.getDistrict(),recordNum.getOrDefault(data.getDistrict(),0.0)+1.0);
+        }
+
+        Set<Map.Entry<String, Double>> entries = map.entrySet();
+        for(Map.Entry<String, Double> entry : entries){
+            String district = entry.getKey();
+            map.put(district,map.get(district) / recordNum.get(district));
+        }
+
+        return map;
     }
 
     public List<Waterdata> getWaterData(String eid){

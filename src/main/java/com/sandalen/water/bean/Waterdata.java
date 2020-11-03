@@ -92,4 +92,22 @@ public class Waterdata {
     public void setLevel(Integer level) {
         this.level = level;
     }
+
+    @Override
+    public int hashCode() {
+        return this.getId();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(null == obj){
+            return false;
+        }
+
+        if(obj instanceof Waterdata){
+            Waterdata other = (Waterdata) obj;
+            return this.getId() == other.getId();
+        }
+        return false;
+    }
 }

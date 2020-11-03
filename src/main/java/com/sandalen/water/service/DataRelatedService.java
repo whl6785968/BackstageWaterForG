@@ -7,6 +7,7 @@ import com.sandalen.water.dao.*;
 import com.sandalen.water.other.CypherUtils;
 import com.sandalen.water.util.Neo4jUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -43,6 +44,9 @@ public class DataRelatedService {
 
     @Autowired
     private StationProvinceMapper stationProvinceMapper;
+
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
 
     public List<Waterdata> getWaterDataBySid(int stationId){
         List<Waterdata> data = waterdataMapper.getDataBySid(stationId);
@@ -134,6 +138,7 @@ public class DataRelatedService {
         Neo4jUtils.createStation(station.getName(),station.getId(),station.getCurrlevel(),station.getIsAlert(),"",station.getUpstreamId(),station.getDownstreamId());
         Neo4jUtils.createRelWithStationAndCharger(station.getId(),station.getResponsible());
 
+        simpMessagingTemplate.convertAndSend("/topic/getNewDataForBD","有新消息了");
         if(insert1 !=0 && insert != 0){
             return 1;
         }
@@ -182,6 +187,7 @@ public class DataRelatedService {
         Neo4jUtils.deleteRel(originCharger,station.getId());
         Neo4jUtils.createRelWithStationAndCharger(station.getId(),station.getResponsible());
 
+        simpMessagingTemplate.convertAndSend("/topic/getNewDataForBD","有新消息了");
         if(i != 0 && i1 != 0){
             return 1;
         }

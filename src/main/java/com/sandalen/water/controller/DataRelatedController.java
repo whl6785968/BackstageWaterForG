@@ -3,6 +3,7 @@ package com.sandalen.water.controller;
 import com.sandalen.water.bean.*;
 import com.sandalen.water.service.DataRelatedService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -10,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RequestMapping("/data/basic/")
 @RestController
@@ -21,6 +19,9 @@ public class DataRelatedController {
 
     @Autowired
     private DataRelatedService dataRelatedService;
+
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
 
     @RequestMapping("/getDataBySid")
     public RespBean getDataBySid(int stationId){
@@ -92,4 +93,79 @@ public class DataRelatedController {
         return RespBean.error("获取数据失败");
     }
 
+
+    @RequestMapping("/getDynamicData")
+    public RespBean getDynamicData(int stationId) throws InterruptedException {
+        String thread_name = "dyn_"+stationId;
+        ThreadGroup threadGroup = Thread.currentThread().getThreadGroup();
+        int cnt = threadGroup.activeCount();
+        Thread[] threads = new Thread[cnt];
+        threadGroup.enumerate(threads);
+
+        for(Thread t:threads){
+            if(t.getName().equals(thread_name)){
+                System.out.println("关闭"+stationId);
+                t.interrupt();
+            }
+        }
+
+        DynamicDataGetterThread data_thread = new DynamicDataGetterThread(stationId);
+        Thread t = new Thread(data_thread);
+        t.setName(thread_name);
+        t.start();
+
+        return RespBean.ok("success");
+    }
+
+    class DynamicDataGetterThread implements Runnable{
+        private int stationId;
+
+        public DynamicDataGetterThread(int stationId){
+            this.stationId = stationId;
+        }
+
+        @Override
+        public synchronized void run() {
+            List<Waterdata> old_data = new ArrayList<>();
+//            List<Waterdata> old_data = MyThreadLocal.threadLocal.get();
+            String destination = "/topic/getDynamicData_"+this.stationId;
+            while (true){
+                System.out.println(new Date()+":轮询:"+this.stationId);
+                try {
+                    Thread.sleep(10000);
+                    List<Waterdata> data = dataRelatedService.getWaterDataBySid(this.stationId);
+                    List<Waterdata> dup = new ArrayList<>(data);
+
+                    if(data != null){
+                        for(Waterdata od : old_data){
+                            for(int i = 0;i < data.size();i++){
+                                if(od.getId().equals(data.get(i).getId())){
+                                    data.remove(i);
+                                    i--;
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        continue;
+                    }
+
+                    if(data.size() != 0){
+                        old_data = dup;
+//                        MyThreadLocal.threadLocal.set(old_data);
+                        simpMessagingTemplate.convertAndSend(destination,data);
+                    }
+                } catch (InterruptedException e) {
+                    System.out.println("该线程被打断");
+                    break;
+                }
+            }
+
+
+        }
+    }
+}
+
+class MyThreadLocal {
+    public static ThreadLocal<List<Waterdata>> threadLocal = ThreadLocal.withInitial(() -> new ArrayList<>());
 }

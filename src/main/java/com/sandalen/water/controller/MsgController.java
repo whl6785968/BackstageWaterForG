@@ -35,6 +35,7 @@ public class MsgController {
         String uid = msg.getUid();
         int posting = msgService.posting(msg);
 
+        //发送消息需经管理员审核，如果发帖的也是某个管理员则将其isRead字段设置为1
         if(posting != 0){
             List<User> adminUser = userService.getAdminUser();
             for(User user:adminUser){

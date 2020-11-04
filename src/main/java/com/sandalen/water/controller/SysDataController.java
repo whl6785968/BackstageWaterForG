@@ -55,6 +55,14 @@ public class SysDataController {
         return RespBean.ok("获取数据成功",pageInfo);
     }
 
+    @RequestMapping("/getAllProvince")
+    public RespBean  getAllProvince(int page,int pageSize){
+        PageHelper.startPage(page,pageSize);
+        List<Province> province = dataRelatedService.getAllProvince();
+        PageInfo<Province> pageInfo = new PageInfo<>(province);
+        return RespBean.ok("获取数据成功",pageInfo);
+    }
+
     @RequestMapping("/addStation")
     public RespBean addStation(@RequestBody Station station){
 //        System.out.println(station.toString());

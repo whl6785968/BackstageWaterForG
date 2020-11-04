@@ -3,6 +3,7 @@ package com.sandalen.water.controller;
 import com.sandalen.water.bean.*;
 import com.sandalen.water.service.DataRelatedService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.MessageDeliveryException;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.util.*;
 
 @RequestMapping("/data/basic/")
@@ -23,8 +25,14 @@ public class DataRelatedController {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
+    @RequestMapping("/getBasicData")
+    public RespBean getBasicData(){
+        Map<String, Integer> basicData = dataRelatedService.getBasicData();
+        return RespBean.ok("success",basicData);
+    }
+
     @RequestMapping("/getDataBySid")
-    public RespBean getDataBySid(int stationId){
+    public RespBean getDataBySid(int stationId) throws ParseException {
         List<Waterdata> data = dataRelatedService.getWaterDataBySid(stationId);
         return RespBean.ok("success",data);
     }
@@ -33,6 +41,12 @@ public class DataRelatedController {
     public RespBean getWQIByDistrict(){
         Map<String, Double> wqi = dataRelatedService.getWQIByDistrict();
         return RespBean.ok("success",wqi);
+    }
+
+    @RequestMapping("/getWQIByStation")
+    public RespBean getWQIByStation(){
+        Map<String, Double> wqiByStation = dataRelatedService.getWQIByStation();
+        return RespBean.ok("success",wqiByStation);
     }
 
     @RequestMapping("/getStations")
@@ -126,8 +140,8 @@ public class DataRelatedController {
 
         @Override
         public synchronized void run() {
-            List<Waterdata> old_data = new ArrayList<>();
-//            List<Waterdata> old_data = MyThreadLocal.threadLocal.get();
+//            List<Waterdata> old_data = new ArrayList<>();
+            List<Waterdata> old_data = MyThreadLocal.threadLocal.get();
             String destination = "/topic/getDynamicData_"+this.stationId;
             while (true){
                 System.out.println(new Date()+":轮询:"+this.stationId);
@@ -152,15 +166,22 @@ public class DataRelatedController {
 
                     if(data.size() != 0){
                         old_data = dup;
-//                        MyThreadLocal.threadLocal.set(old_data);
-                        simpMessagingTemplate.convertAndSend(destination,data);
+                        MyThreadLocal.threadLocal.set(old_data);
+                        try{
+                            simpMessagingTemplate.convertAndSend(destination,data);
+                        }
+                        catch (MessageDeliveryException e){
+                            System.out.println("发生WebSocket发送异常");
+                            continue;
+                        }
                     }
                 } catch (InterruptedException e) {
                     System.out.println("该线程被打断");
                     break;
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
             }
-
 
         }
     }

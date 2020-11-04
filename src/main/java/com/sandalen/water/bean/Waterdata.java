@@ -21,6 +21,16 @@ public class Waterdata {
 
     private Integer level;
 
+    private String formatDate;
+
+    public String getFormatDate() {
+        return formatDate;
+    }
+
+    public void setFormatDate(String formatDate) {
+        this.formatDate = formatDate;
+    }
+
     public Integer getId() {
         return id;
     }

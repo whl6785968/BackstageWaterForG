@@ -5,12 +5,15 @@ import com.github.pagehelper.PageHelper;
 import com.sandalen.water.bean.*;
 import com.sandalen.water.dao.*;
 import com.sandalen.water.other.CypherUtils;
+import com.sandalen.water.util.DateUtils;
 import com.sandalen.water.util.Neo4jUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -48,8 +51,59 @@ public class DataRelatedService {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
-    public List<Waterdata> getWaterDataBySid(int stationId){
+    @Autowired
+    private ProvinceMapper provinceMapper;
+
+    public Map<String,Integer> getBasicData(){
+        Map<String,Integer> map = new HashMap<>();
+//        StationExample example = new StationExample();
+        List<Station> stations = stationMapper.getCountByLevel();
+
+        Map<String,Integer> districtCnt = new HashMap<>();
+
+        int station_normal_num = 0;
+        int station_err_num = 0;
+        int station_stop_num = 0;
+
+        for(Station station : stations){
+            if(station.getIsAlert() == 0){
+                station_normal_num += 1;
+            }
+            else if(station.getIsAlert() == 1){
+                station_err_num += 1;
+            }
+            else{
+                station_stop_num += 1;
+            }
+//
+//            String district = station.getDistrict().getName();
+//            districtCnt.put(district,districtCnt.getOrDefault(district,0)+1);
+        }
+
+
+
+        map.put("station_normal_num",station_normal_num);
+        map.put("station_err_num",station_err_num);
+        map.put("station_stop_num",station_stop_num);
+
+//        Set<String> set = districtCnt.keySet();
+//        for(String key:set){
+//            map.put(key,districtCnt.get(key));
+//        }
+
+        return map;
+    }
+
+    public List<Waterdata> getWaterDataBySid(int stationId) throws ParseException {
         List<Waterdata> data = waterdataMapper.getDataBySid(stationId);
+        for(Waterdata d : data){
+            Date date = d.getCreateTame();
+            long time = (date.getTime() - 8 * 60 * 60 * 1000);
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String s = format.format(time);
+//            String formatDate = DateUtils.specialFormatDate(d.getCreateTame());
+            d.setFormatDate(s);
+        }
         return data;
     }
 
@@ -80,6 +134,27 @@ public class DataRelatedService {
         for(Map.Entry<String, Double> entry : entries){
             String district = entry.getKey();
             map.put(district,map.get(district) / recordNum.get(district));
+        }
+
+        return map;
+    }
+
+    public Map<String,Double> getWQIByStation(){
+        List<NewestWaterData> newestWaterData = stationMapper.getNewestWaterData();
+        Map<String,Double> map = new HashMap<>();
+        Map<String,Double> recordNum = new HashMap<>();
+
+        for(NewestWaterData data : newestWaterData){
+            double wqi = 0.267 * (data.getDis() / 5.0) + 1.478 * (data.getNh() / 1.0) + 1.367 * (data.getKmno() / 6.0);
+            map.put(data.getStation(),map.getOrDefault(data.getStation(),0.0) + wqi);
+            recordNum.put(data.getStation(),recordNum.getOrDefault(data.getStation(),0.0) + 1.0);
+        }
+
+        Set<Map.Entry<String, Double>> entries = map.entrySet();
+        for(Map.Entry<String, Double> entry : entries){
+            String station = entry.getKey();
+            double res = 10.0 / (map.get(station) / recordNum.get(station));
+            map.put(station,res);
         }
 
         return map;
@@ -116,6 +191,12 @@ public class DataRelatedService {
         List<District> districts = districtMapper.selectByExample(districtExample);
 
         return districts;
+    }
+
+    public List<Province> getAllProvince(){
+        ProvinceExample provinceExample = new ProvinceExample();
+        List<Province> provinces = provinceMapper.selectByExample(provinceExample);
+        return provinces;
     }
 
     public int addStation(Station station){

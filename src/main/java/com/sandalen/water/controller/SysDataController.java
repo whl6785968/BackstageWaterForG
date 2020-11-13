@@ -148,4 +148,45 @@ public class SysDataController {
         }
         return RespBean.error("修改失败");
     }
+
+    @RequestMapping("/getAllEnterprise")
+    public RespBean getAllEnterprise(int page,int pageSize){
+        PageHelper.startPage(page,pageSize);
+        List<Enp> allEnterprise = dataRelatedService.getAllEnterprise();
+        PageInfo<Enp> pageInfo = new PageInfo<>(allEnterprise);
+        return RespBean.ok("获取数据成功",pageInfo);
+    }
+
+    @RequestMapping("/addEnterprise")
+    public RespBean addEnterprise(@RequestBody Enp enp){
+        int i = dataRelatedService.addEnterprise(enp);
+
+        if(i != 0){
+            return RespBean.ok("添加成功");
+        }
+
+        return RespBean.error("添加失败");
+    }
+
+    @RequestMapping("/updateEnterprise")
+    public RespBean updateEnterprise(@RequestBody Enp enp){
+        int i = dataRelatedService.updateEnterprise(enp);
+
+        if(i != 0){
+            return RespBean.ok("添加成功");
+        }
+
+        return RespBean.error("添加失败");
+    }
+
+    @RequestMapping("/deleteEnterprise")
+    public RespBean deleteEnterprise(int id){
+        int i = dataRelatedService.deleteEnterprise(id);
+
+        if(i != 0){
+            return RespBean.ok("添加成功");
+        }
+
+        return RespBean.error("添加失败");
+    }
 }

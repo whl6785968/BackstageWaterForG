@@ -54,6 +54,58 @@ public class DataRelatedService {
     @Autowired
     private ProvinceMapper provinceMapper;
 
+    @Autowired
+    private EnpMapper enpMapper;
+
+    @Autowired
+    private EtsStaMapper etsStaMapper;
+
+    public int deleteEnterprise(int id){
+        EtsStaExample etsStaExample = new EtsStaExample();
+        etsStaExample.createCriteria().andEidEqualTo(id);
+        etsStaMapper.deleteByExample(etsStaExample);
+
+        int i = enpMapper.deleteByPrimaryKey(id);
+
+        return i;
+    }
+
+    public int updateEnterprise(Enp enp){
+        EtsStaExample etsStaExample = new EtsStaExample();
+        etsStaExample.createCriteria().andEidEqualTo(enp.getId());
+        List<EtsSta> etsStas = etsStaMapper.selectByExample(etsStaExample);
+        EtsSta etsSta = etsStas.get(0);
+
+        etsSta.setSid(enp.getStation().getId());
+        etsStaMapper.updateByPrimaryKey(etsSta);
+
+        int i = enpMapper.updateByPrimaryKey(enp);
+        return i;
+    }
+
+    public int addEnterprise(Enp enp){
+        int i = enpMapper.insert(enp);
+
+        EtsSta etsSta = new EtsSta();
+        etsSta.setEid(enp.getId());
+        etsSta.setSid(enp.getStation().getId());
+        etsStaMapper.insert(etsSta);
+
+        Neo4jUtils.createEnterprise(enp.getId(),enp.getName(),enp.getContacts(),enp.getContactsNumber(),
+                enp.getMainPollutions(),enp.getPollutionsNum(),enp.getIsExceed(),enp.getExceedFactor());
+
+        Neo4jUtils.createRelBetweenEnterPriseAndStation(enp.getId(),enp.getStation().getId());
+
+        return i;
+    }
+
+    public List<Enp> getAllEnterprise(){
+//        EnterpriseExample example = new EnterpriseExample();
+//        List<Enterprise> enterprises = enterpriseMapper.selectByExample(example);
+        List<Enp> enterprises = enpMapper.getAllEnp();
+        return enterprises;
+    }
+
     public Map<String,Integer> getBasicData(){
         Map<String,Integer> map = new HashMap<>();
 //        StationExample example = new StationExample();
@@ -125,7 +177,7 @@ public class DataRelatedService {
         Map<String,Double> map = new HashMap<>();
         Map<String,Double> recordNum = new HashMap<>();
         for(NewestWaterData data : newestWaterData){
-            double wqi = 0.267 * (data.getDis() / 5.0) + 1.478 * (data.getNh() / 1.0) + 1.367 * (data.getKmno() / 6.0);
+            double wqi = 0.27 * (data.getDis() / 5.0) + 1.0156959 * (data.getNh() / 1.0) + 0.95732255 * (data.getKmno() / 6.0) + 1.2295406*(data.getTotalp() / 0.2);
             map.put(data.getDistrict(),map.getOrDefault(data.getDistrict(),0.0)+wqi);
             recordNum.put(data.getDistrict(),recordNum.getOrDefault(data.getDistrict(),0.0)+1.0);
         }
@@ -145,7 +197,8 @@ public class DataRelatedService {
         Map<String,Double> recordNum = new HashMap<>();
 
         for(NewestWaterData data : newestWaterData){
-            double wqi = 0.267 * (data.getDis() / 5.0) + 1.478 * (data.getNh() / 1.0) + 1.367 * (data.getKmno() / 6.0);
+            double wqi = 0.27 * (data.getDis() / 5.0) + 1.0156959 * (data.getNh() / 1.0) + 0.95732255 * (data.getKmno() / 6.0) + 1.2295406*(data.getTotalp() / 0.2);
+//            double wqi = 0.267 * (data.getDis() / 5.0) + 1.478 * (data.getNh() / 1.0) + 1.367 * (data.getKmno() / 6.0);
             map.put(data.getStation(),map.getOrDefault(data.getStation(),0.0) + wqi);
             recordNum.put(data.getStation(),recordNum.getOrDefault(data.getStation(),0.0) + 1.0);
         }
@@ -218,6 +271,8 @@ public class DataRelatedService {
 
         Neo4jUtils.createStation(station.getName(),station.getId(),station.getCurrlevel(),station.getIsAlert(),"",station.getUpstreamId(),station.getDownstreamId());
         Neo4jUtils.createRelWithStationAndCharger(station.getId(),station.getResponsible());
+        Neo4jUtils.createRelBetweenStationAndBasin(station.getId(),station.getDistrict().getId());
+        Neo4jUtils.createRelBetweenStationAndProvince(station.getId(),String.valueOf(station.getProvince().getId()));
 
         simpMessagingTemplate.convertAndSend("/topic/getNewDataForBD","有新消息了");
         if(insert1 !=0 && insert != 0){
@@ -240,6 +295,20 @@ public class DataRelatedService {
         List<Station> stations = stationMapper.selectByExample(stationExample);
         Station station1 = stations.get(0);
         String originCharger = station1.getResponsible();
+
+        StationProvinceExample sp = new StationProvinceExample();
+        sp.createCriteria().andSidEqualTo(station1.getId());
+        StationDistrictExample sd1 = new StationDistrictExample();
+        sd1.createCriteria().andSidEqualTo(station1.getId());
+
+        List<StationDistrict> sds = stationDistrictMapper.selectByExample(sd1);
+        StationDistrict stationDistrict1 = sds.get(0);
+
+        List<StationProvince> sps = stationProvinceMapper.selectByExample(sp);
+        StationProvince stationProvince1 = sps.get(0);
+
+        String originProvince = String.valueOf(stationProvince1.getPid());
+        String originBasin = stationDistrict1.getDid();
 
         int i = stationMapper.updateByPrimaryKey(station);
 
@@ -267,6 +336,14 @@ public class DataRelatedService {
         //修改负责人
         Neo4jUtils.deleteRel(originCharger,station.getId());
         Neo4jUtils.createRelWithStationAndCharger(station.getId(),station.getResponsible());
+
+        //修改省市
+        Neo4jUtils.deleteRel(station.getId(),originProvince);
+        Neo4jUtils.createRelBetweenStationAndProvince(station.getId(),String.valueOf(station.getProvince().getId()));
+
+        //修改流域
+        Neo4jUtils.deleteRel(station.getId(),originBasin);
+        Neo4jUtils.createRelBetweenStationAndBasin(station.getId(),station.getDistrict().getId());
 
         simpMessagingTemplate.convertAndSend("/topic/getNewDataForBD","有新消息了");
         if(i != 0 && i1 != 0){

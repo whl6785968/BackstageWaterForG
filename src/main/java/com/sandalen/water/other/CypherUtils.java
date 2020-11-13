@@ -94,7 +94,7 @@ public class CypherUtils {
     }
 
     public static String getRelBySid(String sid){
-        return "match (n:Water{sid:'"+sid+"'})-[r*..3]-(m) return n,r,m";
+        return "match (n:Station:Water{sid:'"+sid+"'})-[r:流入*..2]-(m:Station:Water) return n,r,m";
     }
 
     public static String updateStation(String sid,String name,int level,int status){
@@ -102,12 +102,33 @@ public class CypherUtils {
     }
 
     public static String createRelWithStationAndCharger(String stationId,String chargerId){
-        return "match (n:Water{sid:'"+stationId+"'}),(m:Water{sid:'"+chargerId+"'}) merge (m)-[r:负责]->(n) return m,r,n";
+        return "match (n:Station:Water{sid:'"+stationId+"'}),(m:Charger:Water{sid:'"+chargerId+"'}) merge (m)-[r:负责]->(n) return m,r,n";
     }
 
     public static String deleteRel(String sid1,String sid2){
-
         return "match (n:Water{sid:'"+sid1+"'})-[r]->(m:Water{sid:'"+sid2+"'}) delete r";
+    }
+
+    public static String createRelBetweenStationAndProvince(String stationId,String provinceId){
+        return "match (n:Station:Water{sid:'"+ stationId +"'}),(m:Province:Water{sid:'"+ provinceId +"'}) " +
+                "merge (n)-[r:属于{create_time:date(),update_time:date()}]->(m) return n,r,m";
+    }
+
+    public static String createRelBetweenStationAndBasin(String stationId,String basinId){
+        return "match (n:Station:Water{sid:'"+ stationId +"'}),(m:Basin:Water{sid:'"+ basinId +"'}) " +
+                "merge (n)-[r:属于{create_time:date(),update_time:date()}]->(m) return n,r,m";
+    }
+
+    public static String createEnterprise(int eid,String name,String contacts,String contacts_num,String main_pollution
+    ,double pollution_num,int is_exceed,String exceed_factor){
+        return "merge (n:Enterprise:Water{name:'"+name+"',sid:'"+eid+"',contacts:'"+contacts+"'," +
+                "contacts_num:'"+contacts_num+"',main_pollution:'"+main_pollution+"',pollution_num:'"+pollution_num+"'," +
+                "is_exceed:'"+is_exceed+"',exceed_factor:'"+exceed_factor+"',create_time:date(),update_time:date()}) return n";
+    }
+
+    public static String createRelBetweenEnterPriseAndStation(int eid,String sid){
+        return "match (n:Enterprise:Water{sid:'"+ eid +"'}),(m:Station:Water{sid:'"+ sid +"'}) " +
+                "merge (n)-[r:临近{create_time:date(),update_time:date()}]->(m) return n,r,m";
     }
 
 }

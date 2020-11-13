@@ -4,6 +4,9 @@ import com.sandalen.water.bean.ErrRecord;
 import com.sandalen.water.bean.RespBean;
 import com.sandalen.water.bean.Waterdata;
 import com.sandalen.water.service.AlgoService;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +31,7 @@ public class AlgoController {
 
     @RequestMapping("/errCheck")
     public RespBean errCheck() throws IOException {
-        List<Map<String, Object>> errInfo = algoService.isoForest();
+        List<Map<String, Object>> errInfo = algoService.errCheckWithPython();
         return RespBean.ok("操作成功",errInfo);
     }
 
@@ -40,7 +43,7 @@ public class AlgoController {
 
     @RequestMapping("/tst")
     public RespBean tst() throws IOException {
-        algoService.err_check();
+        algoService.trainIsoForest();
         return RespBean.ok("ss");
     }
 
@@ -48,5 +51,16 @@ public class AlgoController {
     public RespBean getErrRecord(){
         List<ErrRecord> errRecord = algoService.getErrRecord();
         return RespBean.ok("获取数据成功",errRecord);
+    }
+
+    @RequestMapping("/errCheckWithPython")
+    public RespBean tstPython() throws IOException {
+
+        List<Map<String, Object>> res = algoService.errCheckWithPython();
+
+
+        return RespBean.ok("success",res);
+
+
     }
 }

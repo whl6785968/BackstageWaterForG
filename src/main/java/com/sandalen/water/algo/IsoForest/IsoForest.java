@@ -68,25 +68,13 @@ public class IsoForest {
 
     public void train(int numTrees,double score) throws IOException {
         String train_data = isoForest.isoForestProperties.getTrain_data();
-        DenseMatrix64F dataSet = loadFile(train_data);
-        int rows = dataSet.numRows;
-
-        int maxLength = (int) Math.ceil(bottomChanging(rows,2));
-//        int numTrees = 500;
-        int numFeatures = dataSet.numCols;
-        int maxSamples = 256;
-        int subSampleSize = Math.min(256,rows);
-
-        List<ITree> iTrees = new ArrayList<ITree>();
-
-        for (int i = 0;i < numTrees;i++){
-            DenseMatrix64F subSample = getSubSample(dataSet, subSampleSize);
-            ITree iTree = growTree(subSample, maxLength, numFeatures, 0);
-            iTrees.add(iTree);
-        }
-
-        IForest iForest = new IForest(iTrees,maxSamples,score);
+        System.out.println("开始训练模型");
+        IForest iForest = train(train_data, score);
+        System.out.println("训练完成");
+//        IForest iForest = new IForest(iTrees,maxSamples,score);
+//        IForest iForest = train(isoForest.isoForestProperties.getTrain_data(), score);
         save_model(iForest,isoForest.isoForestProperties.getModel_path());
+        System.out.println("保存模型至"+isoForest.isoForestProperties.getModel_path());
     }
 
     public IForest train(String filepath,double score) throws IOException {

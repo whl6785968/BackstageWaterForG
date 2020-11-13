@@ -281,4 +281,20 @@ public class Neo4jUtils {
         session.run(CypherUtils.deleteRel(sid1,sid2));
     }
 
+    public static void createRelBetweenStationAndProvince(String stationId,String provinceId){
+        session.run(CypherUtils.createRelBetweenStationAndProvince(stationId,provinceId));
+    }
+
+    public static void createRelBetweenStationAndBasin(String stationId,String basinId){
+        session.run(CypherUtils.createRelBetweenStationAndBasin(stationId, basinId));
+    }
+
+    public static void createEnterprise(int eid,String name,String contacts,String contacts_num,String main_pollution
+            ,double pollution_num,int is_exceed,String exceed_factor){
+        session.run(CypherUtils.createEnterprise(eid,name,contacts,contacts_num,main_pollution,pollution_num,is_exceed,exceed_factor));
+    }
+
+    public static void createRelBetweenEnterPriseAndStation(int eid,String sid){
+        session.run(CypherUtils.createRelBetweenEnterPriseAndStation(eid, sid));
+    }
 }

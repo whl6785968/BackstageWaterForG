@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sandalen.water.dao.EnpMapper" >
+  <resultMap id="BaseResultMap" type="com.sandalen.water.bean.Enp" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="contacts" property="contacts" jdbcType="VARCHAR" />
+    <result column="contacts_number" property="contactsNumber" jdbcType="VARCHAR" />
+    <result column="main_pollutions" property="mainPollutions" jdbcType="VARCHAR" />
+    <result column="pollutions_num" property="pollutionsNum" jdbcType="DOUBLE" />
+    <result column="is_exceed" property="isExceed" jdbcType="INTEGER" />
+    <result column="exceed_factor" property="exceedFactor" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, contacts, contacts_number, main_pollutions, pollutions_num, is_exceed, 
+    exceed_factor
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sandalen.water.bean.EnpExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from enp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from enp
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from enp
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sandalen.water.bean.EnpExample" >
+    delete from enp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sandalen.water.bean.Enp" >
+    insert into enp (id, name, contacts, 
+      contacts_number, main_pollutions, pollutions_num, 
+      is_exceed, exceed_factor)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, 
+      #{contactsNumber,jdbcType=VARCHAR}, #{mainPollutions,jdbcType=VARCHAR}, #{pollutionsNum,jdbcType=DOUBLE}, 
+      #{isExceed,jdbcType=INTEGER}, #{exceedFactor,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sandalen.water.bean.Enp" >
+    insert into enp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="contacts != null" >
+        contacts,
+      </if>
+      <if test="contactsNumber != null" >
+        contacts_number,
+      </if>
+      <if test="mainPollutions != null" >
+        main_pollutions,
+      </if>
+      <if test="pollutionsNum != null" >
+        pollutions_num,
+      </if>
+      <if test="isExceed != null" >
+        is_exceed,
+      </if>
+      <if test="exceedFactor != null" >
+        exceed_factor,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null" >
+        #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsNumber != null" >
+        #{contactsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="mainPollutions != null" >
+        #{mainPollutions,jdbcType=VARCHAR},
+      </if>
+      <if test="pollutionsNum != null" >
+        #{pollutionsNum,jdbcType=DOUBLE},
+      </if>
+      <if test="isExceed != null" >
+        #{isExceed,jdbcType=INTEGER},
+      </if>
+      <if test="exceedFactor != null" >
+        #{exceedFactor,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sandalen.water.bean.EnpExample" resultType="java.lang.Integer" >
+    select count(*) from enp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update enp
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contacts != null" >
+        contacts = #{record.contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactsNumber != null" >
+        contacts_number = #{record.contactsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainPollutions != null" >
+        main_pollutions = #{record.mainPollutions,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pollutionsNum != null" >
+        pollutions_num = #{record.pollutionsNum,jdbcType=DOUBLE},
+      </if>
+      <if test="record.isExceed != null" >
+        is_exceed = #{record.isExceed,jdbcType=INTEGER},
+      </if>
+      <if test="record.exceedFactor != null" >
+        exceed_factor = #{record.exceedFactor,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update enp
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      contacts = #{record.contacts,jdbcType=VARCHAR},
+      contacts_number = #{record.contactsNumber,jdbcType=VARCHAR},
+      main_pollutions = #{record.mainPollutions,jdbcType=VARCHAR},
+      pollutions_num = #{record.pollutionsNum,jdbcType=DOUBLE},
+      is_exceed = #{record.isExceed,jdbcType=INTEGER},
+      exceed_factor = #{record.exceedFactor,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sandalen.water.bean.Enp" >
+    update enp
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null" >
+        contacts = #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsNumber != null" >
+        contacts_number = #{contactsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="mainPollutions != null" >
+        main_pollutions = #{mainPollutions,jdbcType=VARCHAR},
+      </if>
+      <if test="pollutionsNum != null" >
+        pollutions_num = #{pollutionsNum,jdbcType=DOUBLE},
+      </if>
+      <if test="isExceed != null" >
+        is_exceed = #{isExceed,jdbcType=INTEGER},
+      </if>
+      <if test="exceedFactor != null" >
+        exceed_factor = #{exceedFactor,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sandalen.water.bean.Enp" >
+    update enp
+    set name = #{name,jdbcType=VARCHAR},
+      contacts = #{contacts,jdbcType=VARCHAR},
+      contacts_number = #{contactsNumber,jdbcType=VARCHAR},
+      main_pollutions = #{mainPollutions,jdbcType=VARCHAR},
+      pollutions_num = #{pollutionsNum,jdbcType=DOUBLE},
+      is_exceed = #{isExceed,jdbcType=INTEGER},
+      exceed_factor = #{exceedFactor,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <resultMap id="CustomMap" type="com.sandalen.water.bean.Enp">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="contacts" property="contacts" jdbcType="VARCHAR" />
+    <result column="contacts_number" property="contactsNumber" jdbcType="VARCHAR" />
+    <result column="main_pollutions" property="mainPollutions" jdbcType="VARCHAR" />
+    <result column="pollutions_num" property="pollutionsNum" jdbcType="DOUBLE" />
+    <result column="is_exceed" property="isExceed" jdbcType="INTEGER" />
+    <result column="exceed_factor" property="exceedFactor" jdbcType="VARCHAR" />
+    <association property="station" javaType="com.sandalen.water.bean.Station">
+      <id column="sid" property="id" jdbcType="VARCHAR"></id>
+      <result column="sname" property="name" jdbcType="VARCHAR"></result>
+    </association>
+  </resultMap>
+
+  <select id="getAllEnp" resultMap="CustomMap">
+--     select * from enp e,ets_sta es,station s where e.id = es.eid and es.sid = s.id
+    select e.id,e.name,e.contacts,e.contacts_number,e.main_pollutions,e.pollutions_num,e.is_exceed,e.exceed_factor,s.id as sid,s.name as sname from enp e,station s,ets_sta es where e.id = es.eid and s.id = es.sid
+
+  </select>
+</mapper>

@@ -34,4 +34,6 @@ public interface WaterdataMapper {
     int updateByPrimaryKey(Waterdata record);
 
     List<Waterdata> getDataBySid(int id);
+
+    List<Waterdata> getDataByEidAndTwe(String id);
 }

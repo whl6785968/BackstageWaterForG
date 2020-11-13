@@ -2,6 +2,8 @@ package com.sandalen.water.service;
 
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.sandalen.water.PropertiesClass.IsoForestProperties;
 import com.sandalen.water.PropertiesClass.SMSProperties;
 import com.sandalen.water.algo.IsoForest.IForest;
@@ -12,6 +14,9 @@ import com.sandalen.water.dao.ErrRecordMapper;
 import com.sandalen.water.dao.WaterdataMapper;
 import com.sandalen.water.other.Constants;
 import com.sandalen.water.util.*;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.ejml.data.DenseMatrix64F;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.ujmp.core.util.MathUtil;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 @Service
@@ -43,6 +49,81 @@ public class AlgoService {
 
     @Autowired
     private ErrRecordMapper errRecordMapper;
+
+    public List<Map<String,Object>> errCheckWithPython() throws IOException {
+        SearchCondition searchCondition = new SearchCondition();
+        List<Equipment> equipAndStation = dataRelatedService.getEquipAndStation(searchCondition);
+
+        List<Map<String,Object>> real_result = new ArrayList<>();
+
+        for (int i = 0;i < equipAndStation.size();i++){
+            List<Waterdata> waterdata = waterdataMapper.getDataByEidAndTwe(equipAndStation.get(i).getId());
+
+            List<DenseMatrix64F> bad_data = new ArrayList<>();
+            List<DenseMatrix64F> good_data = new ArrayList<>();
+            List<DenseMatrix64F> data = new ArrayList<>();
+            List<Double> label = new ArrayList<>();
+            Map<String, Object> map = new HashMap<>();
+            double bad_count = 0.0;
+            for (int j = 0;j < waterdata.size(); j++){
+                DenseMatrix64F denseMatrix64F = new DenseMatrix64F(1, 5);
+                denseMatrix64F.set(0,0,waterdata.get(j).getPh());
+                denseMatrix64F.set(0,1,waterdata.get(j).getDisslove());
+                denseMatrix64F.set(0,2,waterdata.get(j).getNh());
+                denseMatrix64F.set(0,3,waterdata.get(j).getKmno());
+                denseMatrix64F.set(0,4,waterdata.get(j).getTotalp());
+
+                HttpClient httpClient = new HttpClient();
+                String param_data = waterdata.get(j).getPh() + "," + waterdata.get(j).getDisslove() + "," +
+                waterdata.get(j).getNh() + "," + waterdata.get(j).getKmno() + "," + waterdata.get(j).getTotalp();
+                String uri = "http://127.0.0.1:5000/errCheck/?data=" + param_data;
+                GetMethod getMethod = new GetMethod(uri);
+                getMethod.addRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=utf-8");
+                int statusCode = httpClient.executeMethod(getMethod);
+                if (statusCode != HttpStatus.SC_OK) {// 打印服务器返回的状态
+                    System.out.println("Method failed: " + getMethod.getStatusLine());
+                }
+
+                byte[] responseBody = getMethod.getResponseBodyAsString().getBytes(getMethod.getResponseCharSet());
+                
+                String response = new String(responseBody, "utf-8");
+                JSONObject jsonObject = JSON.parseObject(response);
+                Object o = JSON.parseObject(jsonObject.getString("data")).get("result");
+                String s = o.toString();
+
+                if (Integer.parseInt(s) == 0){
+                    bad_data.add(denseMatrix64F);
+                    label.add(-1.0);
+                }
+                else {
+                    good_data.add(denseMatrix64F);
+                    label.add(1.0);
+                }
+
+                data.add(denseMatrix64F);
+            }
+
+            List<Double> corr = MathUtils.calcCorr(data, label);
+            System.out.println(corr.toString());
+
+            bad_count = bad_data.size();
+            List<Double> bad_data_mean = MathUtils.getMeanForDenseMatrix(bad_data);
+            List<Double> good_data_mean = MathUtils.getMeanForDenseMatrix(good_data);
+            map.put("bad_count",bad_count);
+            map.put("bad_data",bad_data);
+            map.put("bad_percent",MathUtils.keepDecimal(bad_count/waterdata.size(),3));
+            map.put("bad_data_mean",bad_data_mean);
+            map.put("good_data_mean",good_data_mean);
+            map.put("data_corr",corr);
+            map.put("equipmentId",equipAndStation.get(i).getId());
+            map.put("equipmentName",equipAndStation.get(i).getName());
+            map.put("station",equipAndStation.get(i).getStation().getName());
+
+            real_result.add(map);
+
+        }
+        return real_result;
+    }
 
     public List<Map<String,Object>> isoForest() throws IOException {
         String modelStr = IOUtils.getModelStr(isoForestProperties.getModel_path());
@@ -167,7 +248,7 @@ public class AlgoService {
                         "设备状态异常";
 
             }
-            else if(equipStatus == 1){
+            else if(equipStatus == 0){
                 WaterdataExample waterdataExample = new WaterdataExample();
                 WaterdataExample.Criteria criteria = waterdataExample.createCriteria();
                 criteria.andEidEqualTo(equip.getId());
@@ -182,7 +263,8 @@ public class AlgoService {
                     desc += "站点"+station_name+"呈恶化趋势。";
                 }
             }
-            if (!desc.equals("") && isAlert == 0){
+
+            if (!desc.equals("") && isAlert != 1){
                 Map<String, List<String>> map = MathUtils.analysis_basin1(equip);
                 List<String> upstream = map.get("upstream");
                 List<String> downstream = map.get("downstream");
@@ -229,7 +311,7 @@ public class AlgoService {
                 errRecordMapper.insert(errRecord);
 //                System.out.println(sub_desc);
 //                System.out.println(desc);
-                SMSUtils.send(smsProperties.getUid(),smsProperties.getKey(),number,desc+sub_desc);
+//                SMSUtils.send(smsProperties.getUid(),smsProperties.getKey(),number,desc+sub_desc);
             }
         }
     }

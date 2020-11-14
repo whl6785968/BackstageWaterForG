@@ -11,6 +11,7 @@ import com.sandalen.water.algo.IsoForest.IsoForest;
 import com.sandalen.water.bean.*;
 import com.sandalen.water.dao.EquipmentMapper;
 import com.sandalen.water.dao.ErrRecordMapper;
+import com.sandalen.water.dao.StationMapper;
 import com.sandalen.water.dao.WaterdataMapper;
 import com.sandalen.water.other.Constants;
 import com.sandalen.water.util.*;
@@ -50,6 +51,9 @@ public class AlgoService {
     @Autowired
     private ErrRecordMapper errRecordMapper;
 
+    @Autowired
+    private StationMapper stationMapper;
+
     public List<Map<String,Object>> errCheckWithPython() throws IOException {
         SearchCondition searchCondition = new SearchCondition();
         List<Equipment> equipAndStation = dataRelatedService.getEquipAndStation(searchCondition);
@@ -73,20 +77,16 @@ public class AlgoService {
                 denseMatrix64F.set(0,3,waterdata.get(j).getKmno());
                 denseMatrix64F.set(0,4,waterdata.get(j).getTotalp());
 
-                HttpClient httpClient = new HttpClient();
+
                 String param_data = waterdata.get(j).getPh() + "," + waterdata.get(j).getDisslove() + "," +
                 waterdata.get(j).getNh() + "," + waterdata.get(j).getKmno() + "," + waterdata.get(j).getTotalp();
                 String uri = "http://127.0.0.1:5000/errCheck/?data=" + param_data;
-                GetMethod getMethod = new GetMethod(uri);
-                getMethod.addRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=utf-8");
-                int statusCode = httpClient.executeMethod(getMethod);
-                if (statusCode != HttpStatus.SC_OK) {// 打印服务器返回的状态
-                    System.out.println("Method failed: " + getMethod.getStatusLine());
+
+                String response = HttpClientUtils.getRequest(uri);
+                if(response.startsWith("request fail")){
+                    System.out.println("发生异常");
                 }
 
-                byte[] responseBody = getMethod.getResponseBodyAsString().getBytes(getMethod.getResponseCharSet());
-                
-                String response = new String(responseBody, "utf-8");
                 JSONObject jsonObject = JSON.parseObject(response);
                 Object o = JSON.parseObject(jsonObject.getString("data")).get("result");
                 String s = o.toString();
@@ -192,19 +192,19 @@ public class AlgoService {
         double ph = waterdata.getPh();
         double nh = waterdata.getNh();
         double dissolve = waterdata.getDisslove();
-        double totalc = waterdata.getTotalp();
+        double totalp = waterdata.getTotalp();
         double kmno = waterdata.getKmno();
 
-        IForest isoForest = AlgoUtils.getIsoForest();
-        DenseMatrix64F denseMatrix64F = new DenseMatrix64F(1, 5);
-        denseMatrix64F.set(0,0,ph);
-        denseMatrix64F.set(0,1,dissolve);
-        denseMatrix64F.set(0,2,nh);
-        denseMatrix64F.set(0,3,kmno);
-        denseMatrix64F.set(0,4,totalc);
+        String params = ph + "," + dissolve + "," + nh + "," + kmno + "," + totalp;
+        String uri = "http://127.0.0.1:5000/errCheck/?data=" + params;
 
-        double predict = isoForest.predict(denseMatrix64F);
-        if(predict == 1.0){
+        String response = HttpClientUtils.getRequest(uri);
+
+        JSONObject jsonObject = JSON.parseObject(response);
+        Object o = JSON.parseObject(jsonObject.getString("data")).get("result");
+        String s = o.toString();
+
+        if (Integer.parseInt(s) == 0){
             return 1;
         }
         else {
@@ -219,102 +219,124 @@ public class AlgoService {
         isoForest.train(numTrees, score);
     }
 
-    //秒 分 时 月中的天 月 周中的天 年
-    //月中的天和周中的天一定有一个是?
-//    @Scheduled(cron = "0 0/30 * * * ?")
-    public void err_check() throws IOException {
-        String modelStr = IOUtils.getModelStr(isoForestProperties.getModel_path());
-        IForest iForest = IOUtils.load_model(modelStr, IForest.class);
-        System.out.println("我运行了"+new Date(System.currentTimeMillis()));
-
+    public void err_detection() throws Exception{
         SearchCondition searchCondition = new SearchCondition();
         List<Equipment> equipAndStation = dataRelatedService.getEquipAndStation(searchCondition);
 
-        for (Equipment equip : equipAndStation){
-            Integer equipStatus = equip.getStatus();
-            String responsible = equip.getStation().getResponsible();
+        int resultOfWarning = -1;
+        List<String> warningFactors = new ArrayList<>();
+
+        for(Equipment equipment : equipAndStation){
+            Integer status = equipment.getStatus();
+            String responsible = equipment.getStation().getResponsible();
             Userinfo userinfo = userService.getUserDetailsById(responsible);
-            String number = userinfo.getLink();
-            String station_name = equip.getStation().getName();
+            String charger_number = userinfo.getLink();
             String charger_name = userinfo.getName();
-            Integer isAlert = equip.getStation().getIsAlert();
-            String stationId = equip.getStation().getId();
+
+            Integer isAlert = equipment.getStation().getIsAlert();
+            String stationId = equipment.getStation().getId();
+
+            String stationName = equipment.getStation().getName();
+
             String desc = "";
-            String sub_desc = "";
-
-            if (equipStatus == 2){
-                sub_desc = "编号"+equip.getId()+"设备状态异常";
-                desc = "站点"+station_name+"中"+sub_desc+"，请负责人尽快排查和解决，自动判断原因为" +
-                        "设备状态异常";
-
+            if (status == 2){
+                desc += "设备状态异常";
+                resultOfWarning = 1;
             }
-            else if(equipStatus == 0){
-                WaterdataExample waterdataExample = new WaterdataExample();
-                WaterdataExample.Criteria criteria = waterdataExample.createCriteria();
-                criteria.andEidEqualTo(equip.getId());
-                List<Waterdata> waterdataList = waterdataMapper.selectByExample(waterdataExample);
-                Double err_percent = MathUtils.keepDecimal(MathUtils.get_err_percent(waterdataList, iForest),3);
+            else{
+                List<Waterdata> waterdataList = waterdataMapper.getDataByEidAndTwe(equipment.getId());
 
-                if (err_percent > 0.05){
-                    String format_err_percent = err_percent * 100 + "%";
-                    desc = "站点"+station_name+"的水质异常数据达到"+format_err_percent+"。";
+                //计算数据异常比例
+                Double err_percent = MathUtils.keepDecimal(MathUtils.getErrPercentWithPython(waterdataList),3);
+
+                if(err_percent > 0.1){
+                    desc += "该站点最近20条数据中，异常数据比例超过10%";
+                    resultOfWarning = 2;
                 }
-                else if(MathUtils.isAscend(waterdataList)){
-                    desc += "站点"+station_name+"呈恶化趋势。";
+                else{
+                    //计算指标趋势
+                    String isDes = MathUtils.judgeTheTrend(waterdataList);
+                    if(!isDes.equals("")) {
+                        resultOfWarning = 3;
+                        desc += isDes;
+                    }
+                    else {
+                        //计算指标突变
+//                        MathUtils.haveMutation(waterdataList);
+
+                        //计算新异常值某指标是否超过阈值
+                        List<String> seriousExeededFactor = MathUtils.getSeriousExeededFactor(waterdataList);
+
+                        String sef = "";
+                        if(seriousExeededFactor.size() != 0){
+                            for(String s : seriousExeededFactor){
+                                sef += s +",";
+                            }
+
+                            sef = sef.substring(0,sef.length()-1);
+
+                            desc += "指标" + sef +"等严重超标";
+
+                            resultOfWarning = 4;
+                            warningFactors = seriousExeededFactor;
+                        }
+                    }
                 }
             }
 
-            if (!desc.equals("") && isAlert != 1){
-                Map<String, List<String>> map = MathUtils.analysis_basin1(equip);
-                List<String> upstream = map.get("upstream");
-                List<String> downstream = map.get("downstream");
-
-                if (upstream.size() == 0 && downstream.size() != 0){
-                    StringBuffer sb = new StringBuffer();
-                    for (int i = 0;i < downstream.size();i++){
-                        sb.append(downstream.get(i)+"->");
-                    }
-                    String s = sb.toString();
-                    sub_desc = "自动诊断：下游水质出现异常,考虑是"+station_name+"站点的水质本身出现异常,其中下游异常站点顺序为"+s.substring(0,s.length()-2);
-
-                }
-                else if(upstream.size() !=0 && downstream.size() == 0){
-                    StringBuffer sb = new StringBuffer();
-                    for (int i = 0;i < upstream.size();i++){
-                        sb.append(upstream.get(i)+"->");
-                    }
-                    String s = sb.toString();
-                    sub_desc = "自动诊断：上游水质出现异常，考虑是上游站点水质出现异常流入站点"+station_name+"导致异常,上游异常站点顺序为"+s.substring(0,s.length()-2);
-                }
-                else if(upstream.size() !=0 && downstream.size() != 0){
-                    StringBuffer sb = new StringBuffer();
-                    for (int i = 0;i < upstream.size();i++){
-                        sb.append(upstream.get(i)+"->");
-                    }
-                    String s = sb.toString();
-                    sub_desc = "自动诊断：上下游站点水质都出现异常，考虑上游站点水质出现异常而导致的下游水质出现异常，上游站点顺序为"+s.substring(0,s.length()-2);
-                }
-                else {
-                    sub_desc = "自动诊断：上下游水质都未出现异常，考虑设备出现问题或者本站点水质自身问题，需进一步分析";
-                }
-                dataRelatedService.update_alert(0,stationId);
+            //辅助判断
+            if(!desc.equals("") && isAlert != 1){
+                desc = "站点："+ stationName + desc;
+//                //如果不是某个具体指标的原因，则需要进一步查找是哪些指标出现的问题
                 ErrRecord errRecord = new ErrRecord();
                 errRecord.setRecordId(IdUtils.getId());
-                errRecord.setTitle("站点"+station_name + "出现水质异常" );
-                errRecord.setJudge(sub_desc);
-                errRecord.setEmergency(0);
-                errRecord.setChargerId(responsible);
+                errRecord.setTitle(desc);
+                errRecord.setEmergency(-1);
+                errRecord.setChargerId(charger_number);
                 errRecord.setChargerName(charger_name);
+                errRecord.setOrigin(resultOfWarning);
                 errRecord.setIsSolve(0);
                 errRecord.setCreateTime(new Date());
                 errRecord.setSid(stationId);
-                errRecordMapper.insert(errRecord);
-//                System.out.println(sub_desc);
-//                System.out.println(desc);
-//                SMSUtils.send(smsProperties.getUid(),smsProperties.getKey(),number,desc+sub_desc);
+
+                StationExample stationExample = new StationExample();
+                stationExample.createCriteria().andIdEqualTo(stationId);
+                List<Station> stations = stationMapper.selectByExample(stationExample);
+                Station station = stations.get(0);
+                station.setIsAlert(1);
+
+                stationMapper.updateByPrimaryKey(station);
+
+                if(resultOfWarning != 4){
+                    //前三种异常情况需要检查具体哪些指标出现问题
+                    //使用什么方法进行检测？
+                    //1.相关度
+                    //2.灰色关联分析
+
+                    //采用相关度和灰色关系分析综合判断
+                    List<Waterdata> waterdata = waterdataMapper.getDataByEidAndTwe(equipment.getId());
+
+
+                }
+                else{
+                    String factors = "";
+                    for(String f : warningFactors){
+                        factors += f + "-";
+                    }
+
+                    factors = factors.substring(0,factors.length()-1);
+                    errRecord.setSeriousFactor(factors);
+                    errRecordMapper.insert(errRecord);
+
+                }
+
             }
         }
     }
+
+    //秒 分 时 月中的天 月 周中的天 年
+    //月中的天和周中的天一定有一个是?
+//    @Scheduled(cron = "0 0/30 * * * ?")
 
     public List<ErrRecord> getErrRecord(){
         ErrRecordExample errRecordExample = new ErrRecordExample();

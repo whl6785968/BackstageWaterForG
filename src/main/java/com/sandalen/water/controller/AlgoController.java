@@ -42,8 +42,8 @@ public class AlgoController {
     }
 
     @RequestMapping("/tst")
-    public RespBean tst() throws IOException {
-        algoService.trainIsoForest();
+    public RespBean tst() throws Exception {
+        algoService.err_detection();
         return RespBean.ok("ss");
     }
 

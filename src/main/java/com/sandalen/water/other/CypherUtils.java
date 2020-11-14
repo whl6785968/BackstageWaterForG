@@ -131,4 +131,16 @@ public class CypherUtils {
                 "merge (n)-[r:临近{create_time:date(),update_time:date()}]->(m) return n,r,m";
     }
 
+    public static String updateEnterprise(int eid,String name,String contacts,String contacts_num,String main_pollution,
+                                          double pollution_num,int is_exceed,String exceed_factor){
+        return "match (n:Enterprise:Water{sid:'"+eid+"'}) set n.name='"+name+"',n.contacts='"+contacts+"'," +
+                "n.contacts_num='"+contacts_num+"',n.main_pollution='"+main_pollution+"',n.pollution_num='"+pollution_num+"'," +
+                "n.is_exceed='"+is_exceed+"',n.exceed_factor='"+exceed_factor+"',n.update_time=date() return  n";
+    }
+
+    public static String warningStation(String sid,String factors){
+        return "match (n:Station:Water{sid:'"+ sid +"'}) set n.status = 1,n.excessed = '"+ factors +"'," +
+                "n.update_time = date() return n";
+    }
+
 }

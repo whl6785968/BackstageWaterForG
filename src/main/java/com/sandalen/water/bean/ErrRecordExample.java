@@ -305,76 +305,6 @@ public class ErrRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andJudgeIsNull() {
-            addCriterion("judge is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andJudgeIsNotNull() {
-            addCriterion("judge is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andJudgeEqualTo(String value) {
-            addCriterion("judge =", value, "judge");
-            return (Criteria) this;
-        }
-
-        public Criteria andJudgeNotEqualTo(String value) {
-            addCriterion("judge <>", value, "judge");
-            return (Criteria) this;
-        }
-
-        public Criteria andJudgeGreaterThan(String value) {
-            addCriterion("judge >", value, "judge");
-            return (Criteria) this;
-        }
-
-        public Criteria andJudgeGreaterThanOrEqualTo(String value) {
-            addCriterion("judge >=", value, "judge");
-            return (Criteria) this;
-        }
-
-        public Criteria andJudgeLessThan(String value) {
-            addCriterion("judge <", value, "judge");
-            return (Criteria) this;
-        }
-
-        public Criteria andJudgeLessThanOrEqualTo(String value) {
-            addCriterion("judge <=", value, "judge");
-            return (Criteria) this;
-        }
-
-        public Criteria andJudgeLike(String value) {
-            addCriterion("judge like", value, "judge");
-            return (Criteria) this;
-        }
-
-        public Criteria andJudgeNotLike(String value) {
-            addCriterion("judge not like", value, "judge");
-            return (Criteria) this;
-        }
-
-        public Criteria andJudgeIn(List<String> values) {
-            addCriterion("judge in", values, "judge");
-            return (Criteria) this;
-        }
-
-        public Criteria andJudgeNotIn(List<String> values) {
-            addCriterion("judge not in", values, "judge");
-            return (Criteria) this;
-        }
-
-        public Criteria andJudgeBetween(String value1, String value2) {
-            addCriterion("judge between", value1, value2, "judge");
-            return (Criteria) this;
-        }
-
-        public Criteria andJudgeNotBetween(String value1, String value2) {
-            addCriterion("judge not between", value1, value2, "judge");
-            return (Criteria) this;
-        }
-
         public Criteria andEmergencyIsNull() {
             addCriterion("emergency is null");
             return (Criteria) this;
@@ -572,6 +502,136 @@ public class ErrRecordExample {
 
         public Criteria andChargerNameNotBetween(String value1, String value2) {
             addCriterion("charger_name not between", value1, value2, "chargerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOriginIsNull() {
+            addCriterion("origin is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOriginIsNotNull() {
+            addCriterion("origin is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOriginEqualTo(Integer value) {
+            addCriterion("origin =", value, "origin");
+            return (Criteria) this;
+        }
+
+        public Criteria andOriginNotEqualTo(Integer value) {
+            addCriterion("origin <>", value, "origin");
+            return (Criteria) this;
+        }
+
+        public Criteria andOriginGreaterThan(Integer value) {
+            addCriterion("origin >", value, "origin");
+            return (Criteria) this;
+        }
+
+        public Criteria andOriginGreaterThanOrEqualTo(Integer value) {
+            addCriterion("origin >=", value, "origin");
+            return (Criteria) this;
+        }
+
+        public Criteria andOriginLessThan(Integer value) {
+            addCriterion("origin <", value, "origin");
+            return (Criteria) this;
+        }
+
+        public Criteria andOriginLessThanOrEqualTo(Integer value) {
+            addCriterion("origin <=", value, "origin");
+            return (Criteria) this;
+        }
+
+        public Criteria andOriginIn(List<Integer> values) {
+            addCriterion("origin in", values, "origin");
+            return (Criteria) this;
+        }
+
+        public Criteria andOriginNotIn(List<Integer> values) {
+            addCriterion("origin not in", values, "origin");
+            return (Criteria) this;
+        }
+
+        public Criteria andOriginBetween(Integer value1, Integer value2) {
+            addCriterion("origin between", value1, value2, "origin");
+            return (Criteria) this;
+        }
+
+        public Criteria andOriginNotBetween(Integer value1, Integer value2) {
+            addCriterion("origin not between", value1, value2, "origin");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriousFactorIsNull() {
+            addCriterion("serious_factor is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriousFactorIsNotNull() {
+            addCriterion("serious_factor is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriousFactorEqualTo(String value) {
+            addCriterion("serious_factor =", value, "seriousFactor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriousFactorNotEqualTo(String value) {
+            addCriterion("serious_factor <>", value, "seriousFactor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriousFactorGreaterThan(String value) {
+            addCriterion("serious_factor >", value, "seriousFactor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriousFactorGreaterThanOrEqualTo(String value) {
+            addCriterion("serious_factor >=", value, "seriousFactor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriousFactorLessThan(String value) {
+            addCriterion("serious_factor <", value, "seriousFactor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriousFactorLessThanOrEqualTo(String value) {
+            addCriterion("serious_factor <=", value, "seriousFactor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriousFactorLike(String value) {
+            addCriterion("serious_factor like", value, "seriousFactor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriousFactorNotLike(String value) {
+            addCriterion("serious_factor not like", value, "seriousFactor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriousFactorIn(List<String> values) {
+            addCriterion("serious_factor in", values, "seriousFactor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriousFactorNotIn(List<String> values) {
+            addCriterion("serious_factor not in", values, "seriousFactor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriousFactorBetween(String value1, String value2) {
+            addCriterion("serious_factor between", value1, value2, "seriousFactor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriousFactorNotBetween(String value1, String value2) {
+            addCriterion("serious_factor not between", value1, value2, "seriousFactor");
             return (Criteria) this;
         }
 

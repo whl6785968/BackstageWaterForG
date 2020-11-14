@@ -65,6 +65,8 @@ public class DataRelatedService {
         etsStaExample.createCriteria().andEidEqualTo(id);
         etsStaMapper.deleteByExample(etsStaExample);
 
+        Neo4jUtils.deleteEntity(String.valueOf(id));
+
         int i = enpMapper.deleteByPrimaryKey(id);
 
         return i;
@@ -76,8 +78,15 @@ public class DataRelatedService {
         List<EtsSta> etsStas = etsStaMapper.selectByExample(etsStaExample);
         EtsSta etsSta = etsStas.get(0);
 
+        Neo4jUtils.deleteRel(String.valueOf(enp.getId()),etsSta.getSid());
+        Neo4jUtils.createRelBetweenEnterPriseAndStation(enp.getId(),enp.getStation().getId());
+
+
+
         etsSta.setSid(enp.getStation().getId());
         etsStaMapper.updateByPrimaryKey(etsSta);
+        Neo4jUtils.updateEnterprise(enp.getId(),enp.getName(),enp.getContacts(),enp.getContactsNumber(),enp.getMainPollutions(),
+                enp.getPollutionsNum(),enp.getIsExceed(),enp.getExceedFactor());
 
         int i = enpMapper.updateByPrimaryKey(enp);
         return i;

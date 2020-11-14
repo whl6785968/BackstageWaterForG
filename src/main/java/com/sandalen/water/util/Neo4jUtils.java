@@ -297,4 +297,13 @@ public class Neo4jUtils {
     public static void createRelBetweenEnterPriseAndStation(int eid,String sid){
         session.run(CypherUtils.createRelBetweenEnterPriseAndStation(eid, sid));
     }
+
+    public static void updateEnterprise(int eid,String name,String contacts,String contacts_num,String main_polltuion,
+                                        double pollution_num,int is_exceed,String exceed_factor){
+        session.run(CypherUtils.updateEnterprise(eid, name, contacts, contacts_num, main_polltuion, pollution_num, is_exceed, exceed_factor));
+    }
+
+    public static void updateWarningStation(String sid,String factors){
+        session.run(CypherUtils.warningStation(sid, factors));
+    }
 }

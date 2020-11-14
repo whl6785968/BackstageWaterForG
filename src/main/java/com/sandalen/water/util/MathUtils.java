@@ -1,5 +1,7 @@
 package com.sandalen.water.util;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.sandalen.water.PropertiesClass.IsoForestProperties;
 import com.sandalen.water.algo.IsoForest.IForest;
 import com.sandalen.water.bean.Equipment;
@@ -14,10 +16,7 @@ import org.ujmp.core.util.MathUtil;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class MathUtils {
@@ -248,6 +247,34 @@ public class MathUtils {
         return err_percent;
     }
 
+    public static Double getErrPercentWithPython(List<Waterdata> waterdataList) throws IOException {
+        double sum = 0.0;
+        for(Waterdata waterdata : waterdataList){
+            Double ph = waterdata.getPh();
+            Double disslove = waterdata.getDisslove();
+            Double nh = waterdata.getNh();
+            Double kmno = waterdata.getKmno();
+            Double totalp = waterdata.getTotalp();
+
+            String params = ph + "," + disslove + "," + nh +"," + kmno + "," + totalp;
+            String uri = "http://127.0.0.1:5000/errCheck/?data=" + params;
+
+            String response = HttpClientUtils.getRequest(uri);
+
+            JSONObject jsonObject = JSON.parseObject(response);
+            Object o = JSON.parseObject(jsonObject.getString("data")).get("result");
+            String s = o.toString();
+
+            if(Integer.parseInt(s) == 0){
+                sum += 1;
+            }
+        }
+
+        double errPercent = sum / waterdataList.size();
+
+        return errPercent;
+    }
+
     public static Map<String,List<String>> analysis_basin1(Equipment equipment) throws IOException {
         Map<String,List<String>> map = new HashMap();
         Station station = equipment.getStation();
@@ -308,87 +335,162 @@ public class MathUtils {
         }
     }
 
-    public static boolean isAscend(List<Waterdata> waterdataList){
-        boolean isAscend = false;
-//        List<Double> ph = new ArrayList<>();
-        List<Double> dissolve = new ArrayList<>();
+    public static String judgeTheTrend(List<Waterdata> waterdataList){
+        List<Double> dis = new ArrayList<>();
         List<Double> nh = new ArrayList<>();
         List<Double> kmno = new ArrayList<>();
-        for (int i = 0;i < waterdataList.size();i++) {
-            dissolve.set(i,waterdataList.get(i).getDisslove());
-            nh.set(i,waterdataList.get(i).getNh());
-            kmno.set(i,waterdataList.get(i).getKmno());
+        List<Double> totalp = new ArrayList<>();
+
+        for(Waterdata waterdata : waterdataList){
+            dis.add(waterdata.getDisslove());
+            nh.add(waterdata.getNh());
+            kmno.add(waterdata.getKmno());
+            totalp.add(waterdata.getTotalp());
         }
 
-        boolean d = isAscend2(dissolve, false);
-        boolean n = isAscend2(nh,true);
-        boolean k = isAscend2(kmno,true);
+        boolean disTrend = isDeteriorating(dis, false);
+        boolean nhTrend = isDeteriorating(nh,true);
+        boolean kmnoTrend = isDeteriorating(kmno,true);
+        boolean totalpTrend = isDeteriorating(totalp,true);
 
-        if(d || n || k){
-            return true;
+        String res = "";
+
+        if(disTrend){
+            res += "溶解氧、";
         }
 
-        return false;
+        if(nhTrend){
+            res += "氨氮、";
+        }
+
+        if(kmnoTrend){
+            res += "高锰酸盐、";
+        }
+
+        if(totalpTrend){
+            res += "总磷";
+        }
+
+        if(!res.equals("")){
+            if(res.endsWith("、")){
+                res = res.substring(0,res.length()-1);
+            }
+            res += "等指标呈现恶化趋势";
+        }
+
+        return res;
 
     }
 
-    public static boolean isAscend2(List<Double> data,boolean isLarger){
-        int ascend_count = 0;
-        for (int i = 1;i < data.size();i++){
-            if(isLarger){
-                if((data.get(i) - data.get(i-1)) > 0){
-                    ascend_count += 1;
+    public static boolean isDeteriorating(List<Double> factor,boolean isAscend){
+        boolean res = false;
+
+        if(isAscend){
+            double cnt = 0.0;
+            for(int i = 1;i < factor.size();i++){
+                if(factor.get(i) - factor.get(i-1) > 0){
+                    cnt += 1.0;
                 }
             }
-            else {
-                if((data.get(i) - data.get(i-1)) < 0){
-                    ascend_count += 1;
-                }
+
+            if(cnt / factor.size() > 0.7){
+                res = true;
             }
 
         }
+        else{
+            double cnt = 0.0;
+            for(int i = 1;i < factor.size();i++){
+                if(factor.get(i) - factor.get(i-1) < 0){
+                    cnt += 1.0;
+                }
+            }
 
-        double ascend_percent = ascend_count / (data.size()-1);
-
-        if (ascend_percent > 0.8){
-            return true;
+            if(cnt / factor.size() > 0.7){
+                res = true;
+            }
         }
 
+        return res;
+    }
+
+    public static String haveMutation(List<Waterdata> waterdataList){
+        List<Double> dis = new ArrayList<>();
+        List<Double> nh = new ArrayList<>();
+        List<Double> kmno = new ArrayList<>();
+        List<Double> totalp = new ArrayList<>();
+
+        for(Waterdata waterdata : waterdataList){
+            dis.add(waterdata.getDisslove());
+            nh.add(waterdata.getNh());
+            kmno.add(waterdata.getKmno());
+            totalp.add(waterdata.getTotalp());
+        }
+
+        haveMutationByFactor(nh);
+        haveMutationByFactor(kmno);
+        haveMutationByFactor(dis);
+        haveMutationByFactor(totalp);
+
+        return null;
+
+    }
+
+    public static boolean haveMutationByFactor(List<Double> data){
+        double n = data.size();
+        double M = getMean(data);
+
+        double std = 0;
+
+        for(int i = 0;i < n;i++){
+            std += Math.pow(M - data.get(i),2);
+        }
+
+        std = std / n;
+        System.out.println(std);
         return false;
-
     }
 
+    public static List<String> getSeriousExeededFactor(List<Waterdata> waterdataList) throws IOException {
+        Set<String> seriousFactors = new HashSet<>();
 
+        for(Waterdata waterdata : waterdataList){
+            double ph = waterdata.getPh();
+            double dis = waterdata.getDisslove();
+            double nh = waterdata.getNh();
+            double kmno = waterdata.getKmno();
+            double totalp = waterdata.getTotalp();
 
-    public static void s(){
-        String[] as = {"1","2","3","4"};
-        StringBuffer sb = new StringBuffer();
-        for (String a : as ){
-            sb.append(a + ",");
+            String params = ph + "," + dis + "," + nh + "," +
+                    kmno + "," + totalp;
+
+            String uri = "http://127.0.0.1:5000/errCheck/?data=" + params;
+
+            String response = HttpClientUtils.getRequest(uri);
+
+            JSONObject jsonObject = JSON.parseObject(response);
+            Object o = JSON.parseObject(jsonObject.getString("data")).get("result");
+            String s = o.toString();
+
+            if(Integer.parseInt(s) == 0){
+                if((5.0 - dis) / 5.0 > 0.3){
+                    seriousFactors.add("dis");
+                }
+
+                if((nh - 1.0) / 1.0 > 0.3) seriousFactors.add("nh");
+
+                if((kmno - 6.0) / 6.0 > 0.3) seriousFactors.add("kmno");
+
+                if((totalp-0.2) > 0.3) seriousFactors.add("totalp");
+            }
         }
 
-        System.out.println(sb.toString());
+
+        return new ArrayList<>(seriousFactors);
+
     }
-
-
-
-//    public static List<Boolean> isT(List<DenseMatrix64F> x,List<DenseMatrix64F> y){
-//        List<Boolean> result = new ArrayList<>();
-//        for (int i = 0;i < x.get(0).numCols;i++){
-//            List<Double> xs = new ArrayList<>();
-//            for (int j = 0;j < x.size();j++){
-//                xs.add(x.get(j).get(0,i));
-//            }
-//
-//            boolean b = doubleTCheck(xs, y);
-//            result.add(b);
-//
-//        }
-//
-//        return result;
-//    }
 
     public static void main(String[] args) throws IOException {
-        s();
+
     }
 }

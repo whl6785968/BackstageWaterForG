@@ -64,7 +64,7 @@
         <!--<table tableName="station"></table>-->
         <!--<table tableName="equip_sta"></table>-->
         <!--<table tableName="msg"></table>-->
-        <table tableName="enp"></table>
-        <table tableName="ets_sta"></table>
+        <!--<table tableName="enp"></table>-->
+        <table tableName="err_record"></table>
     </context>
 </generatorConfiguration>

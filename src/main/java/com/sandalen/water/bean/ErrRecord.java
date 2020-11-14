@@ -9,13 +9,15 @@ public class ErrRecord {
 
     private String title;
 
-    private String judge;
-
     private Integer emergency;
 
     private String chargerId;
 
     private String chargerName;
+
+    private Integer origin;
+
+    private String seriousFactor;
 
     private Integer isSolve;
 
@@ -47,14 +49,6 @@ public class ErrRecord {
         this.title = title == null ? null : title.trim();
     }
 
-    public String getJudge() {
-        return judge;
-    }
-
-    public void setJudge(String judge) {
-        this.judge = judge == null ? null : judge.trim();
-    }
-
     public Integer getEmergency() {
         return emergency;
     }
@@ -77,6 +71,22 @@ public class ErrRecord {
 
     public void setChargerName(String chargerName) {
         this.chargerName = chargerName == null ? null : chargerName.trim();
+    }
+
+    public Integer getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(Integer origin) {
+        this.origin = origin;
+    }
+
+    public String getSeriousFactor() {
+        return seriousFactor;
+    }
+
+    public void setSeriousFactor(String seriousFactor) {
+        this.seriousFactor = seriousFactor == null ? null : seriousFactor.trim();
     }
 
     public Integer getIsSolve() {

@@ -8,6 +8,7 @@
     <result column="emergency" property="emergency" jdbcType="INTEGER" />
     <result column="charger_id" property="chargerId" jdbcType="VARCHAR" />
     <result column="charger_name" property="chargerName" jdbcType="VARCHAR" />
+    <result column="charger_numger" property="chargerNumger" jdbcType="VARCHAR" />
     <result column="origin" property="origin" jdbcType="INTEGER" />
     <result column="serious_factor" property="seriousFactor" jdbcType="VARCHAR" />
     <result column="is_solve" property="isSolve" jdbcType="INTEGER" />
@@ -73,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, record_id, title, emergency, charger_id, charger_name, origin, serious_factor, 
-    is_solve, create_time, sid
+    id, record_id, title, emergency, charger_id, charger_name, charger_numger, origin, 
+    serious_factor, is_solve, create_time, sid
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sandalen.water.bean.ErrRecordExample" >
     select
@@ -109,12 +110,14 @@
   <insert id="insert" parameterType="com.sandalen.water.bean.ErrRecord" >
     insert into err_record (id, record_id, title, 
       emergency, charger_id, charger_name, 
-      origin, serious_factor, is_solve, 
-      create_time, sid)
+      charger_numger, origin, serious_factor, 
+      is_solve, create_time, sid
+      )
     values (#{id,jdbcType=INTEGER}, #{recordId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{emergency,jdbcType=INTEGER}, #{chargerId,jdbcType=VARCHAR}, #{chargerName,jdbcType=VARCHAR}, 
-      #{origin,jdbcType=INTEGER}, #{seriousFactor,jdbcType=VARCHAR}, #{isSolve,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{sid,jdbcType=VARCHAR})
+      #{chargerNumger,jdbcType=VARCHAR}, #{origin,jdbcType=INTEGER}, #{seriousFactor,jdbcType=VARCHAR}, 
+      #{isSolve,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{sid,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.sandalen.water.bean.ErrRecord" >
     insert into err_record
@@ -136,6 +139,9 @@
       </if>
       <if test="chargerName != null" >
         charger_name,
+      </if>
+      <if test="chargerNumger != null" >
+        charger_numger,
       </if>
       <if test="origin != null" >
         origin,
@@ -171,6 +177,9 @@
       </if>
       <if test="chargerName != null" >
         #{chargerName,jdbcType=VARCHAR},
+      </if>
+      <if test="chargerNumger != null" >
+        #{chargerNumger,jdbcType=VARCHAR},
       </if>
       <if test="origin != null" >
         #{origin,jdbcType=INTEGER},
@@ -216,6 +225,9 @@
       <if test="record.chargerName != null" >
         charger_name = #{record.chargerName,jdbcType=VARCHAR},
       </if>
+      <if test="record.chargerNumger != null" >
+        charger_numger = #{record.chargerNumger,jdbcType=VARCHAR},
+      </if>
       <if test="record.origin != null" >
         origin = #{record.origin,jdbcType=INTEGER},
       </if>
@@ -244,6 +256,7 @@
       emergency = #{record.emergency,jdbcType=INTEGER},
       charger_id = #{record.chargerId,jdbcType=VARCHAR},
       charger_name = #{record.chargerName,jdbcType=VARCHAR},
+      charger_numger = #{record.chargerNumger,jdbcType=VARCHAR},
       origin = #{record.origin,jdbcType=INTEGER},
       serious_factor = #{record.seriousFactor,jdbcType=VARCHAR},
       is_solve = #{record.isSolve,jdbcType=INTEGER},
@@ -271,6 +284,9 @@
       <if test="chargerName != null" >
         charger_name = #{chargerName,jdbcType=VARCHAR},
       </if>
+      <if test="chargerNumger != null" >
+        charger_numger = #{chargerNumger,jdbcType=VARCHAR},
+      </if>
       <if test="origin != null" >
         origin = #{origin,jdbcType=INTEGER},
       </if>
@@ -296,6 +312,7 @@
       emergency = #{emergency,jdbcType=INTEGER},
       charger_id = #{chargerId,jdbcType=VARCHAR},
       charger_name = #{chargerName,jdbcType=VARCHAR},
+      charger_numger = #{chargerNumger,jdbcType=VARCHAR},
       origin = #{origin,jdbcType=INTEGER},
       serious_factor = #{seriousFactor,jdbcType=VARCHAR},
       is_solve = #{isSolve,jdbcType=INTEGER},
@@ -303,4 +320,27 @@
       sid = #{sid,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="CustomMap" type="com.sandalen.water.bean.ErrRecord">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="record_id" property="recordId" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="emergency" property="emergency" jdbcType="INTEGER" />
+    <result column="charger_id" property="chargerId" jdbcType="VARCHAR" />
+    <result column="charger_name" property="chargerName" jdbcType="VARCHAR" />
+    <result column="charger_numger" property="chargerNumger" jdbcType="VARCHAR" />
+    <result column="origin" property="origin" jdbcType="INTEGER" />
+    <result column="serious_factor" property="seriousFactor" jdbcType="VARCHAR" />
+    <result column="is_solve" property="isSolve" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="sid" property="sid" jdbcType="VARCHAR" />
+
+    <association property="recordReport" javaType="com.sandalen.water.bean.RecordReport">
+      <id column="rid" property="id" jdbcType="INTEGER"></id>
+      <result column="report_id" property="reportId" jdbcType="VARCHAR"></result>
+    </association>
+  </resultMap>
+  <select id="getErrRecordAndReportId" resultMap="CustomMap">
+    select er.*,rr.id as rid,rr.report_id as report_id from err_record er,record_report rr where er.record_id = rr.record_id;
+  </select>
 </mapper>

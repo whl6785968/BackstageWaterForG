@@ -306,4 +306,45 @@ public class Neo4jUtils {
     public static void updateWarningStation(String sid,String factors){
         session.run(CypherUtils.warningStation(sid, factors));
     }
+
+    public static List<Record> searchErrOrigin(String sid){
+        StatementResult result = session.run(CypherUtils.searchErrOrigin(sid));
+        List<Record> recordList = result.list();
+
+        return recordList;
+
+    }
+
+    public static List<Record> searchBasin(String sid){
+        StatementResult res = session.run(CypherUtils.searchBasin(sid));
+        List<Record> records = res.list();
+
+        return records;
+    }
+
+    public static List<Record> searchEnterprise(String sid){
+        StatementResult res = session.run(CypherUtils.searchEnterprise(sid));
+        List<Record> records = res.list();
+
+        return records;
+    }
+
+    public static List<Record> searchDemo(String sid){
+        StatementResult result = session.run(CypherUtils.searchDemo(sid));
+        List<Record> records = result.list();
+
+        return records;
+    }
+
+    public static List<Record> getFactorOrigin(String factor){
+        StatementResult result = session.run(CypherUtils.getFactorOrigin(factor));
+        List<Record> records = result.list();
+        return records;
+    }
+
+    public static List<Record> getFactorSolution(String factor){
+        StatementResult result = session.run(CypherUtils.getFactorSolution(factor));
+        List<Record> records = result.list();
+        return records;
+    }
 }

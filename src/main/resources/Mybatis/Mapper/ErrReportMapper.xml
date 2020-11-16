@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sandalen.water.dao.ErrReportMapper" >
+  <resultMap id="BaseResultMap" type="com.sandalen.water.bean.ErrReport" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="report_id" property="reportId" jdbcType="VARCHAR" />
+    <result column="result" property="result" jdbcType="VARCHAR" />
+    <result column="basin_error" property="basinError" jdbcType="VARCHAR" />
+    <result column="enterprise_error" property="enterpriseError" jdbcType="VARCHAR" />
+    <result column="factor_result" property="factorResult" jdbcType="VARCHAR" />
+    <result column="factor_solution" property="factorSolution" jdbcType="VARCHAR" />
+    <result column="sid" property="sid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, report_id, result, basin_error, enterprise_error, factor_result, factor_solution, 
+    sid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sandalen.water.bean.ErrReportExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from err_report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from err_report
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from err_report
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sandalen.water.bean.ErrReportExample" >
+    delete from err_report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sandalen.water.bean.ErrReport" >
+    insert into err_report (id, report_id, result, 
+      basin_error, enterprise_error, factor_result, 
+      factor_solution, sid)
+    values (#{id,jdbcType=INTEGER}, #{reportId,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, 
+      #{basinError,jdbcType=VARCHAR}, #{enterpriseError,jdbcType=VARCHAR}, #{factorResult,jdbcType=VARCHAR}, 
+      #{factorSolution,jdbcType=VARCHAR}, #{sid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sandalen.water.bean.ErrReport" >
+    insert into err_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="reportId != null" >
+        report_id,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="basinError != null" >
+        basin_error,
+      </if>
+      <if test="enterpriseError != null" >
+        enterprise_error,
+      </if>
+      <if test="factorResult != null" >
+        factor_result,
+      </if>
+      <if test="factorSolution != null" >
+        factor_solution,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="reportId != null" >
+        #{reportId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="basinError != null" >
+        #{basinError,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseError != null" >
+        #{enterpriseError,jdbcType=VARCHAR},
+      </if>
+      <if test="factorResult != null" >
+        #{factorResult,jdbcType=VARCHAR},
+      </if>
+      <if test="factorSolution != null" >
+        #{factorSolution,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sandalen.water.bean.ErrReportExample" resultType="java.lang.Integer" >
+    select count(*) from err_report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update err_report
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.reportId != null" >
+        report_id = #{record.reportId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.result != null" >
+        result = #{record.result,jdbcType=VARCHAR},
+      </if>
+      <if test="record.basinError != null" >
+        basin_error = #{record.basinError,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseError != null" >
+        enterprise_error = #{record.enterpriseError,jdbcType=VARCHAR},
+      </if>
+      <if test="record.factorResult != null" >
+        factor_result = #{record.factorResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.factorSolution != null" >
+        factor_solution = #{record.factorSolution,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update err_report
+    set id = #{record.id,jdbcType=INTEGER},
+      report_id = #{record.reportId,jdbcType=VARCHAR},
+      result = #{record.result,jdbcType=VARCHAR},
+      basin_error = #{record.basinError,jdbcType=VARCHAR},
+      enterprise_error = #{record.enterpriseError,jdbcType=VARCHAR},
+      factor_result = #{record.factorResult,jdbcType=VARCHAR},
+      factor_solution = #{record.factorSolution,jdbcType=VARCHAR},
+      sid = #{record.sid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sandalen.water.bean.ErrReport" >
+    update err_report
+    <set >
+      <if test="reportId != null" >
+        report_id = #{reportId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="basinError != null" >
+        basin_error = #{basinError,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseError != null" >
+        enterprise_error = #{enterpriseError,jdbcType=VARCHAR},
+      </if>
+      <if test="factorResult != null" >
+        factor_result = #{factorResult,jdbcType=VARCHAR},
+      </if>
+      <if test="factorSolution != null" >
+        factor_solution = #{factorSolution,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sandalen.water.bean.ErrReport" >
+    update err_report
+    set report_id = #{reportId,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
+      basin_error = #{basinError,jdbcType=VARCHAR},
+      enterprise_error = #{enterpriseError,jdbcType=VARCHAR},
+      factor_result = #{factorResult,jdbcType=VARCHAR},
+      factor_solution = #{factorSolution,jdbcType=VARCHAR},
+      sid = #{sid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

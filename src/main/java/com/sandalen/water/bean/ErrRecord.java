@@ -15,6 +15,8 @@ public class ErrRecord {
 
     private String chargerName;
 
+    private String chargerNumger;
+
     private Integer origin;
 
     private String seriousFactor;
@@ -24,6 +26,8 @@ public class ErrRecord {
     private Date createTime;
 
     private String sid;
+
+    private RecordReport recordReport;
 
     public Integer getId() {
         return id;
@@ -73,6 +77,14 @@ public class ErrRecord {
         this.chargerName = chargerName == null ? null : chargerName.trim();
     }
 
+    public String getChargerNumger() {
+        return chargerNumger;
+    }
+
+    public void setChargerNumger(String chargerNumger) {
+        this.chargerNumger = chargerNumger == null ? null : chargerNumger.trim();
+    }
+
     public Integer getOrigin() {
         return origin;
     }
@@ -111,5 +123,13 @@ public class ErrRecord {
 
     public void setSid(String sid) {
         this.sid = sid == null ? null : sid.trim();
+    }
+
+    public RecordReport getRecordReport() {
+        return recordReport;
+    }
+
+    public void setRecordReport(RecordReport recordReport) {
+        this.recordReport = recordReport;
     }
 }

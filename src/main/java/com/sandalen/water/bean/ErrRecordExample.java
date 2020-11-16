@@ -505,6 +505,76 @@ public class ErrRecordExample {
             return (Criteria) this;
         }
 
+        public Criteria andChargerNumgerIsNull() {
+            addCriterion("charger_numger is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargerNumgerIsNotNull() {
+            addCriterion("charger_numger is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargerNumgerEqualTo(String value) {
+            addCriterion("charger_numger =", value, "chargerNumger");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargerNumgerNotEqualTo(String value) {
+            addCriterion("charger_numger <>", value, "chargerNumger");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargerNumgerGreaterThan(String value) {
+            addCriterion("charger_numger >", value, "chargerNumger");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargerNumgerGreaterThanOrEqualTo(String value) {
+            addCriterion("charger_numger >=", value, "chargerNumger");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargerNumgerLessThan(String value) {
+            addCriterion("charger_numger <", value, "chargerNumger");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargerNumgerLessThanOrEqualTo(String value) {
+            addCriterion("charger_numger <=", value, "chargerNumger");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargerNumgerLike(String value) {
+            addCriterion("charger_numger like", value, "chargerNumger");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargerNumgerNotLike(String value) {
+            addCriterion("charger_numger not like", value, "chargerNumger");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargerNumgerIn(List<String> values) {
+            addCriterion("charger_numger in", values, "chargerNumger");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargerNumgerNotIn(List<String> values) {
+            addCriterion("charger_numger not in", values, "chargerNumger");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargerNumgerBetween(String value1, String value2) {
+            addCriterion("charger_numger between", value1, value2, "chargerNumger");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargerNumgerNotBetween(String value1, String value2) {
+            addCriterion("charger_numger not between", value1, value2, "chargerNumger");
+            return (Criteria) this;
+        }
+
         public Criteria andOriginIsNull() {
             addCriterion("origin is null");
             return (Criteria) this;

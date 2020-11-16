@@ -143,4 +143,28 @@ public class CypherUtils {
                 "n.update_time = date() return n";
     }
 
+    public static String searchErrOrigin(String sid){
+        return "match (n{sid:'"+ sid +"'})-[r*..2]-(m) where (m.is_exceed = '1' or m.status = 1) and (n.excessed = m.exceed_factor or n.excessed = m.excessed) return n,r,m";
+    }
+
+    public static String searchBasin(String sid){
+        return "match (n{sid:'"+ sid +"'})-[r:`流入`]-(m)  where m.status = 1 and n.excessed = m.excessed return n,r,m";
+    }
+
+    public static String searchEnterprise(String sid){
+        return "match (n{sid:'"+ sid +"'})-[r:`临近`*..2]-(m) where m.is_exceed = '1' and n.excessed = m.exceed_factor return m";
+    }
+
+    public static String searchDemo(String sid){
+        return "match (m{sid:'"+ sid +"'})-[r:`流入`*..2]-(n) return n,m,r";
+    }
+
+    public static String getFactorOrigin(String factor){
+        return "match (n{name:'"+ factor +"'})-[r{real_relation:'异常原因'}]->(m) return m.name";
+    }
+
+    public static String getFactorSolution(String factor){
+        return "match (n{name:'"+ factor +"'})-[r{real_relation:'解决方法'}]->(m) return m.name";
+    }
+
 }

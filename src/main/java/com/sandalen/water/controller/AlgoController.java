@@ -1,6 +1,7 @@
 package com.sandalen.water.controller;
 
 import com.sandalen.water.bean.ErrRecord;
+import com.sandalen.water.bean.ErrReport;
 import com.sandalen.water.bean.RespBean;
 import com.sandalen.water.bean.Waterdata;
 import com.sandalen.water.service.AlgoService;
@@ -55,12 +56,13 @@ public class AlgoController {
 
     @RequestMapping("/errCheckWithPython")
     public RespBean tstPython() throws IOException {
-
         List<Map<String, Object>> res = algoService.errCheckWithPython();
-
-
         return RespBean.ok("success",res);
+    }
 
-
+    @RequestMapping("/getErrReport")
+    public RespBean getErrReport(String reportId){
+        ErrReport errReport = algoService.getErrReport(reportId);
+        return RespBean.ok("success",errReport);
     }
 }

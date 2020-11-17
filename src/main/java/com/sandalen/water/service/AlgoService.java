@@ -13,9 +13,6 @@ import com.sandalen.water.dao.*;
 import com.sandalen.water.other.Constants;
 import com.sandalen.water.structure.Graph;
 import com.sandalen.water.util.*;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.methods.GetMethod;
 import org.ejml.data.DenseMatrix64F;
 import org.neo4j.driver.v1.Record;
 import org.neo4j.driver.v1.Value;
@@ -24,10 +21,9 @@ import org.neo4j.driver.v1.types.Relationship;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.ujmp.core.util.MathUtil;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
 import java.util.*;
 
 @Service
@@ -669,6 +665,19 @@ public class AlgoService {
 
         return errReports.get(0);
 
+    }
+
+    public Station getStaticsDataBySid(String sid) throws ParseException {
+        Station stations = stationMapper.getStaticsDataBySid(sid);
+
+        List<Waterdata> waterdatas = stations.getWaterdatas();
+        for(Waterdata waterdata : waterdatas){
+            waterdata.setFormatDate(DateUtils.specialFormatDate(waterdata.getCreateTame()));
+        }
+
+        stations.setWaterdatas(waterdatas);
+
+        return stations;
     }
 
 }

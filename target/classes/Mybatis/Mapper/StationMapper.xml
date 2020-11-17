@@ -308,16 +308,24 @@
       <id column="did" property="id" jdbcType="VARCHAR"></id>
       <result column="dname" property="name" jdbcType="VARCHAR"></result>
     </association>
-    <association property="errRecord" javaType="com.sandalen.water.bean.ErrRecord">
-      <id column="eid" property="id" jdbcType="INTEGER"></id>
-      <result column="judge" property="judge" jdbcType="VARCHAR"></result>
-      <result column="chargerName" property="chargerName" jdbcType="VARCHAR"></result>
-      <result column="createTime" property="createTime" jdbcType="VARCHAR"></result>
+    <association property="equipment" javaType="com.sandalen.water.bean.Equipment">
+      <id column="eid" property="id" jdbcType="VARCHAR"></id>
+      <result column="ename" property="name" jdbcType="VARCHAR"></result>
+      <result column="model" property="model" jdbcType="VARCHAR"></result>
     </association>
     <association property="province" javaType="com.sandalen.water.bean.Province">
       <id column="pid" property="id" jdbcType="INTEGER"></id>
       <result column="pname" property="name" jdbcType="VARCHAR"></result>
     </association>
+    <collection property="waterdatas" ofType="com.sandalen.water.bean.Waterdata">
+      <id column="id" property="id" jdbcType="INTEGER"></id>
+      <result column="ph" property="ph" jdbcType="DOUBLE"></result>
+      <result column="disslove" property="disslove" jdbcType="DOUBLE"></result>
+      <result column="nh" property="nh" jdbcType="DOUBLE"></result>
+      <result column="kmno" property="kmno" jdbcType="DOUBLE"></result>
+      <result column="totalp" property="totalp" jdbcType="DOUBLE"></result>
+      <result column="create_tame" property="createTame" jdbcType="TIMESTAMP" />
+    </collection>
   </resultMap>
 
   <select id="getAllInfoForStation" resultMap="StationMap" parameterType="java.util.Map">
@@ -361,5 +369,9 @@
 
   <select id="getNewestWaterData" resultType="com.sandalen.water.bean.NewestWaterData">
     select d.name as district,p.name as province,s.id,s.name as station,s.is_alert as status,tt.ph as ph,tt.disslove as dis,tt.nh as nh,tt.kmno as kmno,tt.totalp as totalp,tt.level as level,tt.create_tame as create_time from station s,equip_sta es,station_province sp,province p,station_district sd,district d,(select distinct * from waterdata w,(select max(create_tame) newest_time from waterdata group by eid) t where w.create_tame = t.newest_time) tt where s.id = es.sid and tt.eid = es.eid and s.id = sp.sid and sp.pid = p.id and s.id = sd.sid and sd.did = d.id;
+  </select>
+
+  <select id="getStaticsDataBySid" resultMap="StationMap" parameterType="java.lang.String">
+    select s.id as sid,s.name as sname,e.id as eid,e.name as ename,e.model,w.* from station s,equip_sta es,equipment e,waterdata w where s.id = es.sid and es.eid = e.id and e.id = w.eid and s.id = #{id} order by create_tame desc limit 20;
   </select>
 </mapper>

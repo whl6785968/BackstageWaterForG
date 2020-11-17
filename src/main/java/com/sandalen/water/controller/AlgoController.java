@@ -1,9 +1,6 @@
 package com.sandalen.water.controller;
 
-import com.sandalen.water.bean.ErrRecord;
-import com.sandalen.water.bean.ErrReport;
-import com.sandalen.water.bean.RespBean;
-import com.sandalen.water.bean.Waterdata;
+import com.sandalen.water.bean.*;
 import com.sandalen.water.service.AlgoService;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -64,5 +62,11 @@ public class AlgoController {
     public RespBean getErrReport(String reportId){
         ErrReport errReport = algoService.getErrReport(reportId);
         return RespBean.ok("success",errReport);
+    }
+
+    @RequestMapping("/getStaticsDataBySid")
+    public RespBean getStaticsDataBySid(String sid) throws ParseException {
+        Station station = algoService.getStaticsDataBySid(sid);
+        return RespBean.ok("success",station);
     }
 }

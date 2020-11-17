@@ -46,4 +46,6 @@ public interface StationMapper {
     List<Station> getErrStationAndRecord();
 
     List<NewestWaterData> getNewestWaterData();
+
+    Station getStaticsDataBySid(String id);
 }

@@ -1,5 +1,7 @@
 package com.sandalen.water.bean;
 
+import java.util.List;
+
 public class Station {
     private String id;
 
@@ -28,6 +30,18 @@ public class Station {
     private ErrRecord errRecord;
 
     private Province province;
+
+    private Equipment equipment;
+
+    private List<Waterdata> waterdatas;
+
+    public Equipment getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(Equipment equipment) {
+        this.equipment = equipment;
+    }
 
     public Province getProvince() {
         return province;
@@ -141,4 +155,11 @@ public class Station {
         this.isAlert = isAlert;
     }
 
+    public List<Waterdata> getWaterdatas() {
+        return waterdatas;
+    }
+
+    public void setWaterdatas(List<Waterdata> waterdatas) {
+        this.waterdatas = waterdatas;
+    }
 }

@@ -95,7 +95,18 @@ public class KgController {
         String response = new String(responseBody, "utf-8");
         return RespBean.ok("success",response);
 
+    }
 
+    @RequestMapping("/ner")
+    public RespBean ner(String sentence) throws IOException {
+        List<String> ner = kgService.ner(sentence);
+        return RespBean.ok("success",ner);
+    }
+
+    @RequestMapping("/qa")
+    public RespBean qa(String question) throws Exception {
+        List<String> qa = kgService.qa(question);
+        return RespBean.ok("success",qa);
     }
 
 }

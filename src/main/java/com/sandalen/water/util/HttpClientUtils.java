@@ -1,5 +1,7 @@
 package com.sandalen.water.util;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -23,4 +25,17 @@ public class HttpClientUtils {
 
         return response;
     }
+
+    public static Object parseResponse(String response){
+        if(response.startsWith("request fail")){
+            return response;
+        }
+        JSONObject jsonObject = JSON.parseObject(response);
+        Object o = JSON.parseObject(jsonObject.getString("data")).get("result");
+
+        return o;
+    }
+
+
+
 }

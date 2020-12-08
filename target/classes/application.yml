@@ -27,6 +27,9 @@ spring:
     port: 5672
     username: guest
     password: guest
+  aop:
+    auto: true
+    proxy-target-class: true
 #  main:
 #    allow-bean-definition-overriding: true
 #  resources:

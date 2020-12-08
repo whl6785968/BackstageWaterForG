@@ -3,6 +3,7 @@ package com.sandalen.water.controller;
 
 import com.sandalen.water.bean.Msg;
 import com.sandalen.water.bean.RespBean;
+import com.sandalen.water.customAnnotation.SystemControllerLog;
 import com.sandalen.water.service.MsgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ public class SysMsgController {
         return RespBean.ok("获取数据成功",unReviewMsg);
     }
 
+    @SystemControllerLog(description = "审核帖子")
     @RequestMapping("/passPost")
     public RespBean passPost(String postId,String userId){
         int i = msgService.passPost(postId,userId);
@@ -33,7 +35,7 @@ public class SysMsgController {
         return RespBean.ok("审核通过");
     }
 
-
+    @SystemControllerLog(description = "审核帖子")
     @RequestMapping("/notPass")
     public RespBean notPass(String postId){
         int i = msgService.notPass(postId);

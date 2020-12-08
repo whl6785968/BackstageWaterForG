@@ -2,6 +2,7 @@ package com.sandalen.water.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sandalen.water.bean.*;
+import com.sandalen.water.customAnnotation.SystemControllerLog;
 import com.sandalen.water.enumeration.ResultCode;
 import com.sandalen.water.service.UserService;
 import com.sandalen.water.util.CookieUtils;
@@ -44,6 +45,7 @@ public class SysUserController {
     }
 
 
+    @SystemControllerLog(description = "修改权限")
     @RequestMapping("/changeRole")
     public RespBean changeRole(int id,String user_id,String role_id){
         System.out.println(id);

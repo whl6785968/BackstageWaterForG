@@ -3,6 +3,7 @@ package com.sandalen.water.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sandalen.water.bean.*;
+import com.sandalen.water.customAnnotation.SystemControllerLog;
 import com.sandalen.water.service.DataRelatedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -63,6 +64,7 @@ public class SysDataController {
         return RespBean.ok("获取数据成功",pageInfo);
     }
 
+    @SystemControllerLog(description = "增加站点")
     @RequestMapping("/addStation")
     public RespBean addStation(@RequestBody Station station){
 //        System.out.println(station.toString());
@@ -73,6 +75,7 @@ public class SysDataController {
         return RespBean.error("添加失败");
     }
 
+    @SystemControllerLog(description = "修改站点")
     @RequestMapping("/modifyStation")
     public RespBean modifyStation(@RequestBody Station station){
         int i = dataRelatedService.modifyStation(station);
@@ -82,7 +85,7 @@ public class SysDataController {
         return RespBean.error("修改失败");
     }
 
-
+    @SystemControllerLog(description = "删除站点")
     @RequestMapping("/deleteStation")
     public RespBean deleteStation(String stationId){
         int i = dataRelatedService.deleteStation(stationId);
@@ -94,6 +97,7 @@ public class SysDataController {
     }
 
 
+    @SystemControllerLog(description = "增加流域")
     @RequestMapping("/addDistrict")
     public RespBean addDistrict(@RequestBody District district){
         int i = dataRelatedService.addDistrict(district);
@@ -103,6 +107,7 @@ public class SysDataController {
         return RespBean.error("添加失败");
     }
 
+    @SystemControllerLog(description = "修改流域")
     @RequestMapping("/modifyDistrict")
     public RespBean modifyDistrict(@RequestBody District district){
         int i = dataRelatedService.modifyDistrict(district);
@@ -112,6 +117,7 @@ public class SysDataController {
         return RespBean.error("修改失败");
     }
 
+    @SystemControllerLog(description = "删除流域")
     @RequestMapping("/deleteDistrict")
     public RespBean deleteDistrict(String id){
         int i = dataRelatedService.deleteDistrict(id);
@@ -131,6 +137,7 @@ public class SysDataController {
         return RespBean.ok("获取数据成功",pageInfo);
     }
 
+    @SystemControllerLog(description = "增加设备")
     @RequestMapping("/addEquip")
     public RespBean addEquip(@RequestBody Equipment equipment){
         int i = dataRelatedService.addEquip(equipment);
@@ -140,6 +147,7 @@ public class SysDataController {
         return RespBean.error("添加失败");
     }
 
+    @SystemControllerLog(description = "修改设备")
     @RequestMapping("/modifyEquip")
     public RespBean modifyEquip(@RequestBody Equipment equipment){
         int i = dataRelatedService.modifyEquip(equipment);
@@ -157,6 +165,7 @@ public class SysDataController {
         return RespBean.ok("获取数据成功",pageInfo);
     }
 
+    @SystemControllerLog(description = "增加企业")
     @RequestMapping("/addEnterprise")
     public RespBean addEnterprise(@RequestBody Enp enp){
         int i = dataRelatedService.addEnterprise(enp);
@@ -168,6 +177,7 @@ public class SysDataController {
         return RespBean.error("添加失败");
     }
 
+    @SystemControllerLog(description = "修改企业")
     @RequestMapping("/updateEnterprise")
     public RespBean updateEnterprise(@RequestBody Enp enp){
         int i = dataRelatedService.updateEnterprise(enp);
@@ -179,6 +189,7 @@ public class SysDataController {
         return RespBean.error("添加失败");
     }
 
+    @SystemControllerLog(description = "删除企业")
     @RequestMapping("/deleteEnterprise")
     public RespBean deleteEnterprise(int id){
         int i = dataRelatedService.deleteEnterprise(id);

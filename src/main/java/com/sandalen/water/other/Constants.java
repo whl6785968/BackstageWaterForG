@@ -5,6 +5,6 @@ public class Constants {
 
     public static final String  REQUEST_HEADERS_CONTENT_TYPE = "application/json";
 
-    public static final String PIC_PATH_APPEND = "E:/WaterMonitor/WaterMonitor/";
+    public static final String PIC_PATH_APPEND = "E:/FrontEndOfWaterForG/";
 
 }

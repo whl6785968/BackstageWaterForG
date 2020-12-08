@@ -1,6 +1,7 @@
 package com.sandalen.water.controller;
 
 import com.sandalen.water.bean.*;
+import com.sandalen.water.customAnnotation.SystemControllerLog;
 import com.sandalen.water.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,6 +46,7 @@ public class MenuController {
         return RespBean.error("获取数据失败");
     }
 
+    @SystemControllerLog(description = "配置菜单")
     @RequestMapping("/updateRoleMenu")
     public RespBean updateRoleMenu(String role_id,int[] mids){
         RoleMenuExample roleMenuExample = new RoleMenuExample();

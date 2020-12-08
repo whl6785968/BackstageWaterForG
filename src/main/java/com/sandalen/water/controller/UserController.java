@@ -1,8 +1,11 @@
 package com.sandalen.water.controller;
 
 import com.sandalen.water.bean.*;
+import com.sandalen.water.customAnnotation.SystemControllerLog;
+import com.sandalen.water.service.LogService;
 import com.sandalen.water.service.UserService;
 import com.sandalen.water.util.JwtUtils;
+import com.sandalen.water.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -16,6 +19,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private LogService logService;
 
 
     @RequestMapping("/getRoleById")
@@ -49,11 +55,27 @@ public class UserController {
         return RespBean.error("获取数据失败");
     }
 
+    @SystemControllerLog(description = "修改用户信息")
     @RequestMapping("/updateUserInfo")
-    public RespBean updateUserInfo(String link,String descr,String userid){
+    public RespBean updateUserInfo(String name,String link,String descr,String avatar,String userid){
         Userinfo userinfo = userService.getUserDetailsById(userid);
-        userinfo.setDescr(descr);
-        userinfo.setLink(link);
+
+        if(!ObjectUtils.isStringEmpty(name)){
+            userinfo.setName(name);
+        }
+
+        if(!ObjectUtils.isStringEmpty(link)){
+            userinfo.setLink(link);
+        }
+
+        if(!ObjectUtils.isStringEmpty(descr)){
+            userinfo.setDescr(descr);
+        }
+
+        if(!ObjectUtils.isStringEmpty(avatar)){
+            userinfo.setAvatar(avatar);
+        }
+
         int i = userService.updateUserInfo(userinfo);
         if(i == 0){
             return RespBean.error("修改失败");
@@ -62,6 +84,7 @@ public class UserController {
         return RespBean.ok("修改成功");
     }
 
+    @SystemControllerLog(description = "修改密码")
     @RequestMapping("/updatePassword")
     public RespBean updatePassword(String userid,String pass){
         UserExample userExample = new UserExample();
@@ -77,6 +100,18 @@ public class UserController {
 
         return RespBean.ok("修改成功");
 
+    }
+
+    @RequestMapping("/updateAvatar")
+    public RespBean updateAvatar(){
+        return RespBean.ok("success");
+    }
+
+    @RequestMapping("/getLog")
+    public RespBean getLog(String userid){
+        List<SystemLog> log = logService.getLog(userid);
+
+        return RespBean.ok("success",log);
     }
 
 

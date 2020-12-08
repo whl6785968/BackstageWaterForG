@@ -65,6 +65,6 @@
         <!--<table tableName="equip_sta"></table>-->
         <!--<table tableName="msg"></table>-->
         <!--<table tableName="enp"></table>-->
-        <table tableName="record_report"></table>
+        <table tableName="system_log"></table>
     </context>
 </generatorConfiguration>

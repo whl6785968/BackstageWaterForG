@@ -6,6 +6,7 @@ import com.sandalen.water.bean.CustomPage;
 import com.sandalen.water.bean.Entity4Neo;
 import com.sandalen.water.bean.RespBean;
 import com.sandalen.water.bean.SingleEntity;
+import com.sandalen.water.customAnnotation.SystemControllerLog;
 import com.sandalen.water.service.KgService;
 import com.sandalen.water.util.Neo4jUtils;
 import org.apache.commons.httpclient.HttpClient;
@@ -69,6 +70,7 @@ public class KgController {
         return RespBean.ok("获取数据成功",entity4NeoList);
     }
 
+    @SystemControllerLog(description = "创建实体")
     @RequestMapping("/createEntitiy")
     public RespBean createEntitiy(String entityName,String entityAmbiguous,String entityLink,String label){
         boolean b = Neo4jUtils.createEntitiy(entityName, entityAmbiguous, entityLink, label);
@@ -97,12 +99,14 @@ public class KgController {
 
     }
 
+    @SystemControllerLog(description = "实体识别")
     @RequestMapping("/ner")
     public RespBean ner(String sentence) throws IOException {
         List<String> ner = kgService.ner(sentence);
         return RespBean.ok("success",ner);
     }
 
+    @SystemControllerLog(description = "知识问答")
     @RequestMapping("/qa")
     public RespBean qa(String question) throws Exception {
         List<String> qa = kgService.qa(question);

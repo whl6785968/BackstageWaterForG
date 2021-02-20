@@ -20,4 +20,24 @@ public class User {
     public void setPwd(String pwd) {
         this.pwd = pwd == null ? null : pwd.trim();
     }
+
+    public Userinfo userinfo;
+
+    public Usersecurityinfo usersecurityinfo;
+
+    public Userinfo getUserinfo() {
+        return userinfo;
+    }
+
+    public void setUserinfo(Userinfo userinfo) {
+        this.userinfo = userinfo;
+    }
+
+    public Usersecurityinfo getUsersecurityinfo() {
+        return usersecurityinfo;
+    }
+
+    public void setUsersecurityinfo(Usersecurityinfo usersecurityinfo) {
+        this.usersecurityinfo = usersecurityinfo;
+    }
 }

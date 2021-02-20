@@ -62,6 +62,11 @@ public class UserService {
         return role;
     }
 
+    public List<User> getAllUser(){
+        List<User> allUser = userMapper.getAllUser();
+        return allUser;
+    }
+
     public Userinfo getUserDetailsById(String userId){
         UserinfoExample example = new UserinfoExample();
         UserinfoExample.Criteria criteria = example.createCriteria();

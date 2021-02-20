@@ -42,4 +42,6 @@ public interface MsgMapper {
     Msg getReadableMsgDetail(int postId);
 
     int getUnReadMsgCount(String userId);
+
+    List<Msg> getStarMsg(String userId);
 }

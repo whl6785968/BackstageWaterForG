@@ -9,6 +9,8 @@ public class MsgUser {
 
     private Integer isRead;
 
+    private Integer isStar;
+
     public Integer getId() {
         return id;
     }
@@ -39,5 +41,13 @@ public class MsgUser {
 
     public void setIsRead(Integer isRead) {
         this.isRead = isRead;
+    }
+
+    public Integer getIsStar() {
+        return isStar;
+    }
+
+    public void setIsStar(Integer isStar) {
+        this.isStar = isStar;
     }
 }

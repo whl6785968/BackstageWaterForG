@@ -41,7 +41,7 @@ public class UrlFilterInvocationSecurityMetadatasource implements FilterInvocati
         System.out.println("请求的URL是" + requestUrl);
         List<Menu> allMenu = urlFilterInvocationSecurityMetadatasource.menuService.getAllMenu();
         for (Menu menu:allMenu){
-            if(antPathMatcher.match(menu.getUrl(),requestUrl)){
+            if(antPathMatcher.match(menu.getUrl(),requestUrl) && !requestUrl.equals("/error")){
                 List<Role> roles = menu.getRoles();
                 String[] roleArr = new String[roles.size()];
                 for(int i=0;i<roleArr.length;i++){

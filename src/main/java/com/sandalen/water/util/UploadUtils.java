@@ -37,7 +37,8 @@ public class UploadUtils {
         file.transferTo(new File(path));
         System.out.println("文件已经上传至指定目录");
 
-        return "/static/"+uuid+type;
+//        "/static/"+uuid+type
+        return path;
     }
 
     public static boolean deleteFile(String path){

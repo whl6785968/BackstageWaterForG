@@ -347,4 +347,17 @@ public class Neo4jUtils {
         List<Record> records = result.list();
         return records;
     }
+
+    public static List<Record> searchByNameAndSpecialAmbiguous(String entityName){
+        StatementResult result = session.run(CypherUtils.searchNode(entityName, "实体类"));
+        List<Record> list = result.list();
+        return list;
+    }
+
+    public static List<Record> searchBySpecialAmbiguous(String entityName){
+        StatementResult result = session.run(CypherUtils.searchBySpecialAmbiguous(entityName));
+        List<Record> records = result.list();
+
+        return records;
+    }
 }

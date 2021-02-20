@@ -1,5 +1,7 @@
 package com.sandalen.water.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sandalen.water.bean.*;
 import com.sandalen.water.customAnnotation.SystemControllerLog;
 import com.sandalen.water.service.LogService;
@@ -55,6 +57,14 @@ public class UserController {
         return RespBean.error("获取数据失败");
     }
 
+    @RequestMapping("/getAllUser")
+    public RespBean getAllUser(int page,int pageSize){
+        PageHelper.startPage(page,pageSize);
+        List<User> allUser = userService.getAllUser();
+        PageInfo<User> pageInfo = new PageInfo<>(allUser);
+        return RespBean.ok("success",pageInfo);
+    }
+
     @SystemControllerLog(description = "修改用户信息")
     @RequestMapping("/updateUserInfo")
     public RespBean updateUserInfo(String name,String link,String descr,String avatar,String userid){
@@ -108,10 +118,13 @@ public class UserController {
     }
 
     @RequestMapping("/getLog")
-    public RespBean getLog(String userid){
+    public RespBean getLog(String userid,int page,int pageSize){
+        PageHelper.startPage(page,pageSize);
         List<SystemLog> log = logService.getLog(userid);
 
-        return RespBean.ok("success",log);
+        PageInfo<SystemLog> systemLogPageInfo = new PageInfo<>(log);
+
+        return RespBean.ok("success",systemLogPageInfo);
     }
 
 

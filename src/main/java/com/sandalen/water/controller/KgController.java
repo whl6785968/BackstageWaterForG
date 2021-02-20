@@ -2,10 +2,7 @@ package com.sandalen.water.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sandalen.water.bean.CustomPage;
-import com.sandalen.water.bean.Entity4Neo;
-import com.sandalen.water.bean.RespBean;
-import com.sandalen.water.bean.SingleEntity;
+import com.sandalen.water.bean.*;
 import com.sandalen.water.customAnnotation.SystemControllerLog;
 import com.sandalen.water.service.KgService;
 import com.sandalen.water.util.Neo4jUtils;
@@ -64,6 +61,28 @@ public class KgController {
         return RespBean.ok("获取数据成功",customPage);
     }
 
+    @RequestMapping("/getEntityInfo")
+    public RespBean getEntityInfo(String entityName){
+        List<Baike> entityInfo = kgService.getEntityInfo(entityName);
+
+        return RespBean.ok("获取数据成功",entityInfo);
+    }
+
+    @RequestMapping("/addAttrByEntity")
+    public RespBean addAttrByEntity(String entityName,String relation,String content){
+        int i = kgService.addAttrByEntity(entityName, relation, content);
+        if(i != 0){
+            return RespBean.ok("添加成功");
+        }
+        return RespBean.error("添加失败");
+    }
+
+    @RequestMapping("/getComplexKgByEntity")
+    public RespBean getComplexKgByEntity(String entityName){
+        List<ComplexKg> complexKgByEntity = kgService.getComplexKgByEntity(entityName);
+        return RespBean.ok("获取数据成功",complexKgByEntity);
+    }
+
     @RequestMapping("/getRelation")
     public RespBean getRelation(String entityId){
         List<Entity4Neo> entity4NeoList = Neo4jUtils.getRelationById(entityId);
@@ -103,7 +122,9 @@ public class KgController {
     @RequestMapping("/ner")
     public RespBean ner(String sentence) throws IOException {
         List<String> ner = kgService.ner(sentence);
-        return RespBean.ok("success",ner);
+        Map<String, Integer> inNeo4j = kgService.isInNeo4j(ner);
+
+        return RespBean.ok("success",inNeo4j);
     }
 
     @SystemControllerLog(description = "知识问答")

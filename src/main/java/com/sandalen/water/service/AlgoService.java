@@ -21,6 +21,7 @@ import org.neo4j.driver.v1.types.Relationship;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -209,10 +210,10 @@ public class AlgoService {
         String s = o.toString();
 
         if (Integer.parseInt(s) == 0){
-            return 1;
+            return -1;
         }
         else {
-            return -1;
+            return 1;
         }
     }
 
@@ -223,6 +224,7 @@ public class AlgoService {
         isoForest.train(numTrees, score);
     }
 
+    @Transactional
     public void err_detection() throws Exception{
         SearchCondition searchCondition = new SearchCondition();
         List<Equipment> equipAndStation = dataRelatedService.getEquipAndStation(searchCondition);
@@ -392,7 +394,11 @@ public class AlgoService {
                     Neo4jUtils.updateWarningStation(stationId,factors);
 
                 }
+                desc += "，请登录水质监控系统查看详细异常报告。";
+                System.out.println(desc);
+                SMSUtils.send(smsProperties.getUid(), smsProperties.getKey(), "18245803818", desc);
             }
+
 
         }
 
@@ -615,6 +621,7 @@ public class AlgoService {
                     initial_judge = "上游站点未发生异常，由当前站点"+ idAndStation.get(Math.toIntExact(currentStationNodeId)) +"出发" +
                     "的下游流域" + rp + "中各站点出现" + factor2name.get(factor) + "有关异常，判断当前站点存在问题。";
                     errReport.setBasinError(initial_judge);
+
 
                     List<Record> enterpriseRecord = Neo4jUtils.searchEnterprise(currentStationId);
                     if(enterpriseRecord.size() != 0){

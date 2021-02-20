@@ -42,4 +42,6 @@ public interface UserMapper {
 
     List<String> getNormalUser();
 
+    List<User> getAllUser();
+
 }

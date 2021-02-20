@@ -363,6 +363,66 @@ public class MsgUserExample {
             addCriterion("is_read not between", value1, value2, "isRead");
             return (Criteria) this;
         }
+
+        public Criteria andIsStarIsNull() {
+            addCriterion("is_star is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsStarIsNotNull() {
+            addCriterion("is_star is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsStarEqualTo(Integer value) {
+            addCriterion("is_star =", value, "isStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsStarNotEqualTo(Integer value) {
+            addCriterion("is_star <>", value, "isStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsStarGreaterThan(Integer value) {
+            addCriterion("is_star >", value, "isStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsStarGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_star >=", value, "isStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsStarLessThan(Integer value) {
+            addCriterion("is_star <", value, "isStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsStarLessThanOrEqualTo(Integer value) {
+            addCriterion("is_star <=", value, "isStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsStarIn(List<Integer> values) {
+            addCriterion("is_star in", values, "isStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsStarNotIn(List<Integer> values) {
+            addCriterion("is_star not in", values, "isStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsStarBetween(Integer value1, Integer value2) {
+            addCriterion("is_star between", value1, value2, "isStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsStarNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_star not between", value1, value2, "isStar");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

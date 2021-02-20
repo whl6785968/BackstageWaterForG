@@ -7,6 +7,7 @@ import com.sandalen.water.util.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +45,7 @@ public class MsgController {
                     msgUser.setMid(postId);
                     msgUser.setUid(user.getUserid());
                     msgUser.setIsRead(0);
+                    msgUser.setIsStar(0);
                     msgService.insertMsgUser(msgUser);
                 }
                 else{
@@ -51,6 +53,7 @@ public class MsgController {
                     msgUser.setMid(postId);
                     msgUser.setUid(user.getUserid());
                     msgUser.setIsRead(1);
+                    msgUser.setIsStar(0);
                     msgService.insertMsgUser(msgUser);
                 }
 
@@ -59,6 +62,24 @@ public class MsgController {
             return RespBean.ok("发布成功");
         }
         return RespBean.error("发布失败");
+    }
+
+    @RequestMapping("/star")
+    public RespBean star(String userId,String postId){
+        int star = msgService.star(userId,postId);
+
+        if(star != 0){
+            return RespBean.ok("收藏成功");
+        }
+
+        return RespBean.error("收藏失败");
+    }
+
+    @RequestMapping("/getStarMsg")
+    public RespBean getStarMsg(String userId){
+        List<Msg> starMsg = msgService.getStarMsg(userId);
+
+        return RespBean.ok("success",starMsg);
     }
 
     @MessageMapping("/getMsgCount")

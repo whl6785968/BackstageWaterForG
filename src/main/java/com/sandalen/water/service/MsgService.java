@@ -1,10 +1,7 @@
 package com.sandalen.water.service;
 
 import com.sandalen.water.bean.*;
-import com.sandalen.water.dao.MsgMapper;
-import com.sandalen.water.dao.MsgUserMapper;
-import com.sandalen.water.dao.ReplyMapper;
-import com.sandalen.water.dao.UserMapper;
+import com.sandalen.water.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
@@ -25,12 +22,39 @@ public class MsgService {
     @Autowired
     private ReplyMapper replyMapper;
 
+
+
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
+
+    public int star(String userId,String postId){
+        MsgUserExample msgUserExample = new MsgUserExample();
+        msgUserExample.createCriteria().andMidEqualTo(postId).andUidEqualTo(userId);
+
+        List<MsgUser> msgUsers = msgUserMapper.selectByExample(msgUserExample);
+
+        MsgUser msgUser = msgUsers.get(0);
+
+        if(msgUser.getIsStar() == 0){
+            msgUser.setIsStar(1);
+        }
+        else{
+            msgUser.setIsStar(0);
+        }
+
+        int i = msgUserMapper.updateByPrimaryKey(msgUser);
+
+        return i;
+    }
 
     public int posting(Msg msg){
         int insert = msgMapper.insert(msg);
         return insert;
+    }
+
+    public List<Msg> getStarMsg(String userId){
+        List<Msg> starMsg = msgMapper.getStarMsg(userId);
+        return starMsg;
     }
 
     public List<Msg> getUnReviewMsg(){

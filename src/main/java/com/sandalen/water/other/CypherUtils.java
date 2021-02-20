@@ -29,6 +29,7 @@ public class CypherUtils {
         return "match (m:Water)-[edge]->(n:Water) where n.name='" + entityName + "'or m.name='" + entityName +"' return m,edge,n";
     }
 
+
     public static String search(String entityName,String entityId){
         String pageCondition = " skip 0 limit 50";
         if((entityName == "" || entityName == null)  && (entityId == "" || entityId == null)){
@@ -44,6 +45,10 @@ public class CypherUtils {
             return "match (m:Water)-[r]->(n:Water) where id(m)="+entityId+" or id(n)="+entityId+" return m,r,n"+pageCondition;
         }
 
+    }
+
+    public static String searchBySpecialAmbiguous(String entityName){
+        return "match (n:Knowledge)-[r]->(m:Knowledge) where n.name='"+entityName+"' and n.ambiguous='实体类' return n,m,r";
     }
 
     public static String searchByAmbiguous(String entityName,String entityAmbiguous){

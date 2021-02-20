@@ -27,6 +27,16 @@ public class Msg {
 
     private int isRead;
 
+    private int isStar;
+
+    public int getIsStar() {
+        return isStar;
+    }
+
+    public void setIsStar(int isStar) {
+        this.isStar = isStar;
+    }
+
     public int getIsRead() {
         return isRead;
     }

@@ -20,6 +20,7 @@ public class LogService {
 
     public List<SystemLog> getLog(String userid){
         SystemLogExample systemLogExample = new SystemLogExample();
+        systemLogExample.setOrderByClause("create_time desc");
         systemLogExample.createCriteria().andUserIdEqualTo(userid);
 
         List<SystemLog> systemLogs = systemLogMapper.selectByExample(systemLogExample);

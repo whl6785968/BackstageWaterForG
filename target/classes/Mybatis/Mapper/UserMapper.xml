@@ -185,7 +185,26 @@
     select ur.user_id from role r,user_role ur where ur.role_id = r.roleId and r.roleId = '001';
   </select>
 
+  <resultMap id="CustomMap" type="com.sandalen.water.bean.User" >
+    <id column="userId" property="userid" jdbcType="VARCHAR" />
+    <association property="userinfo" javaType="com.sandalen.water.bean.Userinfo">
+      <id column="info_id" property="id" jdbcType="INTEGER"></id>
+      <result column="name" property="name" jdbcType="VARCHAR"></result>
+      <result column="sex" property="sex" jdbcType="VARCHAR"></result>
+      <result column="age" property="age" jdbcType="INTEGER"></result>
+      <result column="link" property="link" jdbcType="VARCHAR"></result>
+      <result column="descr" property="descr" jdbcType="VARCHAR"></result>
+    </association>
+    <association property="usersecurityinfo" javaType="com.sandalen.water.bean.Usersecurityinfo">
+      <id column="sid" property="id" jdbcType="INTEGER"></id>
+      <result column="locked" property="locked" jdbcType="INTEGER"></result>
+      <result column="enabled" property="enabled" jdbcType="INTEGER"></result>
+    </association>
+  </resultMap>
 
+  <select id="getAllUser" resultMap="CustomMap">
+    select u.userId,ui.id as info_id,ui.name,ui.sex,ui.age,ui.link,ui.descr,usi.id as sid,usi.locked,usi.enabled from user u,userinfo ui,usersecurityinfo usi where ui.uid = u.userId and u.userId = usi.uid
+  </select>
 
 
 </mapper>
